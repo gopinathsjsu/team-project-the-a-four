@@ -2,7 +2,7 @@
 # Team Members:
 1. Mohammed Tuba Ahmed
 2. Abul Hassan Mohammed
-3. Rushi Sharma
+3. Rushi Sanjaykumar Sharma
 4. Esha Shubham Sah
 
 # Technology Stack
