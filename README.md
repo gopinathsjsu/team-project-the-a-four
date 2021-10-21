@@ -3,7 +3,7 @@
 1. Mohammed Tuba Ahmed
 2. Abul Hassan Mohammed
 3. Rushi Sharma
-4. Esha
+4. Esha Shubham Sah
 
 # Technology Stack
 
