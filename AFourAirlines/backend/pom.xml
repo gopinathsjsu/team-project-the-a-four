@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.sjsu</groupId>
-	<artifactId>cmpe255</artifactId>
+	<artifactId>cmpe202</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>afourairlines</name>
 	<description>Spring Boot Project for AFourAirlines</description>
