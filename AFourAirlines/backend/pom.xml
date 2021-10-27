@@ -8,10 +8,10 @@
 		<version>2.5.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.sjsu</groupId>
-	<artifactId>cmpe202</artifactId>
+	<groupId>com.sjsu.cmpe202</groupId>
+	<artifactId>afourairlines</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>afourairlines</name>
+	<name>AFourAirlines</name>
 	<description>Spring Boot Project for AFourAirlines</description>
 	<properties>
 		<java.version>1.8</java.version>
