@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-    class search {
+    class Search {
         render() {
             return(
                 <div class="col-md-5 col-md-offset-1">
@@ -17,6 +17,13 @@ import React, { Component } from 'react'
                                                     <option value="">Select departure location</option>
                                                     <option value="Los Angeles">LAX</option>
                                                     <option value="San Francisco">SFO</option>
+                                                    <option value="San Jose">SJC</option>
+                                                    <option value="Sacramento">SMF</option>
+                                                    <option value="San Diego">SAN</option>
+                                                    <option value="Santa Barbara">SBA</option>
+                                                    <option value="Fullerton">FUL</option>
+                                                    <option value="Riverside">RIV</option>
+                                                    <option value="San Bernardino">SBD</option>
                                                 </select>
                                             </fieldset>
                                         </div>
@@ -26,6 +33,13 @@ import React, { Component } from 'react'
                                                 <select required name='to' onchange='this.form.()'>
                                                     <option value="Los Angeles">LAX</option>
                                                     <option value="San Francisco">SFO</option>
+                                                    <option value="San Jose">SJC</option>
+                                                    <option value="Sacramento">SMF</option>
+                                                    <option value="San Diego">SAN</option>
+                                                    <option value="Santa Barbara">SBA</option>
+                                                    <option value="Fullerton">FUL</option>
+                                                    <option value="Riverside">RIV</option>
+                                                    <option value="San Bernardino">SBD</option>
                                                 </select>
                                             </fieldset>
                                         </div>
@@ -70,6 +84,4 @@ import React, { Component } from 'react'
         }
     }
 
-    export default class Search {
-
-    }
+    export default Search;
