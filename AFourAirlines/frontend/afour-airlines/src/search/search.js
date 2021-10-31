@@ -1,8 +1,21 @@
 import React, { Component } from 'react'
+import NavBar from "../common/navbar";
 
-    class Search {
+class Search extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: props.usename,
+            auth_id: props.auth_id,
+            membership: props.membership
+        }
+    }
+
         render() {
             return(
+                <div>
+                    <NavBar></NavBar>
+                
                 <div class="col-md-5 col-md-offset-1">
                     <section id="first-tab-group" class="tabgroup">
                         <div id="tab1">
@@ -80,8 +93,9 @@ import React, { Component } from 'react'
                         </div>
                     </section>
                 </div>
+                </div>
             )
         }
     }
 
-    export default Search;
+export default Search;
