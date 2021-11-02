@@ -85,7 +85,7 @@ class Search extends Component {
                                         </div>
                                         <div class="col-md-6">
                                             <fieldset>
-                                                <button type="submit" id="form-submit" class="btn">Search</button>
+                                                <button onclick="location.href  ='./searchPage'" type="submit" id="form-submit" class="btn">Search</button>
                                             </fieldset>
                                         </div>
                                     </div>
