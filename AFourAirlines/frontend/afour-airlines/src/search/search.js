@@ -44,6 +44,7 @@ class Search extends Component {
                                             <fieldset>
                                                 <label for="to">To:</label>
                                                 <select required name='to' onchange='this.form.()'>
+                                                    <option value="">Select departure location</option>
                                                     <option value="Los Angeles">LAX</option>
                                                     <option value="San Francisco">SFO</option>
                                                     <option value="San Jose">SJC</option>
