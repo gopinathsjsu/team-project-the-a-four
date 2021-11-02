@@ -1,64 +1,61 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import { NavLink } from "react-router-dom";
 import { useLoginValidate } from "./validate";
-import axios from "axios"
 
 const NavBar = () => {    
         const { userData } = useLoginValidate();
+        const checkActive = (match, location) => {
+            if(!location) return false;
+            const {pathname} = location;
+            console.log(pathname);
+            return pathname === "/";
+        }
         return(
-            <div className="pure-menu pure-menu-horizontal" style={{display:"flex"}}>
-                <a href="/" className="pure-menu-heading pure-menu-link">
-                    {userData.appName}
-                </a>
-                <ul className="pure-menu-list">
-                    <li className="pure-menu-item">
-                        <Link to="/" className="pure-menu-link">
-                            Home
-                        </Link>
+            <div className="nav-horizontal" style={{display:"flex"}}>
+                <ul className="nav-menu">
+                    <li className="nav-menu-item">
+                        <NavLink  to="/" className="nav-menu-link" activeClassName="nav-menu-link-active" isActive={checkActive}>
+                            Search Flights
+                        </NavLink>
                     </li>
-                    <li className="pure-menu-item">
-                        <Link to="/registration" className="pure-menu-link">
+                    <li className="nav-menu-item">
+                        {!userData.username && <NavLink to="/mileageProgram" className="nav-menu-link" activeClassName="nav-menu-link-active">
                             Mileage Program
-                        </Link>
+                        </NavLink>}
+                        {userData.username && <NavLink to="/user/myProfile" className="nav-menu-link" activeClassName="nav-menu-link-active">
+                            Mileage Program
+                        </NavLink>}
                     </li>
-                    {userData.user_id && userData.auth_id === 1 && (
-                    <li className="pure-menu-item">
-                        <Link to="/admin" className="pure-menu-link">
-                        Admin
-                        </Link>
-                    </li>
-                    )}
-                    {userData.user_id && (
-                    <li className="pure-menu-item">
-                        <Link to="/user/myBookings" className="pure-menu-link">
-                        My Bookings
-                        </Link>
+                    {userData.auth_id !== 1 && (
+                    <li className="nav-menu-item">
+                        <NavLink to="/help" className="nav-menu-link" activeClassName="nav-menu-link-active">
+                            Help
+                        </NavLink>
                     </li>
                     )}
-                    {userData.user_id && (
-                    <li className="pure-menu-item">
-                        <Link to="/user/myProfile" params={{ id: userData.user_id }} className="pure-menu-link">
-                        My Profile
-                        </Link>
+                    {userData.username && userData.auth_id === 1 && (
+                    <li className="nav-menu-item">
+                        <NavLink to="/admin" className="nav-menu-link" activeClassName="nav-menu-link-active">
+                            Admin
+                        </NavLink>
                     </li>
                     )}
-
-                    {!userData.user_id && (
-                    <li className="pure-menu-item">
-                        <Link to="/login" className="pure-menu-link">
-                        Login
-                        </Link>
+                    {!userData.username && (
+                    <li className="nav-menu-item">
+                        <NavLink to="/login" className="nav-menu-link" activeClassName="nav-menu-link-active">
+                            Login
+                        </NavLink>
                     </li>
                     )}
-                    {userData.user_id && (
+                    {userData.username && (
                     <li className="pure-menu-item">
-                        <Link to="/logout" className="pure-menu-link">
-                        Logout
-                        </Link>
+                        <NavLink to="/logout" className="nav-menu-link" activeClassName="nav-menu-link-active">
+                            Logout
+                        </NavLink>
                     </li>
                     )}
                 </ul>
-                {userData.user_id && (
+                {userData.username && (
                         <label className="pure-menu-heading" style={{marginLeft:"auto",marginTop:"auto"}}> Hello {userData.username} !</label>
                     )}
             </div>

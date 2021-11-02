@@ -1,5 +1,6 @@
 import React, { Component, useState } from "react";
 import NavBar from "../common/navbar";
+import Registration from "../login/register.js"
 
 class  MileageProgram extends Component {
     constructor(props) {
@@ -15,7 +16,10 @@ class  MileageProgram extends Component {
         return(
             <div>
                 <NavBar></NavBar>
-                <div>This is body</div>
+                <div>
+                    <h1 style={{ textAlign: "center" }}>Mileage Program</h1>
+                </div>
+                <Registration></Registration>
             </div>
         );
     }
