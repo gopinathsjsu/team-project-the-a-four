@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import NavBar from "../common/navbar";
+import { useHistory } from "react-router-dom";
 
 class Search extends Component {
     constructor(props) {
@@ -11,11 +12,11 @@ class Search extends Component {
         }
     }
 
-        render() {
-            return(
-                <div>
-                    <NavBar></NavBar>
-                
+    render() {
+        return (
+            <div>
+                <NavBar></NavBar>
+
                 <div class="col-md-5 col-md-offset-1">
                     <section id="first-tab-group" class="tabgroup">
                         <div id="tab1">
@@ -74,18 +75,23 @@ class Search extends Component {
                                                 <div class="row">
                                                     <div class="col-md-6 col-sm-6 col-xs-6">
                                                         <label for="round">Round trip</label>
-                                                        <input type="radio" name="trip" id="round" value="round" required="required"onchange='this.form.()' />
+                                                        <input type="radio" name="trip" id="round" value="round" required="required" onchange='this.form.()' />
                                                     </div>
                                                     <div class="col-md-6 col-sm-6 col-xs-6">
                                                         <label for="oneway">One-way trip</label>
-                                                        <input type="radio" name="trip" id="oneway" value="one-way" required="required"onchange='this.form.()' />
+                                                        <input type="radio" name="trip" id="oneway" value="one-way" required="required" onchange='this.form.()' />
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <fieldset>
-                                                <button onclick="location.href  ='./searchPage'" type="submit" id="form-submit" class="btn">Search</button>
+                                                <button id="button" type="submit" id="form-submit" class="btn">Search</button>
+                                                <script type="text/javascript">
+                                                    document.getElementById("button").onclick = function () {
+                                                       window.location.href = './searchPage'
+                                                       };
+                                                </script>
                                             </fieldset>
                                         </div>
                                     </div>
@@ -94,9 +100,9 @@ class Search extends Component {
                         </div>
                     </section>
                 </div>
-                </div>
-            )
-        }
+            </div>
+        )
     }
+}
 
 export default Search;
