@@ -36,3 +36,118 @@
     transform: rotate(360deg);
   }
 }
+
+.App {
+  text-align: center;
+}
+.main {
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+}
+.margin8{
+  display: flex;
+  margin: 8px;
+}
+
+.margin10 {
+  margin: 10px;
+}
+
+.displayFlex{
+  display: flex;
+}
+.alignCenter{
+  align-items: center;
+}
+.marginAuto{
+  margin:auto;
+}
+.width100{
+  width:100%;
+}
+
+
+.user-details{
+  text-align: center;
+}
+
+/* input {
+  width: 250px;
+  height: 40px;
+} */
+
+
+tbody tr:hover {
+  background-color: rgb(114, 196, 235);
+  cursor : pointer
+}
+
+.MuiAccordionSummary-root{
+  background: lightblue;
+}
+
+
+@media all and (min-width: 480px) {
+  .Login {
+    padding: 60px 0;
+  }
+
+  .Login form {
+    margin: 0 auto;
+    max-width: 320px;
+  }
+}
+
+.nav-horizontal {
+  background: #61dafb;
+  height: 85px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.2rem calc((100vw - 1000px) / 2);
+  z-index: 12;
+}
+  
+.nav-menu-item{
+  color: #21314e;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 0 1rem;
+  height: 100%;
+  cursor: pointer;
+}
+
+  
+.nav-menu{
+  display: flex;
+  align-items: center;
+  margin-right: -24px;
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
+}
+  
+.nav-menu-link{
+  border-radius: 4px;
+  padding: 10px 22px;
+  color: #000000;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
+  /* Second Nav */
+  margin-left: 24px;
+}
+
+.nav-menu-link :hover {
+  transition: all 0.2s ease-in-out;
+  background: #fff;
+  color: #808080;
+}
+
+.nav-menu-link-active {
+  background-color: #21314e;
+  color: #fff;
+}
