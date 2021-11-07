@@ -10,6 +10,7 @@ const NavBar = () => {
             console.log(pathname);
             return pathname === "/";
         }
+        
         return(
             <div className="nav-horizontal" style={{display:"flex"}}>
                 <ul className="nav-menu">

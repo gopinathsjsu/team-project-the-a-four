@@ -2,17 +2,13 @@ import React, { Component } from 'react'
 import NavBar from "../common/navbar";
 import { useHistory } from "react-router-dom";
 
-class Search extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            username: props.usename,
-            auth_id: props.auth_id,
-            membership: props.membership
-        }
+export default function Search() {
+    
+    const searchResult = () => {
+        window.location.href = './searchPage'
     }
 
-    render() {
+    
         return (
             <div>
                 <NavBar></NavBar>
@@ -86,12 +82,12 @@ class Search extends Component {
                                         </div>
                                         <div class="col-md-6">
                                             <fieldset>
-                                                <button id="button" type="submit" id="form-submit" class="btn">Search</button>
-                                                <script type="text/javascript">
+                                                <button id="button" type="submit" id="form-submit" class="btn" onClick={searchResult}>Search</button>
+                                                {/* <script type="text/javascript">
                                                     document.getElementById("button").onclick = function () {
                                                        window.location.href = './searchPage'
                                                        };
-                                                </script>
+                                                </script> */}
                                             </fieldset>
                                         </div>
                                     </div>
@@ -102,7 +98,5 @@ class Search extends Component {
                 </div>
             </div>
         )
-    }
+    
 }
-
-export default Search;
