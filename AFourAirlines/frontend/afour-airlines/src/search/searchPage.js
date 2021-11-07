@@ -17,7 +17,6 @@ class SearchPage extends Component {
         return (
             <div>
                 <NavBar></NavBar>
-
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12 mb-5">
@@ -65,7 +64,6 @@ class SearchPage extends Component {
                         </div>
                     </div>
                 </div>
-
             </div>
         )
     }
