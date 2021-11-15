@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import NavBar from "../common/navbar";
 import Registration from "../login/register.js"
 
