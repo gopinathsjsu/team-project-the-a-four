@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
 import NavBar from "../common/navbar";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
-export default function Search() {
+export default function Search(props) {
     
     const searchResult = () => {
         window.location.href = './searchPage'
     }
 
-    
+    const { userName } = useParams();
+    console.log(props);
         return (
             <div>
-                <NavBar></NavBar>
-
+                <NavBar props={userName}></NavBar>
                 <div class="col-md-5 col-md-offset-1" align="center">
                     <section id="first-tab-group" class="tabgroup">
                         <div id="tab1">

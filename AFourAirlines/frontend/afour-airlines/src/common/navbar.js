@@ -1,9 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useLoginValidate } from "./validate";
+import { useGetUserData } from "./getUserData";
+import { useParams } from "react-router-dom";
 
-const NavBar = () => {    
-        const { userData } = useLoginValidate();
+const NavBar = (props) => {    
+    const { userName } = useParams();
+        const { userData } = useGetUserData(userName);
         const checkActive = (match, location) => {
             if(!location) return false;
             const {pathname} = location;
@@ -23,7 +25,7 @@ const NavBar = () => {
                         {!userData.username && <NavLink to="/mileageProgram" className="nav-menu-link" activeClassName="nav-menu-link-active">
                             Mileage Program
                         </NavLink>}
-                        {userData.username && <NavLink to="/user/myProfile" className="nav-menu-link" activeClassName="nav-menu-link-active">
+                        {userData.username && <NavLink to="/mileageProgram" className="nav-menu-link" activeClassName="nav-menu-link-active">
                             Mileage Program
                         </NavLink>}
                     </li>
@@ -49,15 +51,15 @@ const NavBar = () => {
                     </li>
                     )}
                     {userData.username && (
-                    <li className="pure-menu-item">
-                        <NavLink to="/logout" className="nav-menu-link" activeClassName="nav-menu-link-active">
+                    <li className="nav-menu-item">
+                        <NavLink to="/" className="nav-menu-link" activeClassName="nav-menu-link-active">
                             Logout
                         </NavLink>
                     </li>
                     )}
                 </ul>
                 {userData.username && (
-                        <label className="pure-menu-heading" style={{marginLeft:"auto",marginTop:"auto"}}> Hello {userData.username} !</label>
+                        <label className="pure-menu-heading" style={{marginLeft:"auto",marginTop:"auto"}}> Hello {userData.first_name} !</label>
                     )}
             </div>
         );

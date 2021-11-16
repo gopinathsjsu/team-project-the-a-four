@@ -6,13 +6,30 @@ import Alert from "@material-ui/lab/Alert";
 import {Snackbar } from "@material-ui/core";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { useHistory } from "react-router-dom";
+import { Redirect } from "react-router";
 
 
 export default function Login() {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
+  const history = useHistory();
+  const [loginStatus, setLoginStatus] = useState(false);
+  const [isUserAuthenticated, setUserAuthenticated] = useState(false);
 
-  const [failMsg, setFailMsg] = useState("");
+  const defaultValues = {
+    username: "",
+    first_name: "",
+    last_name: "",
+    email_id: "",
+    country: "",
+    auth_id: 0,
+  };
+  const [userData, setUserData] = useState(defaultValues);
+
+
+
+  const [errorMsg, setErrorMsg] = useState("");
   const [open, setOpen] = useState(false);
   Axios.defaults.withCredentials = true;
 
@@ -24,11 +41,36 @@ export default function Login() {
   };
 
   function validateForm(){
-    return username.length > 0 && password.length > 0;
+    if (username === "" || password === "") {
+      setErrorMsg("Fields are required");
+      return true;
+    }
+    return false;
+  }
+
+  function setUserInfo(){
+          userData.username = username;
+          userData.first_name ="Esha";
+          userData.last_name = "Sah";
+          userData.email_id = "esha8sah@gmail.com";
+          userData.country = "USA";
+          userData.auth_id = 0;
   }
 
   function handleSubmit(event){
     event.preventDefault();
+    validateForm();
+    try {
+      //await Auth.signIn(username, password);
+      setUserAuthenticated(true);
+      if(isUserAuthenticated){
+        setUserInfo();
+        setLoginStatus(true);
+      }
+      history.push("/" + username);
+    } catch (e) {
+      alert(e.message);
+    }
   }
 
   const login = () => {
@@ -75,14 +117,14 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Form.Group>
-            <Button block size="lg" type="submit" className="pure-u-1-6" onClick={login}>
+            <Button block size="lg" type="submit" className="pure-u-1-6" onClick={handleSubmit}>
               Login
             </Button>
           </Form>
         </div>
         <Snackbar anchorOrigin={{ vertical:"top", horizontal:"center" }} open={open} autoHideDuration={6000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error">
-          {failMsg}
+          {errorMsg}
         </Alert>
       </Snackbar>
       </div>
