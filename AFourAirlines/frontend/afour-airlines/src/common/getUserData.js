@@ -28,3 +28,29 @@ export const useGetUserData = (props) => {
 
   return { userData };
 };
+
+export const useGetMileageData = (props) => {
+  const [userData, setUserData] = useState({});
+  const { userName } = useParams();
+
+  axios.defaults.withCredentials = true;
+
+  useEffect(() => {
+    setUserData({
+      username : userName,
+      first_name :"Esha",
+      last_name : "Sah",
+      mileage_points : 978,
+      reward_number : 345678
+  });
+    // axios.get("http://localhost:3001/user/get" + userName).then((response) => {
+    //     if (response.data.loggedIn === true) {
+    //       setUserData(response.data.user);
+    //     } else {
+    //       setUserData({});
+    //     }
+    // });
+  }, [userName]);
+
+  return { userData };
+};

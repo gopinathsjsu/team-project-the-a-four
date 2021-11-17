@@ -27,8 +27,6 @@ export default function Login() {
   };
   const [userData, setUserData] = useState(defaultValues);
 
-
-
   const [errorMsg, setErrorMsg] = useState("");
   const [open, setOpen] = useState(false);
   Axios.defaults.withCredentials = true;

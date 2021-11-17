@@ -22,10 +22,10 @@ const NavBar = (props) => {
                         </NavLink>
                     </li>
                     <li className="nav-menu-item">
-                        {!userData.username && <NavLink to="/mileageProgram" className="nav-menu-link" activeClassName="nav-menu-link-active">
+                        {!userData.username && <NavLink to="/mileageProgram" params={ userName } className="nav-menu-link" activeClassName="nav-menu-link-active">
                             Mileage Program
                         </NavLink>}
-                        {userData.username && <NavLink to="/mileageProgram" className="nav-menu-link" activeClassName="nav-menu-link-active">
+                        {userData.username && <NavLink to="/mileageProgram" params={ userName } className="nav-menu-link" activeClassName="nav-menu-link-active">
                             Mileage Program
                         </NavLink>}
                     </li>
