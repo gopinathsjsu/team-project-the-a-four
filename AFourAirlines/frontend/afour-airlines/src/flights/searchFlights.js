@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
 import NavBar from "../common/navbar";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
-export default function Search() {
+export default function Search(props) {
     
     const searchResult = () => {
         window.location.href = './searchPage'
     }
 
-    
+    const { userName } = useParams();
+    console.log(props);
         return (
             <div>
-                <NavBar></NavBar>
-
-                <div class="col-md-5 col-md-offset-1">
+                <NavBar props={userName}></NavBar>
+                <div class="col-md-5 col-md-offset-1" align="center">
                     <section id="first-tab-group" class="tabgroup">
                         <div id="tab1">
                             <div class="submit-form">
@@ -22,7 +22,7 @@ export default function Search() {
                                     <div class="row">
                                         <div class="col-md-6">
                                             <fieldset>
-                                                <label for="from">From:</label>
+                                                <label for="from">From: </label>
                                                 <select required name='from' onchange='this.form.()'>
                                                     <option value="">Select departure location</option>
                                                     <option value="Los Angeles">LAX</option>
@@ -39,7 +39,7 @@ export default function Search() {
                                         </div>
                                         <div class="col-md-6">
                                             <fieldset>
-                                                <label for="to">To:</label>
+                                                <label for="to">To: </label>
                                                 <select required name='to' onchange='this.form.()'>
                                                     <option value="">Select departure location</option>
                                                     <option value="Los Angeles">LAX</option>
@@ -56,14 +56,14 @@ export default function Search() {
                                         </div>
                                         <div class="col-md-6">
                                             <fieldset>
-                                                <label for="departure">Departure date:</label>
-                                                <input name="deparure" type="text" class="form-control date" id="deparure" placeholder="Select a date" required="" onchange='this.form.()' />
+                                                <label for="departure">Departure date: </label>
+                                                <input name="deparure" type="date" class="form-control date" id="deparure" placeholder="Select a date" required="" onchange='this.form.()' />
                                             </fieldset>
                                         </div>
                                         <div class="col-md-6">
                                             <fieldset>
-                                                <label for="return">Return date:</label>
-                                                <input name="return" type="text" class="form-control date" id="return" placeholder="Select a date" required="" onchange='this.form.()' />
+                                                <label for="return">Return date: </label>
+                                                <input name="return" type="date" class="form-control date" id="return" placeholder="Select a date" required="" onchange='this.form.()' />
                                             </fieldset>
                                         </div>
                                         <div class="col-md-6">

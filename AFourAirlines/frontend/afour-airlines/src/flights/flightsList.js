@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import NavBar from "../common/navbar";
 import FlightData from '../models/flightData';
 
-class SearchPage extends Component {
+class FlightsList extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -69,4 +69,4 @@ class SearchPage extends Component {
     }
 }
 
-export default SearchPage;
+export default FlightsList;
