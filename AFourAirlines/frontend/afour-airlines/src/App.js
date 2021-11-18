@@ -21,11 +21,10 @@ function App() {
         <Route path="/" exact render={(props) => <Search />} />
         <Route path="/mileageProgram" exact render={(props) => <MileageProgram />} />
         <Route path="/login" exact render={(props) => <Login />} />
-        <Route path="/searchPage" exact render={(props) => <Search />} />
+        <Route path="/:userName" exact render={(props) => <Search />} />
         <Route path ="/flightsList.js" exact render={(props) => <FlightsList/>} />
         <Route path ="/flightPayment" exact render={(props) => <FlightPayment/>} />
-        <Route path ="/userType" exact render={(props) => <UserType/>} />
-        </Switch>np
+        </Switch>
       </Router>
     </BasePage>
   );
