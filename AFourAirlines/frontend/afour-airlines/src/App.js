@@ -11,6 +11,7 @@ import Search from "./flights/searchFlights";
 import Login from "./login/login";
 import FlightsList from "./flights/flightsList";
 import FlightPayment from "./flights/flightPayment";
+import UserType from "./flights/userType";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/searchPage" exact render={(props) => <Search />} />
         <Route path ="/flightsList.js" exact render={(props) => <FlightsList/>} />
         <Route path ="/flightPayment" exact render={(props) => <FlightPayment/>} />
+        <Route path ="/userType" exact render={(props) => <UserType/>} />
         </Switch>np
       </Router>
     </BasePage>
