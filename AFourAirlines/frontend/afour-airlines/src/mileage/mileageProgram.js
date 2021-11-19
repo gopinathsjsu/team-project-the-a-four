@@ -15,7 +15,7 @@ export default function MileageProgram (props){
             <NavBar props={userName}></NavBar>
             {!userName && 
                 <GuestMileage></GuestMileage>}
-            {
+            {userName &&
                 <UserMileage props={userName}></UserMileage>
             }
         </div>

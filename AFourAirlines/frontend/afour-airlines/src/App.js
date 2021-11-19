@@ -11,9 +11,9 @@ import Search from "./flights/searchFlights";
 import Login from "./login/login";
 import FlightsList from "./flights/flightsList";
 import FlightPayment from "./flights/flightPayment";
-import UserType from "./flights/userType";
 
-function App() {
+export default function App() {
+
   return (
     <BasePage>
       <Router>
@@ -30,4 +30,3 @@ function App() {
   );
 }
 
-export default App;

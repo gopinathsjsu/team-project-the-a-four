@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useGetUserData } from "./getUserData";
-import { useParams } from "react-router-dom";
 
-const NavBar = (props) => {    
-    const { userName } = useParams();
-        const { userData } = useGetUserData(userName);
+function NavBar({ handleLoginClick, props}) { 
+    
+    const handleLoginClicked = () => {
+        handleLoginClick();
+    }
+    
+    const [ userName, setUserName]  = useState("esha");
+    const { userData } = useGetUserData(userName);
+    
         const checkActive = (match, location) => {
+            console.log(match);
             if(!location) return false;
             const {pathname} = location;
             console.log(pathname);
@@ -17,7 +23,7 @@ const NavBar = (props) => {
             <div className="nav-horizontal" style={{display:"flex"}}>
                 <ul className="nav-menu">
                     <li className="nav-menu-item">
-                        <NavLink  to="/" className="nav-menu-link" activeClassName="nav-menu-link-active" isActive={checkActive}>
+                        <NavLink to="/" className="nav-menu-link" activeClassName="nav-menu-link-active" isActive={checkActive}>
                             Search Flights
                         </NavLink>
                     </li>
@@ -45,9 +51,10 @@ const NavBar = (props) => {
                     )}
                     {!userData.username && (
                     <li className="nav-menu-item">
-                        <NavLink to="/login" className="nav-menu-link" activeClassName="nav-menu-link-active">
-                            Login
-                        </NavLink>
+                        <div>
+                            <span onClick={handleLoginClicked} className="nav-menu-link" activeClassName="nav-menu-link-active">
+                            Login</span>
+                        </div>
                     </li>
                     )}
                     {userData.username && (

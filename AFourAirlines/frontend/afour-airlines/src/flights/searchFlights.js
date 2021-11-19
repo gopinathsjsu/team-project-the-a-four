@@ -1,18 +1,26 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import NavBar from "../common/navbar";
-import { useHistory, useParams } from "react-router-dom";
+import LoginForm from "../login/loginPage"
+import {  useParams } from "react-router-dom";
 
-export default function Search(props) {
+export default function Search({ handleLoginClick, props}) {
     
     const searchResult = () => {
         window.location.href = './searchPage'
     }
 
+    const [isShowLogin, setIsShowLogin] = useState(false);
+
+    const handleLoginClicked = () => {
+        setIsShowLogin(!isShowLogin);
+    }
+    
     const { userName } = useParams();
     console.log(props);
         return (
             <div>
-                <NavBar props={userName}></NavBar>
+                <NavBar props={userName} handleLoginClick={handleLoginClicked}></NavBar>
+                {isShowLogin && <LoginForm isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin}></LoginForm>}
                 <div class="col-md-5 col-md-offset-1" align="center">
                     <section id="first-tab-group" class="tabgroup">
                         <div id="tab1">
@@ -82,7 +90,7 @@ export default function Search(props) {
                                         </div>
                                         <div class="col-md-6">
                                             <fieldset>
-                                                <button id="button" type="submit" id="form-submit" class="btn" onClick={searchResult}>Search</button>
+                                                <button type="submit" id="btn-form-submit" class="btn" onClick={searchResult}>Search</button>
                                                 {/* <script type="text/javascript">
                                                     document.getElementById("button").onclick = function () {
                                                        window.location.href = './searchPage'
