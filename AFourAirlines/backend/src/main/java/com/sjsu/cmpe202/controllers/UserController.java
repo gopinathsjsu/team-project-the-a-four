@@ -22,7 +22,7 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @GetMapping("/getUserDetails")
+    @GetMapping("/getuserdetails ")
     public Optional<User> getUserDetails(@RequestParam String userName) {
         return userService.getUserDetails(userName);
     }

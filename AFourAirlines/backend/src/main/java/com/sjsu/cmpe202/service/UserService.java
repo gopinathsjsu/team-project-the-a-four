@@ -9,10 +9,16 @@ import java.util.Optional;
 
 @Service
 public class UserService {
+
     @Autowired
     UserRepository userRepository;
 
     public Optional<User> getUserDetails(String userName) {
         return userRepository.findById(userName);
     }
+
+    public Iterable<User> getAllUserDetails(String userName) {
+        return userRepository.findAll();
+    }
+
 }
