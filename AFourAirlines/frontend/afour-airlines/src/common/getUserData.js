@@ -9,6 +9,7 @@ export const useGetUserData = (props) => {
   axios.defaults.withCredentials = true;
 
   useEffect(() => {
+    console.log(userName);
     setUserData({
       username : userName,
       first_name :"Esha",

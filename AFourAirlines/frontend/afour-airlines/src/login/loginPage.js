@@ -3,7 +3,7 @@ import { useSpring, animated } from "react-spring";
 import { useHistory } from "react-router-dom";
 import closeIcon from "../images/images-close.jpg"
 
-const LoginForm = ({isShowLogin, setIsShowLogin}) => {
+const LoginForm = ({isShowLogin, setIsShowLogin, pathname}) => {
 
     const [username, setUserName] = useState("");
     const [password, setPassword] = useState("");
@@ -19,7 +19,7 @@ const LoginForm = ({isShowLogin, setIsShowLogin}) => {
         country: "",
         auth_id: 0,
     };
-    const [userData, setUserData] = useState(defaultValues);
+    //const [userData, setUserData] = useState(defaultValues);
 
     const [errorMsg, setErrorMsg] = useState("");
 
@@ -31,14 +31,14 @@ const LoginForm = ({isShowLogin, setIsShowLogin}) => {
         return false;
     }
 
-    function setUserInfo(){
-            userData.username = username;
-            userData.first_name ="Esha";
-            userData.last_name = "Sah";
-            userData.email_id = "esha8sah@gmail.com";
-            userData.country = "USA";
-            userData.auth_id = 0;
-    }
+    // function setUserInfo(){
+    //         userData.username = username;
+    //         userData.first_name ="Esha";
+    //         userData.last_name = "Sah";
+    //         userData.email_id = "esha8sah@gmail.com";
+    //         userData.country = "USA";
+    //         userData.auth_id = 0;
+    // }
 
     const modalRef = useRef();
 
@@ -63,17 +63,22 @@ const LoginForm = ({isShowLogin, setIsShowLogin}) => {
           //await Auth.signIn(username, password);
           setUserAuthenticated(true);
           if(isUserAuthenticated){
-            setUserInfo();
             setLoginStatus(true);
             setIsShowLogin(false);
+            //console.log(pathname)
+            if(pathname === "/"){
+                history.push("/" + username);
+            }
+            else{
+                history.push(pathname + username);
+            }
           }
-          //history.push("/" + username);
         } catch (e) {
           alert(e.message);
         }
       }
 
-    if(isShowLogin){
+    if(isShowLogin || !loginStatus){
         return(
             <div className="active popup-background" ref={modalRef} onClick={closeLoginForm}>
                 <animated.div style={animation}>

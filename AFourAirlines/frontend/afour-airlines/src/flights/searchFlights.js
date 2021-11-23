@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import NavBar from "../common/navbar";
 import LoginForm from "../login/loginPage"
 import {  useParams } from "react-router-dom";
+import { useGetUserData } from '../common/getUserData';
+import { useHistory } from "react-router-dom";
 
-export default function Search({ handleLoginClick, props}) {
+export default function Search(props) {
     
     const searchResult = () => {
         window.location.href = './searchPage'
@@ -14,13 +16,17 @@ export default function Search({ handleLoginClick, props}) {
     const handleLoginClicked = () => {
         setIsShowLogin(!isShowLogin);
     }
+
+    let { username } = useParams();
     
-    const { userName } = useParams();
+    const pathname = window.location.pathname
+    
+    //const { userName } = useParams();
     console.log(props);
         return (
             <div>
-                <NavBar props={userName} handleLoginClick={handleLoginClicked}></NavBar>
-                {isShowLogin && <LoginForm isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin}></LoginForm>}
+                <NavBar props={username} handleLoginClick={handleLoginClicked}></NavBar>
+                {isShowLogin && <LoginForm isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} pathname={pathname}></LoginForm>}
                 <div class="col-md-5 col-md-offset-1" align="center">
                     <section id="first-tab-group" class="tabgroup">
                         <div id="tab1">
