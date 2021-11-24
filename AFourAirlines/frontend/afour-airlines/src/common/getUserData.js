@@ -3,21 +3,23 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 export const useGetUserData = (props) => {
-  const [userData, setUserData] = useState({});
+  const deafultUser = {
+    username : "eshasah",
+    first_name :"Esha",
+    last_name : "Sah",
+    email_id : "esha8sah@gmail.com",
+    country : "USA",
+    contact_number : "+1(876)543-1234",
+    auth_id : 0,
+  };
+  const [userData, setUserData] = useState(deafultUser);
   const { userName } = useParams();
 
+  
   axios.defaults.withCredentials = true;
 
   useEffect(() => {
     console.log(userName);
-    setUserData({
-      username : userName,
-      first_name :"Esha",
-      last_name : "Sah",
-      email_id : "esha8sah@gmail.com",
-      country : "USA",
-      auth_id : 0,
-  });
     // axios.get("http://localhost:3001/user/get" + userName).then((response) => {
     //     if (response.data.loggedIn === true) {
     //       setUserData(response.data.user);
@@ -25,7 +27,7 @@ export const useGetUserData = (props) => {
     //       setUserData({});
     //     }
     // });
-  }, [userName]);
+  }, []);
 
   return { userData };
 };

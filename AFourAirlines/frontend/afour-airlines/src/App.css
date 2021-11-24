@@ -104,7 +104,7 @@ tbody tr:hover {
   height: 85px;
   display: flex;
   justify-content: space-between;
-  padding: 0.2rem calc((100vw - 1000px) / 2);
+  kpadding: 0.2rem calc((100vw - 1000px) / 2);
   z-index: 12;
 }
   
@@ -150,6 +150,12 @@ tbody tr:hover {
 .nav-menu-link-active {
   background-color: #21314e;
   color: #fff;
+}
+
+.nav-user-greeting {
+  margin-left: auto;
+  margin-top: auto;
+  padding: 10px;
 }
 
 .miles-banner {
@@ -299,4 +305,31 @@ tbody tr:hover {
 
 .btn-spacing{
   margin: 20px !important;
+}
+
+.help-page {
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  max-width: 72%;
+  padding: 0 3% 0 3%;
+  text-align: justify;
+}
+
+.travel-advisory {
+    float: none;
+    margin: 0;
+    width: 100%;
+}
+
+.travle-advisory-notice {
+  display: block;
+  border: 0.0625rem solid #039;
+  padding: 2%;
+  text-align: justify;
+}
+
+.baggage-policy-container{
+  padding-bottom: 2.5%;
+  border-bottom: solid 0.25px;
 }
