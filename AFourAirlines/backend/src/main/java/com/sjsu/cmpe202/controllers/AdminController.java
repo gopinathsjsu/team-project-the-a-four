@@ -7,20 +7,17 @@ import com.sjsu.cmpe202.validators.JwtTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/admin")
 @Slf4j
-public class UserController {
+public class AdminController {
 
     @Autowired
     UserService userService;
@@ -31,7 +28,6 @@ public class UserController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
-    //This is same for login
     @PostMapping("/authenticate")
     public ResponseEntity<JwtResponse> authenticate(@RequestBody User user) {
         String token = null;
@@ -51,24 +47,6 @@ public class UserController {
 
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody User user) throws Exception {
-        log.info("user is {}",user);
-        return ResponseEntity.ok(userService.save(user));
-
-    }
-
-    @PutMapping("/updateuserdetails")
-    public ResponseEntity<?> updateUser(@RequestBody User user) throws Exception {
-        log.info("user is {}",user);
-        return ResponseEntity.ok(userService.save(user));
-
-    }
-    @GetMapping("/getuserdetails")
-    public ResponseEntity<?> getUserDetails() throws Exception {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return ResponseEntity.ok(userService.getUserDetails(username));
-    }
 
     private void authenticate(String username, String password) throws Exception {
         try {
@@ -80,5 +58,15 @@ public class UserController {
             log.error("INVALID_CREDENTIALS {}", e);
             throw new Exception("INVALID_CREDENTIALS", e);
         }
+    }
+
+    @GetMapping("/getalluserdetails")
+    public ResponseEntity<?> getAllUserDetails() throws Exception {
+        return ResponseEntity.ok(userService.getAllUserDetails());
+    }
+
+    @GetMapping("/hello")
+    public String helloAdmin() {
+        return "hello admin";
     }
 }
