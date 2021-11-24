@@ -25,7 +25,7 @@ export default function App() {
         <Route path="/mileageProgram" exact render={(props) => <MileageProgram />} />
         <Route path ="/flightsList.js" exact render={(props) => <FlightsList/>} />
         <Route path ="/flightPayment" exact render={(props) => <FlightPayment/>} />
-        <Route pathe="/userType" exact render={(props) => <UserType/>} />
+        <Route path ="/userType" exact render={(props) => <UserType/>} />
         <Route path="/newUser/Register" exact render={(props) => <NewRegistration/>}/>
         <Route path="/user/UserProfile/" exact render={(props) => <UserProfile/>}/>
         <Route path="/travel/help" exact render={(props) => <HelpPage/>}/>
