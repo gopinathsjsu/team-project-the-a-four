@@ -4,25 +4,28 @@ import { useHistory } from 'react-router';
 import Registration from '../login/register';
 import Login from '../login/login';
 
-class UserType extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            username: props.usename,
-            auth_id: props.auth_id,
-            membership: props.membership
-        }
+export default function UserType(props) {
+    
+    const continueGuest = () => {
+        window.location.href = './flightPayment'
     }
 
-render() {
-    return (
-        <div>
-            <NavBar></NavBar>
-            <Registration></Registration>
-            <Login></Login>
-        </div>
-    )
-}
-}
+        return (
+            <div>
+                <NavBar></NavBar>
+                <div class="col-md-6">
+                    <fieldset>
+                        <button id="button" type="submit" id="form-submit" class="btn" onClick={continueGuest}>Continue As Guest</button>
+                        {/* <script type="text/javascript">
+                                                    document.getElementById("button").onclick = function () {
+                                                       window.location.href = './searchPage'
+                                                       };
+                                                </script> */}
+                    </fieldset>
+                </div>
+                <Registration></Registration>
+                <Login></Login>
+            </div>
+        )
+    }
 
-export default UserType;

@@ -24,6 +24,7 @@ function App() {
         <Route path="/:userName" exact render={(props) => <Search />} />
         <Route path ="/flightsList.js" exact render={(props) => <FlightsList/>} />
         <Route path ="/flightPayment" exact render={(props) => <FlightPayment/>} />
+        <Route path ="/userType" exact render={(props) => <UserType/>} />
         </Switch>
       </Router>
     </BasePage>
