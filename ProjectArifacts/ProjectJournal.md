@@ -22,6 +22,12 @@
 - **What tasks are blocked waiting on another team member?** Data passing from one page to another.
 - **XP Core Value:** Courage
 
+### Sprint 4: 
+- **What tasks did I work on / complete?** Data passing blocker removed. Help page completed
+- **What am I planning to work on next?** Next, I am planing to work on user profile page.
+- **What tasks are blocked waiting on another team member?** None
+- **XP Core Value:** Communication
+
 ## Mohammed Tuba Ahmed
 ### Sprint 1 - 
 - What tasks did I work on / complete?
