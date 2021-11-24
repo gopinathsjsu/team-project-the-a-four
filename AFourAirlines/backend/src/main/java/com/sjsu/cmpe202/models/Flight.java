@@ -7,13 +7,7 @@ import javax.persistence.Id;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@Getter
-@Setter
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
-
+@Entity @Getter @Setter @ToString @AllArgsConstructor @NoArgsConstructor
 public class Flight {
     /*
 id int AI PK
@@ -44,28 +38,28 @@ varchar(45)
     */
     @Id
     private int id;
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
-    @Column(name="source_airport")
+    @Column(name = "source_airport")
     private String sourceAirport;
-    @Column(name="dest_airport")
+    @Column(name = "dest_airport")
     private String destinationAirport;
-    @Column(name="source_terminal")
+    @Column(name = "source_terminal")
     private String sourceTerminal;
-    @Column(name="dest_terminal")
+    @Column(name = "dest_terminal")
     private String destinationTerminal;
-    @Column(name="source_gate")
+    @Column(name = "source_gate")
     private String sourceGate;
-    @Column(name="dest_gate")
+    @Column(name = "dest_gate")
     private String destinationGate;
-    @Column(name="dep_date")
+    @Column(name = "dep_date")
     private LocalDate departureDate;
-    @Column(name="arr_date")
+    @Column(name = "arr_date")
     private LocalDate arrivalDate;
-    @Column(name="dep_time")
+    @Column(name = "dep_time")
     private LocalTime departureTime;
-    @Column(name="arr_time")
+    @Column(name = "arr_time")
     private LocalTime arrivalTime;
-    @Column(name="equipment")
+    @Column(name = "equipment")
     private int equipment;
 }

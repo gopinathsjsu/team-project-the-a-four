@@ -5,13 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Getter
-@Setter
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
-
+@Entity @Getter @Setter @ToString @AllArgsConstructor @NoArgsConstructor
 public class Seat {
     /*
 id
@@ -25,12 +19,12 @@ tinyint(1)
     */
     @Id
     private int id;
-    @Column(name="number")
+    @Column(name = "number")
     private String number;
-    @Column(name="airplane")
+    @Column(name = "airplane")
     private int airplane;
-    @Column(name="flight_id")
+    @Column(name = "flight_id")
     private int flightId;
-    @Column(name="reserved")
+    @Column(name = "reserved")
     private boolean reserved;
 }

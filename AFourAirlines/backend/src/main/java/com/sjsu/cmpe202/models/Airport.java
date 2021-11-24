@@ -4,13 +4,8 @@ import lombok.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-@Getter
-@Setter
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
 
+@Entity @Getter @Setter @ToString @AllArgsConstructor @NoArgsConstructor
 public class Airport {
     /*
 airport_code
@@ -25,14 +20,14 @@ name
 varchar(45)
     */
     @Id
-    @Column(name="airport_code")
+    @Column(name = "airport_code",length = 10)
     private String airportCode;
-    @Column(name="city")
+    @Column(name = "city")
     private String city;
-    @Column(name="country")
+    @Column(name = "country")
     private String country;
-    @Column(name="timezone")
+    @Column(name = "timezone")
     private String timezone;
-    @Column(name="name")
+    @Column(name = "name")
     private String name;
 }

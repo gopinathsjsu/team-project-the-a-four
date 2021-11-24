@@ -1,17 +1,9 @@
 package com.sjsu.cmpe202.models;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-@Getter
-@Setter
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
-
+@Entity @Getter @Setter @ToString @AllArgsConstructor @NoArgsConstructor
 public class Mileage {
     /*
 rewards_number
@@ -20,7 +12,8 @@ balance_points
 int
 */
     @Id
-    private int id;
-    @Column(name="balance_points")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    @Column(name = "balance_points")
     private String balancePoints;
 }

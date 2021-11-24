@@ -1,15 +1,10 @@
 package com.sjsu.cmpe202.models;
+
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-@Getter
-@Setter
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
+import javax.persistence.*;
+
+@Entity @Getter @Setter @ToString @AllArgsConstructor @NoArgsConstructor
 public class Address {
     /*
 id
@@ -27,15 +22,16 @@ varchar(45)
 
     */
     @Id
-    private int id;
-    @Column(name="street")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    @Column(name = "street")
     private String street;
-    @Column(name="city")
+    @Column(name = "city")
     private String city;
-    @Column(name="state")
+    @Column(name = "state")
     private String state;
-    @Column(name="zip")
+    @Column(name = "zip")
     private String zip;
-    @Column(name="country")
+    @Column(name = "country")
     private String country;
 }

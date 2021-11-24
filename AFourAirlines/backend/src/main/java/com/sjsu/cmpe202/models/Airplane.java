@@ -5,13 +5,8 @@ import lombok.*;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-@Getter
-@Setter
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor
-@Entity
 
+@Entity @Getter @Setter @ToString @AllArgsConstructor @NoArgsConstructor
 public class Airplane {
     /*
     id
@@ -25,10 +20,10 @@ public class Airplane {
     */
     @Id
     private int id;
-    @Column(name="make")
+    @Column(name = "make")
     private String make;
-    @Column(name="model")
+    @Column(name = "model")
     private String model;
-    @Column(name="capacity")
+    @Column(name = "capacity")
     private String capacity;
 }

@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class AFourAirlinesApplication {
 
 
-	public static void main(String[] args) {
-		SpringApplication.run(AFourAirlinesApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(AFourAirlinesApplication.class, args);
+    }
 
-	@GetMapping("/health")
-	public String healthCheck(){
-		log.info("Health check being done");
-		return "Health is OK";
-	}
+    @GetMapping("/health")
+    public String healthCheck() {
+        log.info("Health check being done");
+        return "Health is OK";
+    }
 
 }
