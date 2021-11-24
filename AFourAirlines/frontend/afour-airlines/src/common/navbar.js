@@ -13,7 +13,6 @@ function NavBar({ handleLoginClick, props}) {
     //let userData = useGetUserData(userName);
 
     const handleLogout = () => {
-        debugger;
         localStorage.setItem("userName", "");
         localStorage.setItem("token", "");
         window.location.assign("/");

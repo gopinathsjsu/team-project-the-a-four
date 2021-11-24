@@ -1,5 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
-import { useSpring, animated } from "react-spring";
+import React, { useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import closeIcon from "../images/images-close.jpg"
 
@@ -23,14 +22,6 @@ const LoginForm = ({isShowLogin, setIsShowLogin, pathname}) => {
 
     const modalRef = useRef();
 
-    const animation = useSpring({
-        config:{
-            duration:250,
-            opacity: isShowLogin ? 1 : 0,
-            transform: isShowLogin ? `translateY(0%)` : `translateY(-100%)`
-        }
-    });
-
     const closeLoginForm = e => {
         if(modalRef.current === e.target) {
             setIsShowLogin(false);
@@ -40,7 +31,29 @@ const LoginForm = ({isShowLogin, setIsShowLogin, pathname}) => {
     const handleJoinNow = (e) => {
         alert('You will redirected to a new page.');
         setIsShowLogin(false);
-        history.push("/newUser/Register");
+        window.location.assign("/newUser/Register");
+    }
+
+    const authenticate = () =>{
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+        "username": "esha12345",
+        "password": "esha"
+        });
+
+        var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        mode: 'no-cors'
+        };
+
+        fetch("http://localhost:8080/api/users/authenticate", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log("authenticate - " + result))
+        .catch(error => console.log('error', error));        
     }
 
     function handleSubmit(event){
@@ -49,7 +62,8 @@ const LoginForm = ({isShowLogin, setIsShowLogin, pathname}) => {
         validateForm();
         try {
           //await Auth.signIn(username, password);
-          setUserAuthenticated(true);
+          //setUserAuthenticated(true);
+          authenticate();
           console.log("isUserAuthenticated - " + isUserAuthenticated);
           //if(isUserAuthenticated){
 
