@@ -5,13 +5,13 @@ import closeIcon from "../images/images-close.jpg"
 
 const LoginForm = ({isShowLogin, setIsShowLogin, pathname}) => {
 
-    const [username, setUserName] = useState("");
-    const [password, setPassword] = useState("");
+    let [username, setUserName] = useState("");
+    let [password, setPassword] = useState("");
     const history = useHistory();
-    const [loginStatus, setLoginStatus] = useState(false);
-    const [isUserAuthenticated, setUserAuthenticated] = useState(false);
+    let [loginStatus, setLoginStatus] = useState(false);
+    let [isUserAuthenticated, setUserAuthenticated] = useState(false);
 
-    const [errorMsg, setErrorMsg] = useState("");
+    let [errorMsg, setErrorMsg] = useState("");
 
     function validateForm(){
         if (username === "" || password === "") {
@@ -44,22 +44,24 @@ const LoginForm = ({isShowLogin, setIsShowLogin, pathname}) => {
     }
 
     function handleSubmit(event){
-        event.preventDefault();
+        //event.preventDefault();
+        debugger;
         validateForm();
         try {
           //await Auth.signIn(username, password);
           setUserAuthenticated(true);
-          if(isUserAuthenticated){
+          console.log("isUserAuthenticated - " + isUserAuthenticated);
+          //if(isUserAuthenticated){
+
+            localStorage.setItem("userName", username);
+            localStorage.setItem("token", "abctoken");
             setLoginStatus(true);
             setIsShowLogin(false);
-            //console.log(pathname)
-            if(pathname === "/"){
-                history.push("/" + username);
-            }
-            else{
-                history.push(pathname + username);
-            }
-          }
+            console.log("username " + localStorage.getItem("userName"));
+            
+            window.location.reload();
+            
+          //}
         } catch (e) {
           alert(e.message);
         }
@@ -68,7 +70,6 @@ const LoginForm = ({isShowLogin, setIsShowLogin, pathname}) => {
     if(isShowLogin || !loginStatus){
         return(
             <div className="active popup-background" ref={modalRef} onClick={closeLoginForm}>
-                <animated.div style={animation}>
                 <div className="login-form popup-wrapper">
                     <div className="form-box solid popup-content">
                         <form>
@@ -103,7 +104,6 @@ const LoginForm = ({isShowLogin, setIsShowLogin, pathname}) => {
                         </span>
                     </div>
                 </div>
-                </animated.div>
             </div>
         );
     }

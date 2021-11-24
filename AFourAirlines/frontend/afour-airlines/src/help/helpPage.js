@@ -22,7 +22,7 @@ export default function HelpPage(){
     return(
         <div>
             <NavBar props={username} handleLoginClick={handleLoginClicked}></NavBar>
-                {isShowLogin && <LoginForm isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} pathname={pathname}></LoginForm>}
+            {isShowLogin && <LoginForm isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} pathname={pathname}></LoginForm>}
         
             <div className="help-page">
                 <br/>

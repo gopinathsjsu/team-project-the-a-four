@@ -12,7 +12,7 @@ export default function UserProfile () {
         setIsShowLogin(!isShowLogin);
     }
 
-    let { username } = useParams();
+    let username = localStorage.getItem("userName");
     const { userData } = useGetUserData(username);
 
     const pathname = window.location.pathname

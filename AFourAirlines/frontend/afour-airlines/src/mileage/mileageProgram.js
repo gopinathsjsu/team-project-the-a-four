@@ -14,18 +14,18 @@ export default function MileageProgram (props){
         setIsShowLogin(!isShowLogin);
     }
 
-    let { username } = useParams();
-    const { userData } = useGetUserData(username);
+    let username = localStorage.getItem("userName");
+    
     const pathname = window.location.pathname
 
     return(
         <div>
             <NavBar props={username} handleLoginClick={handleLoginClicked}></NavBar>
             {isShowLogin && <LoginForm isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} pathname={pathname}></LoginForm>}
-            {!userData.username  && 
+            {!username  && 
                 <GuestMileage></GuestMileage>}
-            {userData.username &&
-                <UserMileage props={username}></UserMileage>
+            {username &&
+                <UserMileage></UserMileage>
             }
         </div>
         );

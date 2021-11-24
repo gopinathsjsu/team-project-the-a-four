@@ -11,13 +11,13 @@ export default function Search(props) {
         window.location.href = './searchPage'
     }
 
-    const [isShowLogin, setIsShowLogin] = useState(false);
+    let [isShowLogin, setIsShowLogin] = useState(false);
 
     const handleLoginClicked = () => {
         setIsShowLogin(!isShowLogin);
     }
 
-    let { username } = useParams();
+    let username = localStorage.getItem("userName");
     
     const pathname = window.location.pathname
     

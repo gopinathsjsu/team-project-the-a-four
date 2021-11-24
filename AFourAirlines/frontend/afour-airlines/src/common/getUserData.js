@@ -12,14 +12,23 @@ export const useGetUserData = (props) => {
     contact_number : "+1(876)543-1234",
     auth_id : 0,
   };
-  const [userData, setUserData] = useState(deafultUser);
-  const { userName } = useParams();
+
+  const [userData, setUserData] = useState({});
+  let userName = props;
+  debugger;
 
   
   axios.defaults.withCredentials = true;
 
   useEffect(() => {
-    console.log(userName);
+    console.log("userName" + userName);
+    if(!userName){
+      setUserData({});
+    }
+    else{
+      setUserData(deafultUser);
+    }
+    
     // axios.get("http://localhost:3001/user/get" + userName).then((response) => {
     //     if (response.data.loggedIn === true) {
     //       setUserData(response.data.user);
@@ -45,6 +54,8 @@ export const useGetMileageData = (props) => {
       last_name : "Sah",
       mileage_points : 978,
       reward_number : 345678
+      //number_of_trips
+
   });
     // axios.get("http://localhost:3001/user/get" + userName).then((response) => {
     //     if (response.data.loggedIn === true) {
@@ -57,3 +68,7 @@ export const useGetMileageData = (props) => {
 
   return { userData };
 };
+
+export const useUserAuthenticate = (username, password) => {
+  
+}

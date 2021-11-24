@@ -9,8 +9,15 @@ function NavBar({ handleLoginClick, props}) {
         handleLoginClick();
     }
     
-    let { userName } = useParams();
-    const { userData } = useGetUserData(userName);
+    let userName = localStorage.getItem("userName");
+    //let userData = useGetUserData(userName);
+
+    const handleLogout = () => {
+        debugger;
+        localStorage.setItem("userName", "");
+        localStorage.setItem("token", "");
+        window.location.assign("/");
+    }
     
     const checkActive = (match, location) => {
         console.log(match);
@@ -18,8 +25,6 @@ function NavBar({ handleLoginClick, props}) {
         if(!location) return false;
         const {pathname} = location;
         console.log(pathname);
-
-        if(pathname === "/" + userName) return true;
 
         return pathname === "/";
     }
@@ -29,64 +34,62 @@ function NavBar({ handleLoginClick, props}) {
             <div className="nav-horizontal" style={{display:"flex"}}>
                 <ul className="nav-menu">
                     <li className="nav-menu-item">
-                        <NavLink to={"/:userName".replace(':userName', userName === undefined ? "" : userName)} className="nav-menu-link" activeClassName="nav-menu-link-active" isActive={checkActive}>
+                        <NavLink to="/" className="nav-menu-link" activeClassName="nav-menu-link-active" isActive={checkActive}>
                             Search Flights
                         </NavLink>
                     </li>
                     <li className="nav-menu-item">
-                        {!userData.username && <NavLink to="/mileageProgram/" className="nav-menu-link" activeClassName="nav-menu-link-active">
+                        <NavLink to="/mileageProgram/" className="nav-menu-link" activeClassName="nav-menu-link-active">
                             Mileage Program
-                        </NavLink>}
-                        {userData.username && <NavLink to={"/mileageProgram/:userName".replace(':userName', userName)} className="nav-menu-link" activeClassName="nav-menu-link-active">
-                            Mileage Program
-                        </NavLink>}
+                        </NavLink>
                     </li>
-                    {userData.auth_id !== 1 && (
+                    {userName !== "admin" && (
                     <li className="nav-menu-item">
                         <NavLink to="/travel/help" className="nav-menu-link" activeClassName="nav-menu-link-active">
                             Help
                         </NavLink>
                     </li>
                     )}
-                    {userData.username && userData.auth_id === 1 && (
+                    {(userName === "admin") && (
                     <li className="nav-menu-item">
                         <NavLink to="/admin/home" className="nav-menu-link" activeClassName="nav-menu-link-active">
                             Admin
                         </NavLink>
                     </li>
                     )}
-                    {!userData.username && (
+                    {!userName && (
                     <li className="nav-menu-item">
                         <NavLink to="/newUser/Register" className="nav-menu-link" activeClassName="nav-menu-link-active">
                             Register
                         </NavLink>
                     </li>
                     )}
-                    {userData.username && (
+                    {userName && (
                     <li className="nav-menu-item">
-                        <NavLink to={"/user/UserProfile/:userName".replace(':userName', userName)} className="nav-menu-link" activeClassName="nav-menu-link-active">
+                        <NavLink to="/user/UserProfile/" className="nav-menu-link" activeClassName="nav-menu-link-active">
                             My Profile
                         </NavLink>
                     </li>
                     )}
-                    {!userData.username && (
+                    {!userName && (
                     <li className="nav-menu-item">
                         <div>
-                            <span onClick={handleLoginClicked} className="nav-menu-link" activeClassName="nav-menu-link-active">
+                            <span onClick={handleLoginClicked} className="nav-menu-link">
                             Login</span>
                         </div>
                     </li>
                     )}                    
-                    {userData.username && (
+                    {userName && (
                     <li className="nav-menu-item">
-                        <NavLink to="/" className="nav-menu-link" >
-                            Logout
-                        </NavLink>
+                        <div>
+                            <span onClick={handleLogout} className="nav-menu-link">
+                            Logout</span>
+                        </div>
                     </li>
                     )}
                 </ul>
-                {userData.username && (
-                        <label className="nav-user-greeting"> Hello {userData.first_name} !</label>
+                {userName && (
+                        <label className="nav-user-greeting"> Hello {userName} !</label>
                     )}
             </div>
         );
