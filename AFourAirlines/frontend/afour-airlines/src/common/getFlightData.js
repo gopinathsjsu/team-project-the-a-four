@@ -6,11 +6,11 @@ import FlightData from '../models/flightData';
 export const useGetFlightData = (props) => {
 
 
-    const defaultFlight = {
-        this.state.flightData.map(flight => {
-        flightID: flight.id,
+    // const defaultFlight = {
+    //     this.state.flightData.map(flight => {
+    //     flightID: flight.id,
 
-    };
+    // };
 
     const [flightData, setFlightData] = useState(defaultFlight);
     const { flightID } = useParams();
