@@ -265,6 +265,14 @@ tbody tr:hover {
   color: #141414;
 }
 
+.popup-side-content{
+  border-left: 1px solid #d4d4d0;
+}
+
+.hide-parent{
+  overflow: hidden
+}
+
 .popup-close-button {
   cursor: pointer;
   position:absolute;
@@ -278,4 +286,17 @@ tbody tr:hover {
 
 .popup-close-button img {
   width: 30px;
+}
+
+
+.register-checkbox-div {
+ display: table-column !important
+}
+
+.btn-group{
+  align-items: center !important;
+}
+
+.btn-spacing{
+  margin: 20px !important;
 }

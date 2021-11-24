@@ -10,6 +10,7 @@ import MileageProgram from "./mileage/mileageProgram";
 import Search from "./flights/searchFlights";
 import FlightsList from "./flights/flightsList";
 import FlightPayment from "./flights/flightPayment";
+import NewRegistration from "./login/newRegistration";
 
 export default function App() {
 
@@ -23,6 +24,7 @@ export default function App() {
         <Route path="/mileageProgram/:userName" exact render={(props) => <MileageProgram />} />
         <Route path ="/flightsList.js" exact render={(props) => <FlightsList/>} />
         <Route path ="/flightPayment" exact render={(props) => <FlightPayment/>} />
+        <Route path="/newUser/Register" exact render={(props) => <NewRegistration/>}/>
         </Switch>
       </Router>
     </BasePage>

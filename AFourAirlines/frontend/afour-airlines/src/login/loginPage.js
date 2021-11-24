@@ -11,16 +11,6 @@ const LoginForm = ({isShowLogin, setIsShowLogin, pathname}) => {
     const [loginStatus, setLoginStatus] = useState(false);
     const [isUserAuthenticated, setUserAuthenticated] = useState(false);
 
-    const defaultValues = {
-        username: "",
-        first_name: "",
-        last_name: "",
-        email_id: "",
-        country: "",
-        auth_id: 0,
-    };
-    //const [userData, setUserData] = useState(defaultValues);
-
     const [errorMsg, setErrorMsg] = useState("");
 
     function validateForm(){
@@ -30,15 +20,6 @@ const LoginForm = ({isShowLogin, setIsShowLogin, pathname}) => {
         }
         return false;
     }
-
-    // function setUserInfo(){
-    //         userData.username = username;
-    //         userData.first_name ="Esha";
-    //         userData.last_name = "Sah";
-    //         userData.email_id = "esha8sah@gmail.com";
-    //         userData.country = "USA";
-    //         userData.auth_id = 0;
-    // }
 
     const modalRef = useRef();
 
@@ -54,6 +35,12 @@ const LoginForm = ({isShowLogin, setIsShowLogin, pathname}) => {
         if(modalRef.current === e.target) {
             setIsShowLogin(false);
         }
+    }
+
+    const handleJoinNow = (e) => {
+        alert('You will redirected to a new page.');
+        setIsShowLogin(false);
+        history.push("/newUser/Register");
     }
 
     function handleSubmit(event){
@@ -106,6 +93,14 @@ const LoginForm = ({isShowLogin, setIsShowLogin, pathname}) => {
                     
                     <div className="popup-close-button" label="Close" onClick={() => setIsShowLogin(prev => !prev)}>
                         <img src={closeIcon} alt="Close"></img>
+                    </div>
+
+                    <div className="form-box solid popup-content popup-side-content">
+                        <span>Don't have an account?</span>
+                        <br/>
+                        <span>
+                            <span onClick={handleJoinNow} >Join Now!</span>
+                        </span>
                     </div>
                 </div>
                 </animated.div>

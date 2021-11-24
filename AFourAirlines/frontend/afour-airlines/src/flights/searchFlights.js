@@ -21,7 +21,6 @@ export default function Search(props) {
     
     const pathname = window.location.pathname
     
-    //const { userName } = useParams();
     console.log(props);
         return (
             <div>

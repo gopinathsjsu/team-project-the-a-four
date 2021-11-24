@@ -1,32 +1,32 @@
 import React, { useState } from "react";
-import {  useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import NavBar from "../common/navbar";
-import UserMileage from "./userMileage";
-import GuestMileage from "./guestMileage.js";
-import { useGetUserData } from "../common/getUserData";
 import LoginForm from "../login/loginPage"
+import Registration from "../login/register"
 
-export default function MileageProgram (props){
-    
+export default function NewRegistration(props){
+
     const [isShowLogin, setIsShowLogin] = useState(false);
 
     const handleLoginClicked = () => {
         setIsShowLogin(!isShowLogin);
     }
 
-    let { username } = useParams();
-    const { userData } = useGetUserData(username);
     const pathname = window.location.pathname
+    let { username } = useParams();
 
     return(
-        <div>
+        <div className={isShowLogin ? "hide-parent" : ""}>
             <NavBar props={username} handleLoginClick={handleLoginClicked}></NavBar>
             {isShowLogin && <LoginForm isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} pathname={pathname}></LoginForm>}
-            {!userData.username  && 
-                <GuestMileage></GuestMileage>}
-            {userData.username &&
-                <UserMileage props={username}></UserMileage>
-            }
+            <div>
+                <div>
+                    <h1 style={{ textAlign: "center" }}>Get an account by filling few details.</h1>
+                </div>
+                <div className="popup-content">
+                    <Registration></Registration>
+                </div>
+            </div>
         </div>
-        );
+    );
 }

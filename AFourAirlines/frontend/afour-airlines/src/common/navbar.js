@@ -53,12 +53,19 @@ function NavBar({ handleLoginClick, props}) {
                     )}
                     {!userData.username && (
                     <li className="nav-menu-item">
+                        <NavLink to="/newUser/Register" className="nav-menu-link" activeClassName="nav-menu-link-active">
+                            Register
+                        </NavLink>
+                    </li>
+                    )}
+                    {!userData.username && (
+                    <li className="nav-menu-item">
                         <div>
                             <span onClick={handleLoginClicked} className="nav-menu-link" activeClassName="nav-menu-link-active">
                             Login</span>
                         </div>
                     </li>
-                    )}
+                    )}                    
                     {userData.username && (
                     <li className="nav-menu-item">
                         <NavLink to="/" className="nav-menu-link" >
