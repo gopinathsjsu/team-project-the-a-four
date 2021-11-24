@@ -104,7 +104,7 @@ tbody tr:hover {
   height: 85px;
   display: flex;
   justify-content: space-between;
-  padding: 0.2rem calc((100vw - 1000px) / 2);
+  kpadding: 0.2rem calc((100vw - 1000px) / 2);
   z-index: 12;
 }
   
@@ -152,6 +152,12 @@ tbody tr:hover {
   color: #fff;
 }
 
+.nav-user-greeting {
+  margin-left: auto;
+  margin-top: auto;
+  padding: 10px;
+}
+
 .miles-banner {
   border-radius: 4px;
   border: solid 1px #d4d4d0;
@@ -197,4 +203,133 @@ tbody tr:hover {
   width: 80px;
   height: 100px;
   background-color: white;
+}
+
+.button-general {
+  background-color: #21314e;
+  color: #fff;
+}
+
+.show {
+  display: block;
+  transition: 800ms;
+  opacity: 1;
+}
+
+.show.active {
+  transform: translateY(100px) scale(0) rotateY(180deg);
+  opacity: 0;
+}
+
+.popup-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.popup-button {
+  min-width: 100px;
+  padding: 16px 32px;
+  border-radius: 4px;
+  border: none;
+  background: #141414;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.popup-background {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  display: flex;
+  justify-self: center;
+  align-items: center;
+}
+
+.popup-wrapper {
+  width: 800px;
+  height: 500px;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
+  background: #fff;
+  color: #000;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: relative;
+  z-index: 10;
+  border-radius: 10px;
+}
+
+.popup-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.8;
+  color: #141414;
+}
+
+.popup-side-content{
+  border-left: 1px solid #d4d4d0;
+}
+
+.hide-parent{
+  overflow: hidden
+}
+
+.popup-close-button {
+  cursor: pointer;
+  position:absolute;
+  top: 20px;
+  right: 40px;
+  width: 10px;
+  height: 10px;
+  padding: 0;
+  z-index: 10;
+}
+
+.popup-close-button img {
+  width: 30px;
+}
+
+
+.register-checkbox-div {
+ display: table-column !important
+}
+
+.btn-group{
+  align-items: center !important;
+}
+
+.btn-spacing{
+  margin: 20px !important;
+}
+
+.help-page {
+  display: block;
+  position: relative;
+  margin: 0 auto;
+  max-width: 72%;
+  padding: 0 3% 0 3%;
+  text-align: justify;
+}
+
+.travel-advisory {
+    float: none;
+    margin: 0;
+    width: 100%;
+}
+
+.travle-advisory-notice {
+  display: block;
+  border: 0.0625rem solid #039;
+  padding: 2%;
+  text-align: justify;
+}
+
+.baggage-policy-container{
+  padding-bottom: 2.5%;
+  border-bottom: solid 0.25px;
 }
