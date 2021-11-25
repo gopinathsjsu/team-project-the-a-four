@@ -7,6 +7,7 @@ import com.sjsu.cmpe202.validators.JwtTokenUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -32,6 +33,7 @@ public class UserController {
     private JwtTokenUtil jwtTokenUtil;
 
     //This is same for login
+    @CrossOrigin
     @PostMapping("/authenticate")
     public ResponseEntity<JwtResponse> authenticate(@RequestBody User user) {
         String token = null;
@@ -47,6 +49,7 @@ public class UserController {
             log.error("Exception occured {}", e);
             throw new BadCredentialsException(user.getUsername());
         }
+        log.info("Token generated is {}",token);
         return ResponseEntity.ok(new JwtResponse(token));
 
     }
