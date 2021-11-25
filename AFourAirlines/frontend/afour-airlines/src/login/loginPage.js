@@ -47,18 +47,30 @@ const LoginForm = ({isShowLogin, setIsShowLogin, pathname}) => {
         method: 'POST',
         headers: myHeaders,
         body: raw,
-        mode: 'no-cors'
+        mode: 'cors'
         };
 
         fetch("http://localhost:8080/api/users/authenticate", requestOptions)
-        .then(response => response.text())
-        .then(result => console.log("authenticate - " + result))
-        .catch(error => console.log('error', error));        
+        .then(async response => {
+            const data = await response.json();
+
+            // check for error response
+            if (!response.ok) {
+                // get error message from body or default to response statusText
+                const error = (data && data.message) || response.statusText;
+                return Promise.reject(error);
+            }
+            localStorage.setItem('token', data.token);
+        })
+        .catch(error => {
+            //this.setState({ errorMessage: error.toString() });
+            console.error('There was an error!', error);
+        });       
     }
 
     function handleSubmit(event){
-        //event.preventDefault();
-        debugger;
+        event.preventDefault();
+        //debugger;
         validateForm();
         try {
           //await Auth.signIn(username, password);
@@ -71,9 +83,6 @@ const LoginForm = ({isShowLogin, setIsShowLogin, pathname}) => {
             localStorage.setItem("token", "abctoken");
             setLoginStatus(true);
             setIsShowLogin(false);
-            console.log("username " + localStorage.getItem("userName"));
-            
-            window.location.reload();
             
           //}
         } catch (e) {
