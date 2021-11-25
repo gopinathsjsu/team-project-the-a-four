@@ -4,9 +4,10 @@ import { useParams } from "react-router-dom";
 import icon from "../images/icon.png";
 
 export default function UserMileage (props){
-    const { userName } = useParams();
-    const { userData } = useGetMileageData(userName);
-    console.log(icon);
+    let userName = localStorage.getItem("userName");
+
+    let { userData } = useGetMileageData(userName);
+    
     return (
         <div>
                 <h1 style={{ textAlign: "center" }}>Mileage Details</h1>

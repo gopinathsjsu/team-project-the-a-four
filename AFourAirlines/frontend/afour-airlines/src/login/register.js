@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Axios from "axios";
-import "../App.css";
 import {
   Button,
   FormControl,
@@ -14,7 +13,7 @@ import { useHistory } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 import FormLabel from "react-bootstrap/esm/FormLabel";
 
-const Registration = () => {
+export default function Registration(){
   Axios.defaults.withCredentials = true;
 
   // States for registration
@@ -48,15 +47,6 @@ const Registration = () => {
     id_number: false,
     contact: false,
   });
-  // const defaultValues = {
-  //   // user_id: "",
-  //   password: "",
-  //   first_name: "",
-  //   last_name: "",
-  //   email_id: "",
-  //   country: "",
-  // };
-  // const [userDetails, setUserDetails] = useState(defaultValues);
   
 
   const validateFields = () => {
@@ -99,7 +89,6 @@ const Registration = () => {
 
       if(hasError){
         //setMessage("Has error");
-        //register();
       }
       else{
         setMessage("Success!");
@@ -291,22 +280,20 @@ const Registration = () => {
             }}
           />
         </FormControl>
-        <FormControl>
+        <FormControl className="register-checkbox-div">
           <Checkbox id="register-enroll-checkbox" onChange={(e) => setEnrollMileage(e.currentTarget.checked)}></Checkbox>
           <FormLabel>Enroll in Mileage Program!</FormLabel>
         </FormControl>
-        <FormControl>
+        <FormControl className="register-checkbox-div">
           <Checkbox id="register-tnc-checkbox" onChange={(e) => setTncCheckbox(e.currentTarget.checked)}></Checkbox>
           <FormLabel>Read and agree to the Terms, Conditions and Policies of our Airlines!</FormLabel>
         </FormControl>
-        <FormControl>
-        <div>
-          <div className="pure-u-1-6"></div>
-          <Button variant="contained" color="primary" className="pure-u-1-6" onClick={handleSubmit}>
+        <FormControl className="btn-group">
+        <div className="">
+          <Button variant="contained" color="primary" className="pure-u-1-6 btn-spacing" onClick={handleSubmit}>
             Register
           </Button>
-          <div className="pure-u-1-6"></div>
-          <Button variant="contained" color="primary" className="pure-u-1-6" onClick={history.goBack}>
+          <Button variant="contained" color="primary" className="pure-u-1-6 btn-spacing" onClick={history.goBack}>
             Cancel
           </Button>
           </div>
@@ -316,5 +303,3 @@ const Registration = () => {
     </div>
   );
 }
-
-export default Registration;

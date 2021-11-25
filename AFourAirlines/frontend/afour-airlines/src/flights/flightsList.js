@@ -10,6 +10,9 @@ class FlightsList extends Component {
             auth_id: props.auth_id,
             membership: props.membership,
             flightData: FlightData
+            //get flight data function. Define it in either common or here. For now I can have it fetch from the model folder
+            //add props for all the user inputs
+            //use useParams based on the mileageProgram. This will allow you to get parameters from the URL
         }
     }
 
@@ -40,7 +43,7 @@ class FlightsList extends Component {
                                     <tbody>
                                         {this.state.flightData.map(flight => {
                                             return (
-                                                <tr key={flight.id}>
+                                                <th key={flight.id}>
                                                     <td scope="row">{flight.id}</td>
                                                     <td>{flight.airline}</td>
                                                     <td>{flight.flight_number}</td>
@@ -49,12 +52,13 @@ class FlightsList extends Component {
                                                     <td>{flight.arrival_airport}</td>
                                                     <td>{flight.departure_time}</td>
                                                     <td>{flight.arrival_time}</td>
+                                                    {/* add price information as well which can help the customer decide*/}
                                                     <td>
                                                         <a type="button"
                                                             className="btn btn-success btn-just-icon btn-sm"
                                                             href={"/select/" + flight.id}>Select</a>
                                                     </td>
-                                                </tr>
+                                                </th>
                                             );
                                         })
                                         }
