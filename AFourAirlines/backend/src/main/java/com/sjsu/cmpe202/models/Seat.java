@@ -18,7 +18,7 @@ reserved
 tinyint(1)
     */
     @Id
-    private int id;
+    private Integer id;
     @Column(name = "number")
     private String number;
     @Column(name = "airplane")
@@ -27,4 +27,6 @@ tinyint(1)
     private int flightId;
     @Column(name = "reserved")
     private boolean reserved;
+    @Column(name = "price")
+    private int price;
 }
