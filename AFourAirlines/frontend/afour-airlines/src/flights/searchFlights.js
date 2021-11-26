@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
 import NavBar from "../common/navbar";
-import LoginForm from "../login/loginPage"
-import {  useParams } from "react-router-dom";
-import { useGetUserData } from '../common/getUserData';
-import { useHistory } from "react-router-dom";
+import LoginModal from "../login/loginPopup";
 
 export default function Search(props) {
     
@@ -17,15 +14,13 @@ export default function Search(props) {
         setIsShowLogin(!isShowLogin);
     }
 
-    let username = localStorage.getItem("userName");
-    
     const pathname = window.location.pathname
     
     console.log(props);
         return (
             <div>
-                <NavBar props={username} handleLoginClick={handleLoginClicked}></NavBar>
-                {isShowLogin && <LoginForm isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} pathname={pathname}></LoginForm>}
+                <NavBar handleLoginClick={handleLoginClicked}></NavBar>
+                {isShowLogin && <LoginModal isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} pathname={pathname}/>}
                 <div class="col-md-5 col-md-offset-1" align="center">
                     <section id="first-tab-group" class="tabgroup">
                         <div id="tab1">

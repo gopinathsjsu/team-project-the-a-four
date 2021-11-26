@@ -293,7 +293,7 @@ export default function Registration(){
           <Button variant="contained" color="primary" className="pure-u-1-6 btn-spacing" onClick={handleSubmit}>
             Register
           </Button>
-          <Button variant="contained" color="primary" className="pure-u-1-6 btn-spacing" onClick={history.goBack}>
+          <Button variant="contained" color="tertiary" className="pure-u-1-6 btn-spacing" onClick={history.goBack}>
             Cancel
           </Button>
           </div>

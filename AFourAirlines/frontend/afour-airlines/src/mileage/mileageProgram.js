@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import {  useParams } from "react-router-dom";
 import NavBar from "../common/navbar";
 import UserMileage from "./userMileage";
 import GuestMileage from "./guestMileage.js";
-import { useGetUserData } from "../common/getUserData";
-import LoginForm from "../login/loginPage"
+import LoginModal from "../login/loginPopup"
 
 export default function MileageProgram (props){
     
@@ -21,7 +19,7 @@ export default function MileageProgram (props){
     return(
         <div>
             <NavBar props={username} handleLoginClick={handleLoginClicked}></NavBar>
-            {isShowLogin && <LoginForm isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} pathname={pathname}></LoginForm>}
+            {isShowLogin && <LoginModal isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} pathname={pathname}/>}
             {!username  && 
                 <GuestMileage></GuestMileage>}
             {username &&

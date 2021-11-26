@@ -53,8 +53,8 @@ export const useGetMileageData = (props) => {
       first_name :"Esha",
       last_name : "Sah",
       mileage_points : 978,
-      reward_number : 345678
-      //number_of_trips
+      reward_number : 345678,
+      number_of_trips : 27,
 
   });
     // axios.get("http://localhost:3001/user/get" + userName).then((response) => {

@@ -1,14 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
-import { useGetUserData } from "./getUserData";
-import {  useParams } from "react-router-dom";
 
 function NavBar({ handleLoginClick, props}) { 
-    
-    const handleLoginClicked = () => {
-        handleLoginClick();
-    }
-    
+        
     let userName = localStorage.getItem("userName");
     //let userData = useGetUserData(userName);
 
@@ -73,7 +67,7 @@ function NavBar({ handleLoginClick, props}) {
                     {!userName && (
                     <li className="nav-menu-item">
                         <div>
-                            <span onClick={handleLoginClicked} className="nav-menu-link">
+                            <span onClick={handleLoginClick} className="nav-menu-link">
                             Login</span>
                         </div>
                     </li>
