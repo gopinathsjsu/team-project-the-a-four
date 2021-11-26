@@ -9,7 +9,6 @@ export const useGetFlightData = (props) => {
     // const defaultFlight = {
     //     this.state.flightData.map(flight => {
     //     flightID: flight.id,
-
     // };
 
     const [flightData, setFlightData] = useState(defaultFlight);

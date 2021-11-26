@@ -14,6 +14,7 @@ import NewRegistration from "./login/newRegistration";
 import UserProfile from "./user/userProfile";
 import HelpPage from "./help/helpPage";
 import UserType from "./flights/userType";
+import AdminHome from "./admin/adminHome";
 
 export default function App() {
 
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="/newUser/Register" exact render={(props) => <NewRegistration/>}/>
         <Route path="/user/UserProfile/" exact render={(props) => <UserProfile/>}/>
         <Route path="/travel/help" exact render={(props) => <HelpPage/>}/>
+        <Route path="/admin/home" exact render={(props) => <AdminHome/>}/>
         </Switch>
       </Router>
     </BasePage>
