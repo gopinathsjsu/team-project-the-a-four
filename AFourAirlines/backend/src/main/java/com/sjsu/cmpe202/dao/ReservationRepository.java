@@ -11,6 +11,6 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 public interface ReservationRepository extends CrudRepository<Reservation, Integer> {
-    @Query(value = "SELECT * FROM reservation WHERE passenger_id = :userName", nativeQuery = true)
+    @Query(value = "SELECT * FROM reservation WHERE passenger = :userName", nativeQuery = true)
     Optional<ArrayList<Reservation>> getReservationsForUser(@Param("userName") String userName);
 }

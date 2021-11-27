@@ -4,10 +4,12 @@ import com.sjsu.cmpe202.dao.FlightRepository;
 import com.sjsu.cmpe202.dao.ReservationRepository;
 import com.sjsu.cmpe202.models.Flight;
 import com.sjsu.cmpe202.models.Reservation;
+import com.sjsu.cmpe202.models.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -20,5 +22,10 @@ public class ReservationService {
 
     public Optional<ArrayList<Reservation>> getReservationsForUser(String username) {
         return reservationRepository.getReservationsForUser(username);
+    }
+
+    @Transactional
+    public Reservation save(Reservation reservation) {
+        return reservationRepository.save(reservation);
     }
 }
