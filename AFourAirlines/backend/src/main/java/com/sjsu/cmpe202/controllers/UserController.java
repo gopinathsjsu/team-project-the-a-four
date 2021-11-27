@@ -67,8 +67,7 @@ public class UserController {
     }
 
     @GetMapping("/get-user-details")
-    public ResponseEntity<?> getUserDetails() throws Exception {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+    public ResponseEntity<?> getUserDetails(@RequestParam String username) throws Exception {
         return ResponseEntity.ok(userService.getUserDetails(username));
     }
 

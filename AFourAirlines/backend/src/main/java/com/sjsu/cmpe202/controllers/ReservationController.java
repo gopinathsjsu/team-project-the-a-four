@@ -5,7 +5,10 @@ import com.sjsu.cmpe202.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
+import javax.xml.ws.Response;
 
 @RestController
 @CrossOrigin
@@ -20,8 +23,13 @@ public class ReservationController {
     public ResponseEntity<?> getReservationById(@RequestParam Integer reservationId) throws Exception {
         return ResponseEntity.ok(reservationService.getReservationById(reservationId));
     }
-    //getReservationById
-    //getReservationsForUser
+
+    @GetMapping("/get-reservations-for-user")
+    public ResponseEntity<?> getReservationsForUser() throws Exception {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return ResponseEntity.ok(reservationService.getReservationsForUser(username));
+    }
+
     //getAllReservations
     //createReservationForUser
     //updateReservation
