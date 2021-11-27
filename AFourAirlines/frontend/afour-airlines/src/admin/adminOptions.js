@@ -5,15 +5,15 @@ import flightImg from "../images/flight-img.jpg";
 import rsrvImg from "../images/schedule-edit-img.jpg";
 
 function AdminOptions() {
-     const usersOnClick = () =>{
-        console.log("users clicked");
+     const optionOnClick = (e) =>{
+        console.log(e.target.cardTitle + " clicked");
      }
 
-     const flightsOnClick = () =>{
+     const flightsOnClick = (e) =>{
         console.log("flights clicked");
     }
 
-    const reservationsOnClick = () =>{
+    const reservationsOnClick = (e) =>{
         console.log("reservations clicked");
     }
         return ( 
@@ -22,13 +22,13 @@ function AdminOptions() {
                 <div className="container-fluid d-flex justify-content-center card-row">
                     <div className="row">
                         <div className="col-md-4 card-tile">
-                            <Card cardTitle="Users" cardImg={userImg} cardAltText="User Icon" handleOnClick={usersOnClick}/>
+                            <Card cardTitle="Users" cardImg={userImg} cardAltText="User Icon" handleOnClick={(e) => {optionOnClick(e)}}/>
                         </div>
                         <div className="col-md-4">
-                            <Card cardTitle="Flights" cardImg={flightImg} cardAltText="Flight Icon" handleOnClick={flightsOnClick}/>
+                            <Card cardTitle="Flights" cardImg={flightImg} cardAltText="Flight Icon" handleOnClick={optionOnClick}/>
                         </div>
                         <div className="col-md-4">
-                            <Card cardTitle="Reservations" cardImg={rsrvImg} cardAltText="Reservation Icon" handleOnClick={reservationsOnClick}/>
+                            <Card cardTitle="Reservations" cardImg={rsrvImg} cardAltText="Reservation Icon" handleOnClick={optionOnClick}/>
                         </div>
                     </div>
                 </div>
