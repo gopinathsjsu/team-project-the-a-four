@@ -29,7 +29,7 @@ public class ReservationController {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         return ResponseEntity.ok(reservationService.getReservationsForUser(username));
     }
-    //getReservationsForUser
+
     //getAllReservations
     //createReservationForUser
     //updateReservation
