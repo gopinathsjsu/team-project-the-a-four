@@ -63,27 +63,13 @@ export default function LoginModal({isShowLogin, setIsShowLogin, pathname}) {
             console.log("userName: " + username);
             if(username){
                 var authToken = "Bearer " + data.token;
-                var innerHeaders =  {
-                    'Content-Type': 'application/json',
-                    'Authorization': authToken
-                };
-
-                var innerRequestOptions = {
-                method: 'POST',
-                headers: innerHeaders,
-                mode: 'no-cors'
-                };
-
-                console.log(innerHeaders);
-
-                debugger;
                 fetch("http://localhost:8080/api/users/get-user-details", {
                     method: 'GET',
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'application/x-www-form-urlencoded',
                         'Authorization': authToken
                     },
-                    mode: 'no-cors'
+                    mode: 'cors'
                 })
                 .then(async innerResponse => {
                 const resData = await innerResponse.json();
