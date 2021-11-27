@@ -14,6 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/admin")
 @Slf4j
@@ -60,7 +61,7 @@ public class AdminController {
         }
     }
 
-    @GetMapping("/getalluserdetails")
+    @GetMapping("/get-all-user-details")
     public ResponseEntity<?> getAllUserDetails() throws Exception {
         return ResponseEntity.ok(userService.getAllUserDetails());
     }

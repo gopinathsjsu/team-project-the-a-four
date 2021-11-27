@@ -15,5 +15,7 @@ int
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @Column(name = "balance_points")
-    private String balancePoints;
+    private Integer balancePoints;
+    @Column(name = "miles")
+    private Integer miles;
 }

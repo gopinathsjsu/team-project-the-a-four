@@ -15,10 +15,10 @@ import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/users")
 @Slf4j
 public class UserController {
@@ -32,8 +32,6 @@ public class UserController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
-    //This is same for login
-    @CrossOrigin
     @PostMapping("/authenticate")
     public ResponseEntity<JwtResponse> authenticate(@RequestBody User user) {
         String token = null;
@@ -61,13 +59,14 @@ public class UserController {
 
     }
 
-    @PutMapping("/updateuserdetails")
+    @PutMapping("/update-user-details")
     public ResponseEntity<?> updateUser(@RequestBody User user) throws Exception {
         log.info("user is {}",user);
         return ResponseEntity.ok(userService.save(user));
 
     }
-    @GetMapping("/getuserdetails")
+
+    @GetMapping("/get-user-details")
     public ResponseEntity<?> getUserDetails() throws Exception {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         return ResponseEntity.ok(userService.getUserDetails(username));

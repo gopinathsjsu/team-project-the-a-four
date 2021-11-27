@@ -30,17 +30,17 @@ checked_in
 tinyint
     */
     @Id
-    private int number;
+    private Integer number;
     @Column(name = "PNR")
     private String PNR;
     @Column(name = "passenger_id")
     private String passengerId;
     @Column(name = "flight_id")
-    private int flightId;
+    private Integer flightId;
     @Column(name = "seat_id")
-    private int seatId;
+    private Integer seatId;
     @Column(name = "price")
-    private int price;
-    @Column(name = "checked_in")
-    private boolean checkedIn;
+    private Integer price;
+    @Column(name = "status")
+    private String status;
 }
