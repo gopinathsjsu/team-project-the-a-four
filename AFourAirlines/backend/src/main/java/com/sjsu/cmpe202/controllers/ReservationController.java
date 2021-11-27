@@ -41,5 +41,5 @@ public class ReservationController {
     public ResponseEntity<?> updateReservation(@RequestBody Reservation reservation) throws Exception {
         return ResponseEntity.ok(reservationService.save(reservation));
     }
-    
+
 }
