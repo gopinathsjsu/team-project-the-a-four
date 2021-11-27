@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { Container,Row,Col,Form ,Button} from 'react-bootstrap';
 import NavBar from "../common/navbar";
-import {  useParams } from "react-router-dom";
 import { useGetUserData } from "../common/getUserData";
-import LoginForm from "../login/loginPage"
 
 export default function UserProfile () {
     const [isShowLogin, setIsShowLogin] = useState(false);
@@ -14,13 +12,10 @@ export default function UserProfile () {
 
     let username = localStorage.getItem("userName");
     const { userData } = useGetUserData(username);
-
-    const pathname = window.location.pathname
     
         return (
             <div>
-                <NavBar props={username} handleLoginClick={handleLoginClicked}></NavBar>
-                {isShowLogin && <LoginForm isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} pathname={pathname}></LoginForm>}
+                <NavBar handleLoginClick={handleLoginClicked}></NavBar>
                 <div className="popup-content">
                     <Container>
                         <Row>

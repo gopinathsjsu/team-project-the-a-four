@@ -13,33 +13,94 @@ export const useGetUserData = (props) => {
     auth_id : 0,
   };
 
-  const [userData, setUserData] = useState({});
-  let userName = props;
+  var username = localStorage.getItem("userName");
   debugger;
 
-  
-  axios.defaults.withCredentials = true;
-
   useEffect(() => {
-    console.log("userName" + userName);
-    if(!userName){
-      setUserData({});
-    }
-    else{
-      setUserData(deafultUser);
-    }
-    
-    // axios.get("http://localhost:3001/user/get" + userName).then((response) => {
-    //     if (response.data.loggedIn === true) {
-    //       setUserData(response.data.user);
-    //     } else {
-    //       setUserData({});
-    //     }
-    // });
-  }, []);
+    console.log("userName" + username);
+    if(username){
+      var token = localStorage.getItem("token");
+      
+      var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization", "Bearer " + token);
 
-  return { userData };
+        var raw = JSON.stringify({
+        "username": localStorage.getItem("userName")
+        });
+
+        var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        body: raw,
+        mode: 'cors'
+        };
+
+        fetch('http://localhost:8080/api/users/get-user-details?userName=' + username, requestOptions)
+        .then(async response => {
+          const resData = await response.json();
+
+          if(!response.ok){
+            // get error message from body or default to response statusText
+            const error = (resData && resData.message) || response.statusText;
+            return Promise.reject(error);
+          }
+          localStorage.setItem("userData", resData)
+
+        })
+        .catch(error => {
+          //this.setState({ errorMessage: error.toString() });
+          console.error('There was an error!', error);
+      });
+    }
+  }, []);
 };
+
+
+export function getUserData (props) {
+
+  var username = localStorage.getItem("userName");
+ 
+    console.log("userName" + username);
+    if(username){
+      var token = localStorage.getItem("token");
+      
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization", "Bearer " + token);
+
+        var raw = JSON.stringify({
+        "username": localStorage.getItem("userName")
+        });
+
+        var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        body: raw,
+        mode: 'cors'
+        };
+
+        return fetch('http://localhost:8080/api/users/get-user-details?userName=' + username, requestOptions)
+        .then(async response => {
+          const resData = await response.json();
+
+          if(!response.ok){
+            // get error message from body or default to response statusText
+            const error = (resData && resData.message) || response.statusText;
+            return Promise.reject(error);
+          }
+          debugger;
+          localStorage.setItem("userData", resData.role);
+          console.log(resData.role);
+
+        })
+        .catch(error => {
+          //this.setState({ errorMessage: error.toString() });
+          console.error('There was an error!', error);
+      });
+    }
+};
+
 
 export const useGetMileageData = (props) => {
   const [userData, setUserData] = useState({});
@@ -53,8 +114,8 @@ export const useGetMileageData = (props) => {
       first_name :"Esha",
       last_name : "Sah",
       mileage_points : 978,
-      reward_number : 345678
-      //number_of_trips
+      reward_number : 345678,
+      number_of_trips : 27,
 
   });
     // axios.get("http://localhost:3001/user/get" + userName).then((response) => {

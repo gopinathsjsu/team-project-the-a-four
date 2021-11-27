@@ -1,8 +1,7 @@
 
 import React, { useState } from "react";
 import NavBar from "../common/navbar";
-import {  useParams } from "react-router-dom";
-import LoginForm from "../login/loginPage";
+import LoginModal from "../login/loginPopup";
 import TravelAdisory from "./travelAdvisory";
 import BaggagePolicy from "./baggaegPolicy";
 import ElectronicPolicy from "./electronicPolicy";
@@ -16,14 +15,12 @@ export default function HelpPage(){
         setIsShowLogin(!isShowLogin);
     }
 
-    let { username } = useParams();
     const pathname = window.location.pathname
     
     return(
         <div>
-            <NavBar props={username} handleLoginClick={handleLoginClicked}></NavBar>
-            {isShowLogin && <LoginForm isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} pathname={pathname}></LoginForm>}
-        
+            <NavBar handleLoginClick={handleLoginClicked}></NavBar>
+            {isShowLogin && <LoginModal isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} pathname={pathname}/>}        
             <div className="help-page">
                 <br/>
                 <TravelAdisory />
