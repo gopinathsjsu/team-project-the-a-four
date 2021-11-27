@@ -80,9 +80,9 @@ export default function LoginModal({isShowLogin, setIsShowLogin, pathname}) {
                     return Promise.reject(error);
                 }
                 
-                localStorage.setItem("userData", resData.role);
+                localStorage.setItem("userData", JSON.stringify(resData));
                 console.log(resData.role);
-                // //window.location.assign(pathname);
+                window.location.assign(pathname);
 
                 })
                 .catch(error => {
@@ -102,21 +102,9 @@ export default function LoginModal({isShowLogin, setIsShowLogin, pathname}) {
 
     function handleSubmit(event){
         event.preventDefault();
-        //debugger;
         validateForm();
         try {
-          //await Auth.signIn(username, password);
-          //setUserAuthenticated(true);
           authenticate();
-          console.log("isUserAuthenticated - " + true);
-          //if(isUserAuthenticated){
-
-            
-            //localStorage.setItem("token", "abctoken");
-            setLoginStatus(true);
-            setIsShowLogin(false);
-            
-          //}
         } catch (e) {
           alert(e.message);
         }

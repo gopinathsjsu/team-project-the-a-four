@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Container,Row,Col,Form ,Button} from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import NavBar from "../common/navbar";
 import { useGetUserData } from "../common/getUserData";
 import UserDetails from "../user/userDetails";
@@ -11,8 +11,7 @@ export default function UserProfile () {
         setIsShowLogin(!isShowLogin);
     }
 
-    let username = localStorage.getItem("userName");
-    let { userData } = useGetUserData(username);
+    let userData = JSON.parse(localStorage.getItem("userData"));
     
         return (
             <div>

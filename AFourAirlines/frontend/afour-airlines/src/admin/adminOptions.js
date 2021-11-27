@@ -9,6 +9,7 @@ function AdminOptions(props) {
         console.log(type);
         props.setManageType(type);
         props.setIsShowSearch(true);
+        props.setIsShowOption(false);
 
         switch(type){
             case "Users": 

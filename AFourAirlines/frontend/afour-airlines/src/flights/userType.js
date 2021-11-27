@@ -1,8 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import NavBar from "../common/navbar";
-import { useHistory } from 'react-router';
 import Registration from '../login/register';
-import Login from '../login/login';
 
 export default function UserType(props) {
     
@@ -24,7 +22,7 @@ export default function UserType(props) {
                     </fieldset>
                 </div>
                 <Registration></Registration>
-                <Login></Login>
+                
             </div>
         )
     }

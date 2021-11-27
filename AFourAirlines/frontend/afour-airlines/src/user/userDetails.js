@@ -1,6 +1,15 @@
 import { Form, Button } from 'react-bootstrap';
 
 export default function UserDetails(props){
+
+    const handleUpdate = () => {
+
+    }
+
+    const handleCancel = () => {
+
+    }
+
     return(
         <div className="popup-content">
             <Form className="form">
@@ -10,18 +19,25 @@ export default function UserDetails(props){
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Name</Form.Label>
-                    <Form.Control type="text" defaultValue={props.userData.first_name + " " + props.userData.last_name}/>
+                    <Form.Control type="text" defaultValue={props.userData.firstName + " " + props.userData.lastName}/>
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Email</Form.Label>
-                    <Form.Control type="email" defaultValue={props.userData.email_id}/>
+                    <Form.Control type="email" defaultValue={props.userData.email}/>
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Contact Number</Form.Label>
-                <Form.Control type="text" defaultValue={props.userData.contact_number}/>
+                <Form.Control type="text" defaultValue={props.userData.phone}/>
                 </Form.Group>
-                <Form.Group>
-                    <Button variant="primary">Update Details</Button>
+                <Form.Group style={{display: 'grid'}}>
+                    <div className="btn-group">
+                        <Button variant="primary" className="pure-u-1-6 btn-spacing" onClick={handleUpdate}>
+                            Update Details
+                        </Button>
+                        <Button variant="secondary" className="pure-u-1-6 btn-spacing" onClick={handleCancel}>
+                            Cancel
+                        </Button>
+                    </div>
                 </Form.Group>
             </Form>
         </div>
