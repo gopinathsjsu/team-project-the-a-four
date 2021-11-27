@@ -12,8 +12,8 @@ export const useGetFlightData = (props) => {
         trip_type: "Round Trip",
         departure_airport: "ORD",
         arrival_airport: "LAX",
-        departure_time: "10:00 AM",
-        arrival_time: "5:00 PM",
+        departure_date: "10:00 AM",
+        arrival_date: "5:00 PM",
     };
 
     const [flightData, setFlightData] = useState(defaultFlight);

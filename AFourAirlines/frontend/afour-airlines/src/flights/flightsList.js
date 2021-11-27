@@ -36,7 +36,6 @@ export default function FlightsList(props) {
                                 <thead className="table-borderless table-secondary">
                                     <tr>
                                         <th scope="col">No.</th>
-                                        <th scope="col">Airline</th>
                                         <th scope="col">Flight Number</th>
                                         <th scope="col">Trip Type</th>
                                         <th scope="col">Departure Airport</th>
@@ -75,8 +74,8 @@ export default function FlightsList(props) {
                                         <td>{flightData.trip_type}</td>
                                         <td>{flightData.departure_airport}</td>
                                         <td>{flightData.arrival_airport}</td>
-                                        <td>{flightData.departure_time}</td>
-                                        <td>{flightData.arrival_time}</td>
+                                        <td>{flightData.departure_date}</td>
+                                        <td>{flightData.arrival_date}</td>
                                         <td>
                                             <a type="button"
                                                 className="btn btn-success btn-just-icon btn-sm"
