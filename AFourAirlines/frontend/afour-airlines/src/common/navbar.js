@@ -4,10 +4,18 @@ import { NavLink } from "react-router-dom";
 function NavBar({ handleLoginClick, props}) { 
         
     let userName = localStorage.getItem("userName");
+    let role = "GUEST";
+    if(localStorage.getItem("userData")){
+        role = JSON.parse(localStorage.getItem("userData")).role
+    }
+    //let role = JSON.parse(localStorage.getItem("userData")).role;
 
     const handleLogout = () => {
-        localStorage.setItem("userName", "");
-        localStorage.setItem("token", "");
+        // localStorage.setItem("userName", "");
+        // localStorage.setItem("token", "");
+        // localStorage.setItem("userData", "");
+        // localStorage.setItem("displayData", "");
+        window.localStorage.clear();
         window.location.assign("/");
     }
     
@@ -22,27 +30,20 @@ function NavBar({ handleLoginClick, props}) {
         return(
             <div className="nav-horizontal" style={{display:"flex"}}>
                 <ul className="nav-menu">
-                    <li className="nav-menu-item">
+                    {(role !== "ADMIN") && (<li className="nav-menu-item">
                         <NavLink to="/" className="nav-menu-link" activeClassName="nav-menu-link-active" isActive={checkActive}>
                             Search Flights
                         </NavLink>
-                    </li>
-                    <li className="nav-menu-item">
+                    </li>)}
+                    {(role !== "ADMIN") && (<li className="nav-menu-item">
                         <NavLink to="/mileageProgram/" className="nav-menu-link" activeClassName="nav-menu-link-active">
                             Mileage Program
                         </NavLink>
-                    </li>
-                    {userName !== "admin" && (
+                    </li>)}
+                    {(role !== "ADMIN") && (
                     <li className="nav-menu-item">
                         <NavLink to="/travel/help" className="nav-menu-link" activeClassName="nav-menu-link-active">
                             Help
-                        </NavLink>
-                    </li>
-                    )}
-                    {(userName === "admin") && (
-                    <li className="nav-menu-item">
-                        <NavLink to="/admin/home" className="nav-menu-link" activeClassName="nav-menu-link-active">
-                            Admin
                         </NavLink>
                     </li>
                     )}
@@ -53,7 +54,7 @@ function NavBar({ handleLoginClick, props}) {
                         </NavLink>
                     </li>
                     )}
-                    {userName && (
+                    {(role !== "ADMIN") && userName && (
                     <li className="nav-menu-item">
                         <NavLink to="/user/UserProfile/" className="nav-menu-link" activeClassName="nav-menu-link-active">
                             My Profile
@@ -67,7 +68,14 @@ function NavBar({ handleLoginClick, props}) {
                             Login</span>
                         </div>
                     </li>
-                    )}                    
+                    )} 
+                    {(role === "ADMIN") && (
+                    <li className="nav-menu-item">
+                        <NavLink to="/admin/home" className="nav-menu-link" activeClassName="nav-menu-link-active">
+                            Admin
+                        </NavLink>
+                    </li>
+                    )}                   
                     {userName && (
                     <li className="nav-menu-item">
                         <div>

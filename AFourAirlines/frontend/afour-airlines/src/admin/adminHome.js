@@ -4,11 +4,11 @@ import NavBar from "../common/navbar";
 import AdminSearch from './adminSearch';
 import UserDetails from '../user/userDetails';
 import { useGetUserData } from "../common/getUserData";
+import { Redirect } from 'react-router';
 
 export default function AdminHome(){
     let username = localStorage.getItem("userName");
 
-    let [isShowOptions, setIsShowOption] = useState(true);
     let [isShowSearch, setIsShowSearch] = useState(false);
     let [manageType, setManageType] = useState("");
     let [lableText, setLableText] = useState("");
@@ -20,12 +20,12 @@ export default function AdminHome(){
 
     let token = localStorage.getItem("token");
     let { userData } = useGetUserData(username);
-    let displayData = localStorage.getItem("displayData");
+    let [displayData, setDisplayData] = useState("");
 
     const getUserById = () =>{
         if(username){
             var authToken = "Bearer " + token;
-            fetch("http://localhost:8080/api/users/get-user-details", {
+            fetch("http://localhost:8080/api/users/get-user-details?username=" + entityId, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -42,10 +42,9 @@ export default function AdminHome(){
                 return Promise.reject(error);
             }
             
-            localStorage.setItem("userData", JSON.stringify(resData));
-            console.log(resData.role);
-            window.location.assign("/admin/home");
-
+            localStorage.setItem("displayData", JSON.stringify(resData));
+            //displayData = JSON.parse(localStorage.getItem("displayData"));
+            setDisplayData(JSON.parse(localStorage.getItem("displayData")));
             })
             .catch(error => {
             //this.setState({ errorMessage: error.toString() });
@@ -80,12 +79,14 @@ export default function AdminHome(){
         setManageType("");
     }
 
+    if(isUser){
+        return <Redirect to="/user/UserProfile/"></Redirect>
+    }
     return(
         <div>
             <NavBar props={username}></NavBar>
-            {isShowOptions && <AdminOptions setIsShowOption={setIsShowOption} setIsShowSearch={setIsShowSearch} setManageType={setManageType} setLableText={setLableText}/>}
+            {!isShowSearch && <AdminOptions setIsShowSearch={setIsShowSearch} setManageType={setManageType} setLableText={setLableText}/>}
             {isShowSearch && <AdminSearch handleSearch={handleSearch} lableText={lableText} manageType={manageType} setEntityId={setEntityId}/>}
-            {isUser && <UserDetails userData={displayData}/>}
         </div>
         
     );
