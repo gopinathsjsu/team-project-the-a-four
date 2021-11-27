@@ -15,9 +15,8 @@ public class Reservation {
     private Integer number;
     @Column(name = "PNR")
     private String PNR;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "passenger")
-    private User passenger;
+    @Column(name = "passenger")
+    private String passenger;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "flight")
     private Flight flight;

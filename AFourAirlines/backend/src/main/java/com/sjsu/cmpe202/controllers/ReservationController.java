@@ -1,5 +1,7 @@
 package com.sjsu.cmpe202.controllers;
 
+import com.sjsu.cmpe202.models.Reservation;
+import com.sjsu.cmpe202.models.User;
 import com.sjsu.cmpe202.service.ReservationService;
 import com.sjsu.cmpe202.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +32,14 @@ public class ReservationController {
         return ResponseEntity.ok(reservationService.getReservationsForUser(username));
     }
 
-    //getAllReservations
-    //createReservationForUser
-    //updateReservation
+    @PostMapping("/create-reservation")
+    public ResponseEntity<?> createReservation(@RequestBody Reservation reservation) throws Exception {
+        return ResponseEntity.ok(reservationService.save(reservation));
+    }
+
+    @PutMapping("/update-reservation")
+    public ResponseEntity<?> updateReservation(@RequestBody Reservation reservation) throws Exception {
+        return ResponseEntity.ok(reservationService.save(reservation));
+    }
+    
 }
