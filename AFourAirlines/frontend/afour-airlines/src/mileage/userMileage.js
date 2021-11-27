@@ -10,7 +10,7 @@ export default function UserMileage (props){
     return (
         <div>
             <h1 className="page-hearder">Mileage Details</h1>
-            <div >
+            <div>
                 <h2 className="page-hearder">Hello, { userData.first_name } !</h2>
                 <div className="container-fluid justify-content-center card-row">
                 <div className="row">

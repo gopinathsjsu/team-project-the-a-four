@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Container,Row,Col,Form ,Button} from 'react-bootstrap';
 import NavBar from "../common/navbar";
 import { useGetUserData } from "../common/getUserData";
+import UserDetails from "../user/userDetails";
 
 export default function UserProfile () {
     const [isShowLogin, setIsShowLogin] = useState(false);
@@ -11,7 +12,7 @@ export default function UserProfile () {
     }
 
     let username = localStorage.getItem("userName");
-    const { userData } = useGetUserData(username);
+    let { userData } = useGetUserData(username);
     
         return (
             <div>
@@ -20,30 +21,10 @@ export default function UserProfile () {
                     <Container>
                         <Row>
                             <Col>
-                                <h1>User Profile</h1>
-                                <Form className="form">
-                                    <Form.Group>
-                                        <Form.Label>Username</Form.Label>
-                                        <Form.Control type="text" defaultValue={userData.username}/>
-                                    </Form.Group>
-                                    <Form.Group>
-                                        <Form.Label>Name</Form.Label>
-                                        <Form.Control type="text" defaultValue={userData.first_name + " " + userData.last_name}/>
-                                    </Form.Group>
-                                    <Form.Group>
-                                        <Form.Label>Email</Form.Label>
-                                        <Form.Control type="email" defaultValue={userData.email_id}/>
-                                    </Form.Group>
-                                    <Form.Group>
-                                        <Form.Label>Contact Number</Form.Label>
-                                        <Form.Control type="text" defaultValue={userData.contact_number}/>
-                                    </Form.Group>
-                                    <Form.Group>
-                                        <Form.Label>Profile image</Form.Label>
-                                        <Form.Control type="file" name="profileImage"/>
-                                    </Form.Group>
-                                    <Button variant="primary">Update Details</Button>
-                                </Form>
+                                <h1 className="page-hearder">User Profile</h1>
+                                <div>
+                                    <UserDetails userData={userData}/>
+                                </div>
                             </Col>
                         </Row>
                     </Container>

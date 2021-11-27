@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 function NavBar({ handleLoginClick, props}) { 
         
     let userName = localStorage.getItem("userName");
-    //let userData = useGetUserData(userName);
 
     const handleLogout = () => {
         localStorage.setItem("userName", "");
@@ -13,11 +12,8 @@ function NavBar({ handleLoginClick, props}) {
     }
     
     const checkActive = (match, location) => {
-        console.log(match);
-
         if(!location) return false;
         const {pathname} = location;
-        console.log(pathname);
 
         return pathname === "/";
     }
