@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Modal, Button, Form} from 'react-bootstrap';
-
+import { useGetUserData } from "../common/getUserData";
 
 export default function LoginModal({isShowLogin, setIsShowLogin, pathname}) {
 
@@ -36,8 +36,8 @@ export default function LoginModal({isShowLogin, setIsShowLogin, pathname}) {
         myHeaders.append("Content-Type", "application/json");
 
         var raw = JSON.stringify({
-        "username": "esha12345",
-        "password": "esha"
+        "username": username,
+        "password": password
         });
 
         var requestOptions = {
@@ -58,11 +58,60 @@ export default function LoginModal({isShowLogin, setIsShowLogin, pathname}) {
                 return Promise.reject(error);
             }
             localStorage.setItem('token', data.token);
+            localStorage.setItem("userName", username);
+ 
+            console.log("userName: " + username);
+            if(username){
+                var authToken = "Bearer " + data.token;
+                var innerHeaders =  {
+                    'Content-Type': 'application/json',
+                    'Authorization': authToken
+                };
+
+                var innerRequestOptions = {
+                method: 'POST',
+                headers: innerHeaders,
+                mode: 'no-cors'
+                };
+
+                console.log(innerHeaders);
+
+                debugger;
+                fetch("http://localhost:8080/api/users/get-user-details", {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': authToken
+                    },
+                    mode: 'no-cors'
+                })
+                .then(async innerResponse => {
+                const resData = await innerResponse.json();
+
+                if(!innerResponse.ok){
+                    // get error message from body or default to response statusText
+                    const error = (resData && resData.message) || innerResponse.statusText;
+                    return Promise.reject(error);
+                }
+                
+                localStorage.setItem("userData", resData.role);
+                console.log(resData.role);
+                // //window.location.assign(pathname);
+
+                })
+                .catch(error => {
+                //this.setState({ errorMessage: error.toString() });
+                console.error('There was an error!', error);
+            });
+            }
+
+            
         })
         .catch(error => {
             //this.setState({ errorMessage: error.toString() });
             console.error('There was an error!', error);
         });       
+        
     }
 
     function handleSubmit(event){
@@ -73,11 +122,11 @@ export default function LoginModal({isShowLogin, setIsShowLogin, pathname}) {
           //await Auth.signIn(username, password);
           //setUserAuthenticated(true);
           authenticate();
-          console.log("isUserAuthenticated - " + isUserAuthenticated);
+          console.log("isUserAuthenticated - " + true);
           //if(isUserAuthenticated){
 
-            localStorage.setItem("userName", username);
-            localStorage.setItem("token", "abctoken");
+            
+            //localStorage.setItem("token", "abctoken");
             setLoginStatus(true);
             setIsShowLogin(false);
             

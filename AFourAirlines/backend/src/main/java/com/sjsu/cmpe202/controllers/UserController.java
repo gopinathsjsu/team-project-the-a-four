@@ -66,6 +66,7 @@ public class UserController {
         return ResponseEntity.ok(userService.save(user));
 
     }
+    @CrossOrigin
     @GetMapping("/get-user-details")
     public ResponseEntity<?> getUserDetails() throws Exception {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
