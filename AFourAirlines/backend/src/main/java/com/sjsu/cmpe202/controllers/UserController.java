@@ -18,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/users")
 @Slf4j
 public class UserController {
@@ -31,8 +32,6 @@ public class UserController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
-    //This is same for login
-    @CrossOrigin
     @PostMapping("/authenticate")
     public ResponseEntity<JwtResponse> authenticate(@RequestBody User user) {
         String token = null;
@@ -66,7 +65,7 @@ public class UserController {
         return ResponseEntity.ok(userService.save(user));
 
     }
-    @CrossOrigin
+
     @GetMapping("/get-user-details")
     public ResponseEntity<?> getUserDetails() throws Exception {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
