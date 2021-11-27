@@ -60,7 +60,7 @@ public class AdminController {
         }
     }
 
-    @GetMapping("/getalluserdetails")
+    @GetMapping("/get-all-user-details")
     public ResponseEntity<?> getAllUserDetails() throws Exception {
         return ResponseEntity.ok(userService.getAllUserDetails());
     }

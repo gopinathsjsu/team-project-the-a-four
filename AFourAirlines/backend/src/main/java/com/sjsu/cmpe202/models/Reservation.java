@@ -30,7 +30,7 @@ checked_in
 tinyint
     */
     @Id
-    private int number;
+    private Integer number;
     @Column(name = "PNR")
     private String PNR;
     @Column(name = "passenger_id")

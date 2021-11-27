@@ -37,7 +37,7 @@ equipment
 varchar(45)
     */
     @Id
-    private int id;
+    private Integer id;
     @Column(name = "name")
     private String name;
     @Column(name = "source_airport")
@@ -62,4 +62,6 @@ varchar(45)
     private LocalTime arrivalTime;
     @Column(name = "equipment")
     private int equipment;
+    @Column(name = "base_price")
+    private int basePrice;
 }
