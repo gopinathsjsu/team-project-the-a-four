@@ -15,50 +15,55 @@ export default function Search(props) {
 
     let [errorMsg, setErrorMsg] = useState("");
 
-    function validateForm() {
-        if (source_airport === "" || dest_airport === "" || dep_date === "" || arr_date === "") {
-            setErrorMsg("Fields are required");
-            return true;
-        }
-        return false;
-    }
+    // function validateForm() {
+    //     if (source_airport === "" || dest_airport === "" || dep_date === "" || arr_date === "") {
+    //         setErrorMsg("Fields are required");
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
     const searchResult = () => {
-        console.log("in searchResult method.")
-        console.log("sourceAirport: " + source_airport + "destAirport: " + dest_airport + "depDate" + dep_date + "arrDate" + arr_date);
-        if (source_airport && dest_airport && dep_date && arr_date) {
-            //var authToken = "Bearer " + data.token;
-            fetch("http://localhost:8080/api/flights/get-flights?sourceAirport=" + source_airport + "?destAirport=" + dest_airport + "?depDate=" + dep_date + "?arrDate=" + arr_date, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                    //'Authorization': authToken
-                },
-                mode: 'cors'
-            })
-                .then(async innerResponse => {
-                    const resData = await innerResponse.json();
-
-                    if (!innerResponse.ok) {
-                        // get error message from body or default to response statusText
-                        const error = (resData && resData.message) || innerResponse.statusText;
-                        return Promise.reject(error);
-                    }
-
-                    localStorage.setItem("flightList", JSON.stringify(resData));
-                    // console.log(resData.role);
-                    // if (resData.role === "ADMIN") {
-                    //     window.location.assign("/admin/home");
-                    // }
-                    // else {
-                    window.location.assign("/flights/flightsList");
-                    // }
-
+        debugger;
+        if (source_airport === "" || dest_airport === "" || dep_date === "" || arr_date === "") {
+            setErrorMsg("Fields are required");
+        } else{
+            console.log("in searchResult method.")
+            console.log("sourceAirport: " + source_airport + "destAirport: " + dest_airport + "depDate" + dep_date + "arrDate" + arr_date);
+            if (source_airport && dest_airport && dep_date && arr_date) {
+                //var authToken = "Bearer " + data.token;
+                fetch("http://localhost:8080/api/flights/get-flights?sourceAirport=" + source_airport + "?destAirport=" + dest_airport + "?depDate=" + dep_date + "?arrDate=" + arr_date, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                        //'Authorization': authToken
+                    },
+                    mode: 'cors'
                 })
-                .catch(error => {
-                    //this.setState({ errorMessage: error.toString() });
-                    console.error('There was an error!', error);
-                });
+                    .then(async innerResponse => {
+                        const resData = await innerResponse.json();
+
+                        if (!innerResponse.ok) {
+                            // get error message from body or default to response statusText
+                            const error = (resData && resData.message) || innerResponse.statusText;
+                            return Promise.reject(error);
+                        }
+
+                        localStorage.setItem("flightList", JSON.stringify(resData));
+                        // console.log(resData.role);
+                        // if (resData.role === "ADMIN") {
+                        //     window.location.assign("/admin/home");
+                        // }
+                        // else {
+                        window.location.assign("/flights/flightsList");
+                        // }
+
+                    })
+                    .catch(error => {
+                        //this.setState({ errorMessage: error.toString() });
+                        console.error('There was an error!', error);
+                    });
+            }
         }
     }
 
@@ -70,17 +75,17 @@ export default function Search(props) {
         setIsShowLogin(!isShowLogin);
     }
 
-    const pathname = window.location.pathname
+    let pathname = window.location.pathname
 
-    function handleSubmit(event) {
-        event.preventDefault();
-        validateForm();
-        // try {
-        //     authenticate();
-        // } catch (e) {
-        //     alert(e.message);
-        // }
-    }
+    // function handleSubmit(event) {
+    //     event.preventDefault();
+    //     validateForm();
+    //     // try {
+    //     //     authenticate();
+    //     // } catch (e) {
+    //     //     alert(e.message);
+    //     // }
+    // }
 
 
 
