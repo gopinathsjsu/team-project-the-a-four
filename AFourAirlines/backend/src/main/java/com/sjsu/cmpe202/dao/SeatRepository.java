@@ -1,17 +1,15 @@
 package com.sjsu.cmpe202.dao;
 
-import com.sjsu.cmpe202.models.Reservation;
+import com.sjsu.cmpe202.models.Seat;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
-public interface SeatRepository extends CrudRepository<Reservation, Integer> {
+public interface SeatRepository extends CrudRepository<Seat, Integer> {
 
-    @Query(value = "SELECT * FROM reservation WHERE passenger = :userName", nativeQuery = true)
-    ArrayList<Reservation> getAvailableSeatsForFlight(@Param("userName") String userName);
+    @Query("select s from Seat s where s.flightId = ?1 and s.reserved=0")
+    ArrayList<Seat> getAvailableSeatsForFlight(Integer flightId);
 
 }
 
