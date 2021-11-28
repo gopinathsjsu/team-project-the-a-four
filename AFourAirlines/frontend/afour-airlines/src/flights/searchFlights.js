@@ -4,9 +4,9 @@ import LoginModal from "../login/loginPopup";
 
 export default function Search(props) {
 
-    const searchResult = () => {
-        window.location.href = './flightsList'
-    }
+    // const searchResult = () => {
+    //     window.location.href = './flightsList'
+    // }
 
     let [source_airport, setDepAirport] = useState("");
     let [dest_airport, setArrAirport] = useState("");
@@ -23,39 +23,8 @@ export default function Search(props) {
         return false;
     }
 
-    const search = () => {
-        var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-
-        // var raw = JSON.stringify({
-        //     "departure_airport": source_airport,
-        //     "departure_date": dep_date,
-        //     "arrival_airport": dest_airport,
-        //     "arrival_date": arr_date
-        // });
-
-        // var requestOptions = {
-        //     method: 'POST',
-        //     headers: myHeaders,
-        //     body: raw,
-        //     mode: 'cors'
-        // };
-
-        // fetch("http://localhost:8080/api/users/authenticate", requestOptions)
-        //     .then(async response => {
-        //         const data = await response.json();
-
-        //         //check for error response
-        //         if (!response.ok) {
-        //             const error = (data && data.message) || response.statusText;
-        //             return Promise.reject(error);
-        //         }
-        //         localStorage.setItem('token', data.token);
-        //         localStorage.setItem("sourceAirport", source_airport);
-        //         localStorage.setItem("destAirport", dest_airport);
-        //         localStorage.setItem("depDate", dep_date);
-        //         localStorage.setItem("arrDate", arr_date);
-
+    const searchResult = () => {
+        console.log("in searchResult method.")
         console.log("sourceAirport: " + source_airport + "destAirport: " + dest_airport + "depDate" + dep_date + "arrDate" + arr_date);
         if (source_airport && dest_airport && dep_date && arr_date) {
             //var authToken = "Bearer " + data.token;
@@ -76,13 +45,13 @@ export default function Search(props) {
                         return Promise.reject(error);
                     }
 
-                    // localStorage.setItem("flightData", JSON.stringify(resData));
+                    localStorage.setItem("flightList", JSON.stringify(resData));
                     // console.log(resData.role);
                     // if (resData.role === "ADMIN") {
                     //     window.location.assign("/admin/home");
                     // }
                     // else {
-                    //     window.location.assign(pathname);
+                    window.location.assign("/flights/flightsList");
                     // }
 
                 })
@@ -140,7 +109,7 @@ export default function Search(props) {
                                                 <option value="SBA">SBA</option>
                                                 <option value="FUL">FUL</option>
                                                 <option value="RIV">RIV</option>
-                                                <option value="SBD">SBD</option>
+                                                <option value="Hyd">Hyd</option>
                                             </select>
                                         </fieldset>
                                     </div>
@@ -157,7 +126,7 @@ export default function Search(props) {
                                                 <option value="SBA">SBA</option>
                                                 <option value="FUL">FUL</option>
                                                 <option value="RIV">RIV</option>
-                                                <option value="SBD">SBD</option>
+                                                <option value="Hyd">Hyd</option>
                                             </select>
                                         </fieldset>
                                     </div>

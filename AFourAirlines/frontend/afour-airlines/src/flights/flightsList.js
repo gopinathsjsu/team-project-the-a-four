@@ -4,9 +4,10 @@ import NavBar from "../common/navbar";
 import { useGetFlightData } from '../common/getFlightData'
 
 export default function FlightsList(props) {
-    let flightID = localStorage.getItem("flightID");
+    let flightID = "";
 
-    let { flightData } = useGetFlightData(flightID);
+    let flightList = JSON.parse(localStorage.getItem("flightList"));
+    console.log(flightList);
 
     // class FlightsList extends Component {
     //     constructor(props) {
@@ -46,8 +47,8 @@ export default function FlightsList(props) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {/*                                     
-                                    {this.state.flightData.map(flight => {
+                                                                        
+                                    {flightList.map(flight => {
                                         return (
                                             <th key={flight.id}>
                                                 <td scope="row">{flight.id}</td>
@@ -58,8 +59,7 @@ export default function FlightsList(props) {
                                                 <td>{flight.arrival_airport}</td>
                                                 <td>{flight.departure_time}</td>
                                                 <td>{flight.arrival_time}</td>
-                                                {/* add price information as well which can help the customer decide*/}
-                                    {/* <td>
+                                                <td>
                                                     <a type="button"
                                                         className="btn btn-success btn-just-icon btn-sm"
                                                         href={"/select/" + flight.id}>Select</a>
@@ -67,8 +67,8 @@ export default function FlightsList(props) {
                                             </th>
                                         );
                                     })
-                                    } */}
-                                    <th>
+                                    } 
+                                    {/* <th>
                                         <td scope="row">{flightID}</td>
                                         <td>{flightData.flight_number}</td>
                                         <td>{flightData.trip_type}</td>
@@ -81,7 +81,7 @@ export default function FlightsList(props) {
                                                 className="btn btn-success btn-just-icon btn-sm"
                                                 href={"/select/" + flightID}>Select</a>
                                         </td>
-                                    </th>
+                                    </th> */}
                                 </tbody>
                             </table>
                         </div>
