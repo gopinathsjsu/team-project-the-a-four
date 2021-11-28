@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 
-@Service @Slf4j
+@Service @Slf4j @Transactional
 public class FlightService {
     @Autowired
     FlightRepository flightRepository;
@@ -26,7 +26,7 @@ public class FlightService {
     public Optional<ArrayList<Flight>> getFlights(String sourceAirport, String destinationAirport, LocalDate departureDate, LocalDate arrivalDate) {
         return flightRepository.getFlights(sourceAirport, destinationAirport, departureDate, arrivalDate);
     }
-    @Transactional
+
     public Flight save(Flight flight) {
         return flightRepository.save(flight);
     }
