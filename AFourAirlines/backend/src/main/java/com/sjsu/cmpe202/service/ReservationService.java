@@ -1,10 +1,7 @@
 package com.sjsu.cmpe202.service;
 
-import com.sjsu.cmpe202.dao.FlightRepository;
 import com.sjsu.cmpe202.dao.ReservationRepository;
-import com.sjsu.cmpe202.models.Flight;
 import com.sjsu.cmpe202.models.Reservation;
-import com.sjsu.cmpe202.models.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
