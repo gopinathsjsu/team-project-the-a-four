@@ -36,4 +36,8 @@ public class FlightService {
     public ArrayList<Seat> getAvailableSeats(Integer flightId) {
         return seatRepository.getAvailableSeatsForFlight(flightId);
     }
+
+    public ArrayList<Seat> getAllSeats(Integer flightId) {
+        return seatRepository.getAllSeatsForFlight(flightId);
+    }
 }

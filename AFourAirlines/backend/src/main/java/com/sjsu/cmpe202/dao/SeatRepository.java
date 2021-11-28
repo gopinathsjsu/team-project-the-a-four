@@ -11,5 +11,8 @@ public interface SeatRepository extends CrudRepository<Seat, Integer> {
     @Query("select s from Seat s where s.flightId = ?1 and s.reserved=0")
     ArrayList<Seat> getAvailableSeatsForFlight(Integer flightId);
 
+
+    @Query("select s from Seat s where s.flightId = ?1")
+    ArrayList<Seat> getAllSeatsForFlight(Integer flightId);
 }
 
