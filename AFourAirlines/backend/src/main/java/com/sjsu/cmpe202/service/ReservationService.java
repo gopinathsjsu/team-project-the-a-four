@@ -13,7 +13,7 @@ import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Optional;
 
-@Service @Slf4j
+@Service @Slf4j @Transactional
 public class ReservationService {
     @Autowired
     ReservationRepository reservationRepository;
@@ -24,8 +24,8 @@ public class ReservationService {
         return reservationRepository.getReservationsForUser(username);
     }
 
-    @Transactional
     public Reservation save(Reservation reservation) {
+
         return reservationRepository.save(reservation);
     }
 }
