@@ -36,4 +36,11 @@ public class FlightController {
         return ResponseEntity.ok(flightService.save(flight));
 
     }
+
+    @GetMapping("/get-available-seats")
+    public ResponseEntity<?> updateFlight(@RequestParam Integer flightId) throws Exception {
+        log.info("flightiD is {}",flightId);
+        return ResponseEntity.ok(flightService.getAvailableSeats(flightId));
+
+    }
 }

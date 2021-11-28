@@ -27,4 +27,11 @@ public class FlightService {
     public Flight save(Flight flight) {
         return flightRepository.save(flight);
     }
+
+    public Optional<ArrayList<Flight>> getAvailableSeats(Integer flightId) {
+        /*return flightRepository.findById(flightId);/*
+
+         */
+        return null;
+    }
 }
