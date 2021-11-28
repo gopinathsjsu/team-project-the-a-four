@@ -38,7 +38,7 @@ public class ReservationController {
 
     @PutMapping("/update-reservation")
     public ResponseEntity<?> updateReservation(@RequestBody Reservation reservation) throws Exception {
-        return ResponseEntity.ok(reservationService.save(reservation));
+        return ResponseEntity.ok(reservationService.updateReservation(reservation));
     }
 
 }
