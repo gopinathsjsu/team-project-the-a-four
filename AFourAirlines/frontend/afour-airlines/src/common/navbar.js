@@ -4,6 +4,43 @@ import { NavLink } from "react-router-dom";
 function NavBar({ handleLoginClick, props}) { 
         
     let userName = localStorage.getItem("userName");
+    let token = localStorage.getItem("token");
+    if(userName && !(token || token === ""))
+    {
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        var raw = JSON.stringify({
+        "username": userName,
+        "password": JSON.parse(localStorage.getItem("userData")).password,
+        });
+
+        var requestOptions = {
+        method: 'POST',
+        headers: myHeaders,
+        body: raw,
+        mode: 'cors'
+        };
+
+        fetch("http://localhost:8080/api/users/authenticate", requestOptions)
+        .then(async response => {
+            const data = await response.json();
+
+            // check for error response
+            if (!response.ok) {
+                // get error message from body or default to response statusText
+                const error = (data && data.message) || response.statusText;
+                return Promise.reject(error);
+            }
+            localStorage.setItem('token', data.token);
+        })
+        .catch(error => {
+            //this.setState({ errorMessage: error.toString() });
+            console.error('There was an error!', error);
+        });  
+    }
+
+
     let role = "GUEST";
     if(localStorage.getItem("userData")){
         role = JSON.parse(localStorage.getItem("userData")).role

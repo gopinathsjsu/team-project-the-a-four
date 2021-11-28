@@ -6,6 +6,9 @@ export default function UserDetails(props){
 
     }
 
+    const handleCancel = () => {
+
+    }
 
     return(
         <div className="popup-content">
@@ -30,6 +33,9 @@ export default function UserDetails(props){
                     <div className="btn-group">
                         <Button variant="primary" className="pure-u-1-6 btn-spacing" onClick={handleUpdate}>
                             Update Details
+                        </Button>
+                        <Button variant="secondary" className="pure-u-1-6 btn-spacing" onClick={handleCancel}>
+                            Cancel
                         </Button>
                     </div>
                 </Form.Group>
