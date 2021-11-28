@@ -5,7 +5,7 @@ import LoginModal from "../login/loginPopup";
 export default function Search(props) {
 
     const searchResult = () => {
-        window.location.href = './searchPage'
+        window.location.href = './flightsList'
     }
 
     let [source_airport, setDepAirport] = useState("");
@@ -27,103 +27,97 @@ export default function Search(props) {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
-        var raw = JSON.stringify({
-            "departure_airport": source_airport,
-            "departure_date": dep_date,
-            "arrival_airport": dest_airport,
-            "arrival_date": arr_date
-        });
+        // var raw = JSON.stringify({
+        //     "departure_airport": source_airport,
+        //     "departure_date": dep_date,
+        //     "arrival_airport": dest_airport,
+        //     "arrival_date": arr_date
+        // });
 
-        var requestOptions = {
-            method: 'POST',
-            headers: myHeaders,
-            body: raw,
-            mode: 'cors'
-        };
+        // var requestOptions = {
+        //     method: 'POST',
+        //     headers: myHeaders,
+        //     body: raw,
+        //     mode: 'cors'
+        // };
 
-        fetch("http://localhost:8080/api/users/authenticate", requestOptions)
-            .then(async response => {
-                const data = await response.json();
+        // fetch("http://localhost:8080/api/users/authenticate", requestOptions)
+        //     .then(async response => {
+        //         const data = await response.json();
 
-                //check for error response
-                if (!response.ok) {
-                    const error = (data && data.message) || response.statusText;
-                    return Promise.reject(error);
-                }
-                localStorage.setItem('token', data.token);
-                localStorage.setItem("sourceAirport", source_airport);
-                localStorage.setItem("destAirport", dest_airport);
-                localStorage.setItem("depDate", dep_date);
-                localStorage.setItem("arrDate", arr_date);
+        //         //check for error response
+        //         if (!response.ok) {
+        //             const error = (data && data.message) || response.statusText;
+        //             return Promise.reject(error);
+        //         }
+        //         localStorage.setItem('token', data.token);
+        //         localStorage.setItem("sourceAirport", source_airport);
+        //         localStorage.setItem("destAirport", dest_airport);
+        //         localStorage.setItem("depDate", dep_date);
+        //         localStorage.setItem("arrDate", arr_date);
 
-                console.log("sourceAirport: " + source_airport + "destAirport: " + dest_airport + "depDate" + dep_date + "arrDate" + arr_date);
-                if (source_airport && dest_airport && dep_date && arr_date) {
-                    var authToken = "Bearer " + data.token;
-                    fetch("http://localhost:8080/api/flights/get-flights?sourceAirport=" + source_airport + "?destAirport=" + dest_airport + "?depDate=" + dep_date + "?arrDate=" + arr_date, {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                            'Authorization': authToken
-                        },
-                        mode: 'cors'
-                    })
-                        .then(async innerResponse => {
-                            const resData = await innerResponse.json();
-
-                            if (!innerResponse.ok) {
-                                // get error message from body or default to response statusText
-                                const error = (resData && resData.message) || innerResponse.statusText;
-                                return Promise.reject(error);
-                            }
-
-                            localStorage.setItem("flightData", JSON.stringify(resData));
-                            console.log(resData.role);
-                            if (resData.role === "ADMIN") {
-                                window.location.assign("/admin/home");
-                            }
-                            else {
-                                window.location.assign(pathname);
-                            }
-
-                        })
-                        .catch(error => {
-                            //this.setState({ errorMessage: error.toString() });
-                            console.error('There was an error!', error);
-                        });
-                }
-
+        console.log("sourceAirport: " + source_airport + "destAirport: " + dest_airport + "depDate" + dep_date + "arrDate" + arr_date);
+        if (source_airport && dest_airport && dep_date && arr_date) {
+            //var authToken = "Bearer " + data.token;
+            fetch("http://localhost:8080/api/flights/get-flights?sourceAirport=" + source_airport + "?destAirport=" + dest_airport + "?depDate=" + dep_date + "?arrDate=" + arr_date, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    //'Authorization': authToken
+                },
+                mode: 'cors'
             })
-            .catch(error => {
-                //this.setState({ errorMessage: error.toString() });
-                console.error('There was an error!', error);
-            });
+                .then(async innerResponse => {
+                    const resData = await innerResponse.json();
+
+                    if (!innerResponse.ok) {
+                        // get error message from body or default to response statusText
+                        const error = (resData && resData.message) || innerResponse.statusText;
+                        return Promise.reject(error);
+                    }
+
+                    // localStorage.setItem("flightData", JSON.stringify(resData));
+                    // console.log(resData.role);
+                    // if (resData.role === "ADMIN") {
+                    //     window.location.assign("/admin/home");
+                    // }
+                    // else {
+                    //     window.location.assign(pathname);
+                    // }
+
+                })
+                .catch(error => {
+                    //this.setState({ errorMessage: error.toString() });
+                    console.error('There was an error!', error);
+                });
+        }
     }
 
 
 
-    // let [isShowLogin, setIsShowLogin] = useState(false);
+    let [isShowLogin, setIsShowLogin] = useState(false);
 
-    // const handleLoginClicked = () => {
-    //     setIsShowLogin(!isShowLogin);
-    // }
+    const handleLoginClicked = () => {
+        setIsShowLogin(!isShowLogin);
+    }
 
-    // const pathname = window.location.pathname
+    const pathname = window.location.pathname
 
     function handleSubmit(event) {
         event.preventDefault();
         validateForm();
-        try {
-            authenticate();
-        } catch (e) {
-            alert(e.message);
-        }
+        // try {
+        //     authenticate();
+        // } catch (e) {
+        //     alert(e.message);
+        // }
     }
 
 
 
     console.log(props);
     return (
-        <div>
+        <div align="center">
             <NavBar handleLoginClick={handleLoginClicked}></NavBar>
             {isShowLogin && <LoginModal isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} pathname={pathname} />}
             <div class="col-md-5 col-md-offset-1" align="center">
@@ -136,50 +130,50 @@ export default function Search(props) {
                                     <div class="col-md-6">
                                         <fieldset>
                                             <label for="from">From: </label>
-                                            <select required name='from' onchange='this.form.()'>
+                                            <select required name='from' onchange={(e) => setDepAirport(e.target.value)}>
                                                 <option value="">Select departure location</option>
-                                                <option value="Los Angeles">LAX</option>
-                                                <option value="San Francisco">SFO</option>
-                                                <option value="San Jose">SJC</option>
-                                                <option value="Sacramento">SMF</option>
-                                                <option value="San Diego">SAN</option>
-                                                <option value="Santa Barbara">SBA</option>
-                                                <option value="Fullerton">FUL</option>
-                                                <option value="Riverside">RIV</option>
-                                                <option value="San Bernardino">SBD</option>
+                                                <option value="LAX">LAX</option>
+                                                <option value="SFO">SFO</option>
+                                                <option value="SJC">SJC</option>
+                                                <option value="SMF">SMF</option>
+                                                <option value="SAN">SAN</option>
+                                                <option value="SBA">SBA</option>
+                                                <option value="FUL">FUL</option>
+                                                <option value="RIV">RIV</option>
+                                                <option value="SBD">SBD</option>
                                             </select>
                                         </fieldset>
                                     </div>
                                     <div class="col-md-6">
                                         <fieldset>
                                             <label for="to">To: </label>
-                                            <select required name='to' onchange='this.form.()'>
-                                                <option value="">Select departure location</option>
-                                                <option value="Los Angeles">LAX</option>
-                                                <option value="San Francisco">SFO</option>
-                                                <option value="San Jose">SJC</option>
-                                                <option value="Sacramento">SMF</option>
-                                                <option value="San Diego">SAN</option>
-                                                <option value="Santa Barbara">SBA</option>
-                                                <option value="Fullerton">FUL</option>
-                                                <option value="Riverside">RIV</option>
-                                                <option value="San Bernardino">SBD</option>
+                                            <select required name='to' onchange={(e) => setArrAirport(e.target.value)}>
+                                            <option value="">Select arrival location</option>
+                                                <option value="LAX">LAX</option>
+                                                <option value="SFO">SFO</option>
+                                                <option value="SJC">SJC</option>
+                                                <option value="SMF">SMF</option>
+                                                <option value="SAN">SAN</option>
+                                                <option value="SBA">SBA</option>
+                                                <option value="FUL">FUL</option>
+                                                <option value="RIV">RIV</option>
+                                                <option value="SBD">SBD</option>
                                             </select>
                                         </fieldset>
                                     </div>
                                     <div class="col-md-6">
                                         <fieldset>
                                             <label for="departure">Departure date: </label>
-                                            <input name="deparure" type="date" class="form-control date" id="deparure" placeholder="Select a date" required="" onchange='this.form.()' />
+                                            <input name="deparure" type="date" class="form-control date" id="deparure" placeholder="Select a date" required="" onchange={(e) => setDepDate(e.target.value)} />
                                         </fieldset>
                                     </div>
                                     <div class="col-md-6">
                                         <fieldset>
                                             <label for="return">Return date: </label>
-                                            <input name="return" type="date" class="form-control date" id="return" placeholder="Select a date" required="" onchange='this.form.()' />
+                                            <input name="return" type="date" class="form-control date" id="return" placeholder="Select a date" required="" onchange={(e) => setArrDate(e.target.value)} />
                                         </fieldset>
                                     </div>
-                                    <div class="col-md-6">
+                                    {/* <div class="col-md-6">
                                         <div class="radio-select">
                                             <div class="row">
                                                 <div class="col-md-6 col-sm-6 col-xs-6">
@@ -192,10 +186,11 @@ export default function Search(props) {
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
+                                    </div> */}
+                                    <div class="col-md-6" align="center">
                                         <fieldset>
-                                            <button type="submit" id="btn-form-submit" class="btn" onClick={searchResult}>Search</button>
+                                            {/*<button type="submit" id="btn-form-submit" class="btn" align="center" onClick={searchResult}>Search</button>*/}
+                                            <button variant="primary" className="pure-u-1-6 btn-spacing" align="center" onClick={searchResult}> Search </button>
                                             {/* <script type="text/javascript">
                                                     document.getElementById("button").onclick = function () {
                                                        window.location.href = './searchPage'
@@ -210,8 +205,8 @@ export default function Search(props) {
                 </section>
             </div>
         </div>
-    )
+    );
 
 }
-            
-    
+
+
