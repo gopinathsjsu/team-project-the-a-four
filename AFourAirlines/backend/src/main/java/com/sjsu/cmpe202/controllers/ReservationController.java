@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
 
 @RestController
 @CrossOrigin
@@ -39,7 +38,7 @@ public class ReservationController {
 
     @PutMapping("/update-reservation")
     public ResponseEntity<?> updateReservation(@RequestBody Reservation reservation) throws Exception {
-        return ResponseEntity.ok(reservationService.save(reservation));
+        return ResponseEntity.ok(reservationService.updateReservation(reservation));
     }
 
 }

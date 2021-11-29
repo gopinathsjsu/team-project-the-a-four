@@ -14,8 +14,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
-@Service
-@Slf4j
+@Service @Slf4j @Transactional
 public class UserService implements UserDetailsService {
 
     @Autowired
@@ -34,7 +33,7 @@ public class UserService implements UserDetailsService {
             return new MyUserDetails(user.get());
         }
     }
-    @Transactional
+
     public User save(User user) {
         user.setPassword(bcryptEncoder.encode(user.getPassword()));
         return userRepository.save(user);

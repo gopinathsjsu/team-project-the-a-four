@@ -3,6 +3,7 @@ package com.sjsu.cmpe202.models;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Getter
@@ -27,4 +28,13 @@ public class Reservation {
     private Integer price;
     @Column(name = "status")
     private String status;
+    @Column(name = "identification_number")
+    private String identificationNumber;
+    @Column(name = "first_name")
+    private String firstName;
+    @Column(name = "last_name")
+    private String lastName;
+    @Column(name = "dob")
+    private LocalDate dateOfBirth;
+
 }
