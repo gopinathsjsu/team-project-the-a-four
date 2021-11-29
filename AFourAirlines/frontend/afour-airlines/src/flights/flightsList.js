@@ -1,14 +1,58 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
 import NavBar from "../common/navbar";
 //import FlightData from '../models/flightData';
 import { useGetFlightData } from '../common/getFlightData'
+import LoginModal from '../login/loginPopup';
 
 export default function FlightsList(props) {
     let flightID = "";
 
+    const submitButton = function (i) {
+        if (localStorage.getItem("token").length>0) {
+            return
+            (
+                <a type="button"
+                    className="btn btn-success btn-just-icon btn-sm"
+                    href={"/select/" + flightList[i].id}>Select</a>
+            );
+        }
+        else {
+            return ("");
+        }
+    }
+
     let flightList = JSON.parse(localStorage.getItem("flightList"));
+    const getFlightsMarkup = function () {
+        let rows = [];
+        for (var i = 0; i < flightList.length; i++) {
+            let cell = []
+            cell.push(<td>{flightList[i].id}</td>);
+            cell.push(<td>{flightList[i].sourceAirport}</td>);
+            cell.push(<td>{flightList[i].destinationAirport}</td>);
+            cell.push(<td>{flightList[i].departureTime}</td>);
+            cell.push(<td>{flightList[i].arrivalTime}</td>);
+            cell.push(<td>{submitButton(i)}</td>);
+            rows.push(<tr>{cell}</tr>)
+        }
+        return rows;
+    }
+    console.log(" printing flights");
     console.log(flightList);
 
+    /**
+     *                                         <tr>
+                                                <td>{flightList[0].id}</td>
+                                                <td>{flightList[0].sourceAirport}</td>
+                                                <td>{flightList[0].destinationAirport}</td>
+                                                <td>{flightList[0].departureTime}</td>
+                                                <td>{flightList[0].arrivalTime}</td>
+                                                <td>
+                                                    <a type="button"
+                                                        className="btn btn-success btn-just-icon btn-sm"
+                                                        href={"/select/" + flightList[0].id}>Select</a>
+                                                </td>
+                                            </tr>
+     */
     // class FlightsList extends Component {
     //     constructor(props) {
     //         super(props);
@@ -24,10 +68,22 @@ export default function FlightsList(props) {
     //     }
 
     // render() {
+
+
+    let [isShowLogin, setIsShowLogin] = useState(false);
+
+    const handleLoginClicked = () => {
+        setIsShowLogin(!isShowLogin);
+    }
+
+    let pathname = window.location.pathname
+
     return (
         <div>
-            <NavBar></NavBar>
+            <NavBar handleLoginClick={handleLoginClicked}></NavBar>
+            {isShowLogin && <LoginModal isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} pathname={pathname} />}
             <div className="container">
+                <h4 align="right">Login to reserve</h4>
                 <div className="row">
                     <div className="col-md-12 mb-5">
                         <h1 className="text-left">Flights List</h1>
@@ -37,8 +93,6 @@ export default function FlightsList(props) {
                                 <thead className="table-borderless table-secondary">
                                     <tr>
                                         <th scope="col">No.</th>
-                                        <th scope="col">Flight Number</th>
-                                        <th scope="col">Trip Type</th>
                                         <th scope="col">Departure Airport</th>
                                         <th scope="col">Arrival Airport</th>
                                         <th scope="col">Departure Time</th>
@@ -47,41 +101,9 @@ export default function FlightsList(props) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                                                        
-                                    {flightList.map(flight => {
-                                        return (
-                                            <th key={flight.id}>
-                                                <td scope="row">{flight.id}</td>
-                                                <td>{flight.airline}</td>
-                                                <td>{flight.flight_number}</td>
-                                                <td>{flight.trip_type}</td>
-                                                <td>{flight.departure_airport}</td>
-                                                <td>{flight.arrival_airport}</td>
-                                                <td>{flight.departure_time}</td>
-                                                <td>{flight.arrival_time}</td>
-                                                <td>
-                                                    <a type="button"
-                                                        className="btn btn-success btn-just-icon btn-sm"
-                                                        href={"/select/" + flight.id}>Select</a>
-                                                </td>
-                                            </th>
-                                        );
-                                    })
-                                    } 
-                                    {/* <th>
-                                        <td scope="row">{flightID}</td>
-                                        <td>{flightData.flight_number}</td>
-                                        <td>{flightData.trip_type}</td>
-                                        <td>{flightData.departure_airport}</td>
-                                        <td>{flightData.arrival_airport}</td>
-                                        <td>{flightData.departure_date}</td>
-                                        <td>{flightData.arrival_date}</td>
-                                        <td>
-                                            <a type="button"
-                                                className="btn btn-success btn-just-icon btn-sm"
-                                                href={"/select/" + flightID}>Select</a>
-                                        </td>
-                                    </th> */}
+                                    {
+                                        getFlightsMarkup()
+                                    }
                                 </tbody>
                             </table>
                         </div>
