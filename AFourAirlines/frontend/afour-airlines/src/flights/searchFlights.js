@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Redirect } from 'react-router';
 import NavBar from "../common/navbar";
 import LoginModal from "../login/loginPopup";
 
@@ -9,6 +10,17 @@ export default function Search(props) {
     // }
 
     let [source_airport, setDepAirport] = useState("");
+
+    // const handleSelect=(e)=>{
+
+    //     console.log(e);
+    
+    //     setDepAirport(e)
+    
+    //   }
+
+    var flightList = "";
+
     let [dest_airport, setArrAirport] = useState("");
     let [dep_date, setDepDate] = useState("");
     let [arr_date, setArrDate] = useState("");
@@ -23,39 +35,48 @@ export default function Search(props) {
     //     return false;
     // }
 
-    const searchResult = () => {
-        debugger;
+    const searchResult = (e) => {
+        e.preventDefault();
         if (source_airport === "" || dest_airport === "" || dep_date === "" || arr_date === "") {
             setErrorMsg("Fields are required");
-        } else{
+        } else {
             console.log("in searchResult method.")
-            console.log("sourceAirport: " + source_airport + "destAirport: " + dest_airport + "depDate" + dep_date + "arrDate" + arr_date);
+            console.log("sourceAirport: " + source_airport + "destinationAirport: " + dest_airport + "departureDateString" + dep_date + "arrivalDateString" + arr_date);
             if (source_airport && dest_airport && dep_date && arr_date) {
                 //var authToken = "Bearer " + data.token;
-                fetch("http://localhost:8080/api/flights/get-flights?sourceAirport=" + source_airport + "?destAirport=" + dest_airport + "?depDate=" + dep_date + "?arrDate=" + arr_date, {
+
+                // selectElement = document.querySelector('#select1');
+                // output = selectElement.value;
+                // document.querySelector('.output').textContent = output;
+
+                fetch("http://localhost:8080/api/flights/get-flights?sourceAirport=" 
+                        + source_airport + "&destinationAirport=" + dest_airport + "&departureDateString=" 
+                            + dep_date + "&arrivalDateString=" + arr_date, {
                     method: 'GET',
                     headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Content-Type': 'application/json',
                         //'Authorization': authToken
                     },
                     mode: 'cors'
                 })
                     .then(async innerResponse => {
-                        const resData = await innerResponse.json();
+                        const resData = await innerResponse.json(); 
 
                         if (!innerResponse.ok) {
                             // get error message from body or default to response statusText
                             const error = (resData && resData.message) || innerResponse.statusText;
                             return Promise.reject(error);
                         }
-
+                        console.log("asdsad" + JSON.stringify(resData));
+                        //flightList = resData;
                         localStorage.setItem("flightList", JSON.stringify(resData));
-                        // console.log(resData.role);
-                        // if (resData.role === "ADMIN") {
-                        //     window.location.assign("/admin/home");
-                        // }
-                        // else {
                         window.location.assign("/flights/flightsList");
+                        //if (JSON.stringify(resData).length > 0) {
+                            //setTimeout(function() {
+                            //    window.location.assign("/flights/flightsList");
+                             // }, 5000);
+                        //}
+                            
                         // }
 
                     })
@@ -89,7 +110,7 @@ export default function Search(props) {
 
 
 
-    console.log(props);
+
     return (
         <div align="center">
             <NavBar handleLoginClick={handleLoginClicked}></NavBar>
@@ -103,26 +124,26 @@ export default function Search(props) {
                                 <div class="row">
                                     <div class="col-md-6">
                                         <fieldset>
-                                            <label for="from">From: </label>
-                                            <select required name='from' onchange={(e) => setDepAirport(e.target.value)}>
-                                                <option value="">Select departure location</option>
-                                                <option value="LAX">LAX</option>
-                                                <option value="SFO">SFO</option>
-                                                <option value="SJC">SJC</option>
-                                                <option value="SMF">SMF</option>
-                                                <option value="SAN">SAN</option>
-                                                <option value="SBA">SBA</option>
-                                                <option value="FUL">FUL</option>
-                                                <option value="RIV">RIV</option>
-                                                <option value="Hyd">Hyd</option>
-                                            </select>
+                                            <label for="from">From: </label>                                            
+                                                <select value={source_airport} required name='from' onChange={e=>setDepAirport(e.target.value)}>
+                                                    <option value="">Select departure location</option>
+                                                    <option value="LAX">LAX</option>
+                                                    <option value="SFO">SFO</option>
+                                                    <option value="SJC">SJC</option>
+                                                    <option value="SMF">SMF</option>
+                                                    <option value="SAN">SAN</option>
+                                                    <option value="SBA">SBA</option>
+                                                    <option value="FUL">FUL</option>
+                                                    <option value="RIV">RIV</option>
+                                                    <option value="HYD">HYD</option>
+                                                </select>                                                                 
                                         </fieldset>
                                     </div>
                                     <div class="col-md-6">
                                         <fieldset>
                                             <label for="to">To: </label>
-                                            <select required name='to' onchange={(e) => setArrAirport(e.target.value)}>
-                                            <option value="">Select arrival location</option>
+                                            <select value={dest_airport} required name='to' onChange={e => setArrAirport(e.target.value)}>
+                                                <option value="">Select arrival location</option>
                                                 <option value="LAX">LAX</option>
                                                 <option value="SFO">SFO</option>
                                                 <option value="SJC">SJC</option>
@@ -131,20 +152,31 @@ export default function Search(props) {
                                                 <option value="SBA">SBA</option>
                                                 <option value="FUL">FUL</option>
                                                 <option value="RIV">RIV</option>
-                                                <option value="Hyd">Hyd</option>
+                                                <option value="HYD">HYD</option>
                                             </select>
                                         </fieldset>
                                     </div>
                                     <div class="col-md-6">
                                         <fieldset>
-                                            <label for="departure">Departure date: </label>
-                                            <input name="deparure" type="date" class="form-control date" id="deparure" placeholder="Select a date" required="" onchange={(e) => setDepDate(e.target.value)} />
+                                            <label for="departure" value={dep_date}>Departure date: </label>
+                                            <input name="deparure" type="date" class="form-control date" id="deparure" placeholder="Select a date" required="" onChange={e => setDepDate(e.target.value)} />
                                         </fieldset>
                                     </div>
                                     <div class="col-md-6">
                                         <fieldset>
-                                            <label for="return">Return date: </label>
-                                            <input name="return" type="date" class="form-control date" id="return" placeholder="Select a date" required="" onchange={(e) => setArrDate(e.target.value)} />
+                                            <label for="return" value={arr_date}>Return date: </label>
+                                            <input name="return" type="date" class="form-control date" id="return" placeholder="Select a date" required="" onChange={e => setArrDate(e.target.value)} />
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <fieldset>
+                                            <label for="noOfPass">Number of passengers: </label>
+                                            <select required name='noOfPass'>
+                                                <option value="">Total number</option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                            </select>
                                         </fieldset>
                                     </div>
                                     {/* <div class="col-md-6">
