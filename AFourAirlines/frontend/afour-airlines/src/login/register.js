@@ -19,18 +19,18 @@ export default function Registration(){
   // States for registration
   const defaultValues = {
     username: "",
-    dob: "",
+    dateOfBirth: "",
     password: "",
-    first_name: "",
-    last_name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     street: "",
     city: "",
     zip_code: "",
     state: "",
     country: "",
-    id_number: "",
-    contact: "",
+    identificationNumber: "",
+    phone: "",
     tncCheckbox: false,
     enrollMileage : false,
   };
@@ -48,18 +48,18 @@ export default function Registration(){
   
   const [invalid, setInvalid] = useState({
     username: false,
-    dob: false,
+    dateOfBirth: false,
     password: false,
-    first_name: false,
-    last_name: false,
+    firstName: false,
+    lastName: false,
     email: false,
     street: false,
     city: false,
     zip_code: false,
     state: false,
     country: false,
-    id_number: false,
-    contact: false,
+    identificationNumber: false,
+    phone: false,
     tncCheckbox: false,
   });
   
@@ -68,13 +68,13 @@ export default function Registration(){
     if (
       userData.username.trim() === " " ||
       userData.password.trim().length < 5 ||
-      userData.first_name.trim() === "" ||
-      userData.last_name.trim() === "" ||
+      userData.firstName.trim() === "" ||
+      userData.lastName.trim() === "" ||
       userData.country.trim() === "" ||
       userData.email.trim() === "" ||
-      userData.dob.trim() === "" ||
-      userData.contact.trim() === ""||
-      userData.id_number.trim() === ""
+      userData.dateOfBirth.trim() === "" ||
+      userData.phone.trim() === ""||
+      userData.identificationNumber.trim() === ""
     ) {
       setError(true);
       setMessage("Please fill all required fields");
@@ -88,7 +88,7 @@ export default function Registration(){
       setError(true);
       setMessage("Username cannot be more that 15 characters");
     } else if(
-      userData.dob.includes(" ")
+      userData.dateOfBirth.includes(" ")
     ) {
       setError(true);
       setMessage("Please select a valid date");
@@ -104,13 +104,13 @@ export default function Registration(){
     if (
       userData.username.trim() === " " ||
       userData.password.trim().length < 5 ||
-      userData.first_name.trim() === "" ||
-      userData.last_name.trim() === "" ||
+      userData.firstName.trim() === "" ||
+      userData.lastName.trim() === "" ||
       userData.country.trim() === "" ||
       userData.email.trim() === "" ||
-      userData.dob.trim() === "" ||
-      userData.contact.trim() === ""||
-      userData.id_number.trim() === ""
+      userData.dateOfBirth.trim() === "" ||
+      userData.phone.trim() === ""||
+      userData.identificationNumber.trim() === ""
     ) {
       setError(true);
       setMessage("Please fill all required fields");
@@ -124,7 +124,7 @@ export default function Registration(){
       setError(true);
       setMessage("Username cannot be more that 15 characters");
     } else if(
-      userData.dob.includes(" ")
+      userData.dateOfBirth.includes(" ")
     ) {
       setError(true);
       setMessage("Please select a valid date");
@@ -134,7 +134,54 @@ export default function Registration(){
     } else{
         setError(false);
         setMessage("Success!");
-        //TODO: register user API call
+
+        debugger;
+        var raw = JSON.stringify({
+          "username": userData.username,
+          "password": userData.password,
+          "firstName": userData.firstName,
+          "lastName": userData.lastName,
+          "dateOfBirth": userData.dateOfBirth,
+          "phone": userData.phone,
+          "email": userData.email,
+          "address": {
+              "street": userData.street,
+              "city": userData.city,
+              "country": userData.country,
+              "state": userData.state,
+              "zip": userData.zip_code
+          },
+          "identificationNumber": userData.identificationNumber,
+          "mileage": {
+                    "balancePoints":0,
+                    "miles": 0,
+          },
+          "role": "USER"
+        })
+
+        fetch("http://localhost:8080/api/users/register",{
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: raw,
+            mode: 'cors'
+        })
+        .then(async response => {
+          const resData = await response.json();
+
+          if(!response.ok){
+            const error = (resData && resData.message) || response.statusText;
+            return Promise.reject(error);
+          }
+
+          localStorage.setItem("userName", resData.username);
+          localStorage.setItem("userData", JSON.stringify(resData));
+          window.location.assign("/");
+        })
+        .catch(error => {
+          console.error('There was an error!', error);
+        });
       }
   }
 
@@ -143,7 +190,7 @@ export default function Registration(){
       <FormGroup>
         <FormControl>
           <TextField
-          helperText={invalid.first_name ? "1-25 characters" : ""}
+          helperText={invalid.firstName ? "1-25 characters" : ""}
             id="register-first-name"
             label="First Name"
             type="text"
@@ -153,26 +200,26 @@ export default function Registration(){
                 e.target.value.length > 25 || e.target.value === ""
                   ? true
                   : false;
-              setInvalid({ ...invalid, first_name: validation });
-              setUserData({...userData, first_name: e.target.value});
+              setInvalid({ ...invalid, firstName: validation });
+              setUserData({...userData, firstName: e.target.value});
             }}
           />
         </FormControl>
         <FormControl>
           <TextField
             required
-            helperText={invalid.last_name ? "1-25 characters" : ""}
+            helperText={invalid.lastName ? "1-25 characters" : ""}
             id="register-last-name"
             label="Last Name"
             type="text"
-            error={invalid.last_name}
+            error={invalid.lastName}
             onChange={(e) => {
               const validation =
                 e.target.value.length > 25 || e.target.value === ""
                   ? true
                   : false;
-              setInvalid({ ...invalid, last_name: validation });
-              setUserData({...userData, last_name: e.target.value});
+              setInvalid({ ...invalid, lastName: validation });
+              setUserData({...userData, lastName: e.target.value});
             }}
           />
         </FormControl>
@@ -234,7 +281,7 @@ export default function Registration(){
         </FormControl>
         <FormControl>
           <Input
-            id="register-dob"
+            id="register-dateOfBirth"
             label="Date of Birth"
             type="date"
             required
@@ -246,8 +293,8 @@ export default function Registration(){
                 e.target.value === ""
                   ? true
                   : false;
-              setInvalid({ ...invalid, dob: validation});
-              setUserData({...userData, dob: e.target.value});
+              setInvalid({ ...invalid, dateOfBirth: validation});
+              setUserData({...userData, dateOfBirth: e.target.value});
             }}
           />
         </FormControl>
@@ -340,7 +387,7 @@ export default function Registration(){
         <FormControl>
           <TextField
             required
-            helperText={invalid.id_number ? "7 characters" : ""}
+            helperText={invalid.identificationNumber ? "7 characters" : ""}
             id="register-id-number"
             label="Passport Number"
             type="text"
@@ -350,25 +397,25 @@ export default function Registration(){
                 e.target.value.length > 7 || e.target.value === ""
                   ? true
                   : false;
-              setInvalid({ ...invalid, id_number: validation });
-              setUserData({...userData, id_number: e.target.value});
+              setInvalid({ ...invalid, identificationNumber: validation });
+              setUserData({...userData, identificationNumber: e.target.value});
             }}
           />
         </FormControl>
         <FormControl>
           <TextField
-            helperText={invalid.contact ? "13 characters" : ""}
-            id="register-contact"
+            helperText={invalid.phone ? "17 characters" : ""}
+            id="register-phone"
             label="Phone/Mobile Number"
             type="text"
-            error={invalid.contact}
+            error={invalid.phone}
             onChange={(e) => {
               const validation =
-                e.target.value.length > 13 || e.target.value === ""
+                e.target.value.length > 17 || e.target.value === ""
                   ? true
                   : false;
-              setInvalid({ ...invalid, contact: validation });
-              setUserData({...userData, contact: e.target.value});
+              setInvalid({ ...invalid, phone: validation });
+              setUserData({...userData, phone: e.target.value});
             }}
           />
         </FormControl>
