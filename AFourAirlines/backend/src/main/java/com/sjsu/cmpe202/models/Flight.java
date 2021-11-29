@@ -1,9 +1,7 @@
 package com.sjsu.cmpe202.models;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -37,6 +35,7 @@ equipment
 varchar(45)
     */
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @Column(name = "name")
     private String name;

@@ -2,9 +2,7 @@ package com.sjsu.cmpe202.models;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity @Getter @Setter @ToString @AllArgsConstructor @NoArgsConstructor
 public class Airplane {
@@ -19,6 +17,7 @@ public class Airplane {
     varchar(45)
     */
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column(name = "make")
     private String make;
