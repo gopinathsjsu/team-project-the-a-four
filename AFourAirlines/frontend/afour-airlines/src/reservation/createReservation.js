@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import NavBar from "../common/navbar";
 import LoginModal from "../login/loginPopup";
 import ReservationCard from "./reservationCard";
+import FlightCard from "../flights/flightCard";
 
 export default function CreateReservation(props){
     const [isShowLogin, setIsShowLogin] = useState(false);
@@ -57,6 +58,7 @@ export default function CreateReservation(props){
             <NavBar handleLoginClick={handleLoginClicked}></NavBar>
             {isShowLogin && <LoginModal isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} pathname={pathname}/>}
             <div className="help-page">
+                <FlightCard/>
                 <ReservationCard availableSeats={availableSeats} getAvailableSeats={getAvailableSeats} handleCreate={handleCreate} userData={userData}/>
             </div>
             

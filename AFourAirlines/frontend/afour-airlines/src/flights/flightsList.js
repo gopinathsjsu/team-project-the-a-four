@@ -8,6 +8,7 @@ import {Button} from 'react-bootstrap';
 export default function FlightsList(props) {
     let flightID = "";
 
+    let token = localStorage.getItem("token");
 
     const selectFlight = function (e) {
         console.log("flightID " + e);
@@ -41,7 +42,9 @@ export default function FlightsList(props) {
             cell.push(<td>{flightList[i].destinationAirport}</td>);
             cell.push(<td>{flightList[i].departureTime}</td>);
             cell.push(<td>{flightList[i].arrivalTime}</td>);
-            cell.push(<td>{submitButton(i)}</td>);
+            cell.push(<td>{<Button key={flightList[i].id} variant="primary" className="pure-u-1-6 btn-spacing" onClick={(e) => selectFlight(e.target.key)} disabled={token === null}>
+                                Select
+                            </Button>}</td>);
             rows.push(<tr>{cell}</tr>)
         }
         return rows;
