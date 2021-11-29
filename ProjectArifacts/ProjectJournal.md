@@ -28,6 +28,18 @@
 - **What tasks are blocked waiting on another team member?** None
 - **XP Core Value:** Communication
 
+### Sprint 5: 
+- **What tasks did I work on / complete?** Created mock up for user Profile. Created Admin dashboard mock up
+- **What am I planning to work on next?** Next, I am planing to connect frontend with backend and perform API calls.
+- **What tasks are blocked waiting on another team member?** None
+- **XP Core Value:** Communication
+
+### Sprint 6: 
+- **What tasks did I work on / complete?** Attempted to make all pages dynamic.
+- **What am I planning to work on next?** Next, I am planing to work on Create booking page.
+- **What tasks are blocked waiting on another team member?** Facing difficulty to connect to APIs due to security errors(looking in it)
+- **XP Core Value:** Communication
+
 ## Mohammed Tuba Ahmed
 ### Sprint 1 - 
 - What tasks did I work on / complete?
