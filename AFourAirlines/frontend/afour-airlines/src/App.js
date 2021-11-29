@@ -15,6 +15,7 @@ import UserProfile from "./user/userProfile";
 import HelpPage from "./help/helpPage";
 import UserType from "./flights/userType";
 import AdminHome from "./admin/adminHome";
+import CreateReservation from "./reservation/createReservation";
 
 export default function App() {
 
@@ -31,6 +32,7 @@ export default function App() {
         <Route path="/user/UserProfile/" exact render={(props) => <UserProfile/>}/>
         <Route path="/travel/help" exact render={(props) => <HelpPage/>}/>
         <Route path="/admin/home" exact render={(props) => <AdminHome/>}/>
+        <Route path="/flights/reservation" exact render={(props) => <CreateReservation/>}/>
         </Switch>
       </Router>
     </BasePage>

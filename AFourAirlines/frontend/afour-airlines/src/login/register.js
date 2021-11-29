@@ -176,6 +176,7 @@ export default function Registration(){
           }
 
           localStorage.setItem("userName", resData.username);
+          localStorage.setItem("password", userData.password);
           localStorage.setItem("userData", JSON.stringify(resData));
           window.location.assign("/");
         })

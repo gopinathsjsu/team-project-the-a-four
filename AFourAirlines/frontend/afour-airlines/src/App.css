@@ -361,3 +361,23 @@ tbody tr:hover {
   margin-top: 3%;
   text-align: center;
 }
+
+
+.pass-form {
+  display: flex;
+}
+
+.pass-form div {
+  padding: 0 2% 2% 1.5%;
+}
+
+.pass-form-popup-content{
+  display: "inline-block";
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.8;
+  color: #141414;
+  border-top: solid 0.25px #a3a9ad;
+  padding-top: 1.5%;
+}

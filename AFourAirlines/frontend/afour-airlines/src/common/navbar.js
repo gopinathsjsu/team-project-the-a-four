@@ -5,8 +5,12 @@ function NavBar({ handleLoginClick, props}) {
         
     let userName = localStorage.getItem("userName");
     let token = localStorage.getItem("token");
-    if(userName && !(token || token === ""))
+    let password = localStorage.getItem("password");
+    //this will happend only incase of redirecting from successfull registeration
+    if(userName && !(token || token === "") && password)
     {
+        // console.log("token: " + token);
+        // console.log("password: " + password);
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
@@ -33,12 +37,14 @@ function NavBar({ handleLoginClick, props}) {
                 return Promise.reject(error);
             }
             localStorage.setItem('token', data.token);
+            localStorage.removeItem('password');
         })
         .catch(error => {
             //this.setState({ errorMessage: error.toString() });
             console.error('There was an error!', error);
         });  
     }
+    
 
 
     let role = "GUEST";
