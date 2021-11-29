@@ -14,7 +14,7 @@ export default function CreateReservation(props){
     const pathname = window.location.pathname
 
     let userData = JSON.parse(localStorage.getItem("userData"));
-    let flightData = JSON.parse(localStorage.getItem("flightId"));
+    let flightId = localStorage.getItem("flightId");
 
     console.log(userData);
 
@@ -23,7 +23,7 @@ export default function CreateReservation(props){
     }
     
     var availableSeats = "";
-    let flightId = props.flightDetail.id;
+    //let flightId = props.flightDetail.id;
     console.log("flightId: " + flightId);
     function getAvailableSeats(){
         var authToken = "Bearer " + localStorage.getItem("token");
@@ -58,7 +58,7 @@ export default function CreateReservation(props){
             <NavBar handleLoginClick={handleLoginClicked}></NavBar>
             {isShowLogin && <LoginModal isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} pathname={pathname}/>}
             <div className="help-page">
-                <FlightCard/>
+                <FlightCard flightId={flightId}/>
                 <ReservationCard availableSeats={availableSeats} getAvailableSeats={getAvailableSeats} handleCreate={handleCreate} userData={userData}/>
             </div>
             

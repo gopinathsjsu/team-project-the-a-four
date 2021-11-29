@@ -10,20 +10,10 @@ export default function Search(props) {
     // }
 
     let [source_airport, setDepAirport] = useState("");
-
-    // const handleSelect=(e)=>{
-
-    //     console.log(e);
-    
-    //     setDepAirport(e)
-    
-    //   }
-
-    var flightList = "";
-
     let [dest_airport, setArrAirport] = useState("");
     let [dep_date, setDepDate] = useState("");
     let [arr_date, setArrDate] = useState("");
+    let [noOfPass, setNoOfPass] = useState(0);
 
     let [errorMsg, setErrorMsg] = useState("");
 
@@ -70,6 +60,7 @@ export default function Search(props) {
                         console.log("asdsad" + JSON.stringify(resData));
                         //flightList = resData;
                         localStorage.setItem("flightList", JSON.stringify(resData));
+                        localStorage.setItem("noOfPass", noOfPass);
                         window.location.assign("/flights/flightsList");
                         //if (JSON.stringify(resData).length > 0) {
                             //setTimeout(function() {
@@ -171,8 +162,8 @@ export default function Search(props) {
                                     <div class="col-md-6">
                                         <fieldset>
                                             <label for="noOfPass">Number of passengers: </label>
-                                            <select required name='noOfPass'>
-                                                <option value="">Total number</option>
+                                            <select required name='noOfPass' value={noOfPass} onChange={e => setNoOfPass(e.target.value)}>
+                                                <option value="0">Select number of passengers</option>
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>

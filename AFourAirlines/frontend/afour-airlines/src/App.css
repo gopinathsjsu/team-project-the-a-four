@@ -381,3 +381,7 @@ tbody tr:hover {
   border-top: solid 0.25px #a3a9ad;
   padding-top: 1.5%;
 }
+
+.not-allowed {
+  cursor: not-allowed;
+}

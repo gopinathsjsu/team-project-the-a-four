@@ -9,7 +9,7 @@ export default function ReservationCard(props){
         var noOfPass = localStorage.getItem("noOfPass") ? localStorage.getItem("noOfPass") : 1;
 
         var passForms = [];
-        for(var i = 0; i < 3; i++){
+        for(var i = 0; i < noOfPass; i++){
             passForms.push(<ReservationDetails index={i+1}/>);
         }
         return passForms;
@@ -28,7 +28,7 @@ return(
                     renderPassengerForm()
                 }
                 </Form.Group>
-                <Form.Group style={{display: 'grid'}}>
+                <Form.Group>
                     <div className="btn-group">
                         <Button variant="primary" className="pure-u-1-6 btn-spacing" onClick={props.handleCreate}>
                             Book Now
