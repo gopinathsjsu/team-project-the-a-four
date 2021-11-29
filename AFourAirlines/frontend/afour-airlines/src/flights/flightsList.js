@@ -1,22 +1,44 @@
-import React, { Component, useState } from 'react'
+import React, { useState } from 'react'
 import NavBar from "../common/navbar";
-//import FlightData from '../models/flightData';
-import { useGetFlightData } from '../common/getFlightData'
 import LoginModal from '../login/loginPopup';
 import {Button} from 'react-bootstrap';
 
-import OverlayTrigger from "react-bootstrap/OverlayTrigger";
-import Tooltip from "react-bootstrap/Tooltip";
-
 export default function FlightsList(props) {
-    let flightID = "";
+    
+    let flightId = localStorage.getItem("flightId");
 
     let token = localStorage.getItem("token");
 
     const selectFlight = function (e) {
         console.log("flightID " + e.target.value);
         localStorage.setItem("flightId",e.target.value);
-        window.location.assign("/flights/reservation/");
+
+        var authToken = "Bearer " + localStorage.getItem("token");
+
+        fetch("http://localhost:8080/api/flights/get-available-seats?flightId=123", {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': authToken
+            },
+            mode: 'cors'
+            })
+        .then(async response => {
+            const data = await response.json();
+
+            // check for error response
+            if (!response.ok) {
+                // get error message from body or default to response statusText
+                const error = (data && data.message) || response.statusText;
+                return Promise.reject(error);
+            }
+            localStorage.setItem("availableSeats", JSON.stringify(data))
+            window.location.assign("/flights/reservation/");
+        })
+        .catch(error => {
+            //this.setState({ errorMessage: error.toString() });
+            console.error('There was an error!', error);
+        });
     }
 
 

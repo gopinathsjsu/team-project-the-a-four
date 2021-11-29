@@ -14,52 +14,52 @@ export default function CreateReservation(props){
     const pathname = window.location.pathname
 
     let userData = JSON.parse(localStorage.getItem("userData"));
-    let flightId = localStorage.getItem("flightId");
 
     console.log(userData);
 
     const handleCreate = () => {
-
+        console.log(JSON.stringify(passList));
+        console.log(JSON.stringify(passList).replace('[','{').replace(']','}'));
     }
+
+    var availableSeats = JSON.parse(localStorage.getItem("availableSeats"));
+    console.log(availableSeats);
+
     
-    var availableSeats = "";
-    //let flightId = props.flightDetail.id;
-    console.log("flightId: " + flightId);
-    function getAvailableSeats(){
-        var authToken = "Bearer " + localStorage.getItem("token");
 
-        fetch("http://localhost:8080/api/flights/get-available-seats?flightId=" + props.flightDetail.id, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': authToken
-            },
-            mode: 'cors'
-            })
-        .then(async response => {
-            const data = await response.json();
-
-            // check for error response
-            if (!response.ok) {
-                // get error message from body or default to response statusText
-                const error = (data && data.message) || response.statusText;
-                return Promise.reject(error);
-            }
-            availableSeats = data;
-        })
-        .catch(error => {
-            //this.setState({ errorMessage: error.toString() });
-            console.error('There was an error!', error);
-        });
+    function renderSeatList(){
+        var seatList = [];
+        seatList.push(<option value="0">Select seat</option>);
+        for(var i = 0; i < availableSeats.length; i++){
+            seatList.push(<option key={availableSeats[i].id} value={availableSeats[i].id}>{availableSeats[i].number}</option>);
+        }
+        return seatList;
     }
+
+    var seatListElements = renderSeatList()
     
+    let passList = [];
+    let defaultPass = {
+        passNumber: 0,
+        firstName: "",
+        lastName: "",
+        identificationNumber: "",
+        seat: "",
+    }
+    passList.push(defaultPass);
+
+    console.log(passList);
+    var noOfPass = localStorage.getItem("noOfPass") ? localStorage.getItem("noOfPass") : 1;
+
+
     return(
         <div>
             <NavBar handleLoginClick={handleLoginClicked}></NavBar>
             {isShowLogin && <LoginModal isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} pathname={pathname}/>}
             <div className="help-page">
-                <FlightCard flightId={flightId}/>
-                <ReservationCard availableSeats={availableSeats} getAvailableSeats={getAvailableSeats} handleCreate={handleCreate} userData={userData}/>
+                <FlightCard/>
+                <ReservationCard handleCreate={handleCreate} 
+                    userData={userData} renderSeatList={seatListElements} noOfPass={noOfPass} passList={passList}/>
             </div>
             
 

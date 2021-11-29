@@ -3,14 +3,10 @@ import ReservationDetails from './reservationDetails';
 
 export default function ReservationCard(props){
 
-    //var noOfPass = localStorage.getItem("noOfPass") ? localStorage.getItem("noOfPass") : 1;
-
     function renderPassengerForm(){
-        var noOfPass = localStorage.getItem("noOfPass") ? localStorage.getItem("noOfPass") : 1;
-
         var passForms = [];
-        for(var i = 0; i < noOfPass; i++){
-            passForms.push(<ReservationDetails index={i+1}/>);
+        for(var i = 0; i < props.noOfPass; i++){
+            passForms.push(<ReservationDetails index={i+1} renderSeatList={props.renderSeatList} passList={props.passList}/>);
         }
         return passForms;
     }
