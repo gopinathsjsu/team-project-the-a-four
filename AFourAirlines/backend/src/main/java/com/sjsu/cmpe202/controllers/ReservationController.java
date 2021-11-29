@@ -29,10 +29,10 @@ public class ReservationController {
         Optional<Reservation> reservation = null;
         try {
             reservation = reservationService.getReservationById(reservationId);
-        }catch (Exception e){
-            log.error("Error occured in getReservationById :{}",e);
+        } catch (Exception e) {
+            log.error("Error occured in getReservationById :{}", e);
             return ResponseEntity.status(400).body(e.getMessage());
-        }finally {
+        } finally {
             log.info("Exiting getReservationById Api");
         }
         return ResponseEntity.ok(reservation);
@@ -45,10 +45,10 @@ public class ReservationController {
         try {
             String username = SecurityContextHolder.getContext().getAuthentication().getName();
             reservations = reservationService.getReservationsForUser(username);
-        }catch (Exception e){
-            log.error("Error occured in getReservationsForUser :{}",e);
+        } catch (Exception e) {
+            log.error("Error occured in getReservationsForUser :{}", e);
             return ResponseEntity.status(400).body(e.getMessage());
-        }finally {
+        } finally {
             log.info("Exiting getReservationsForUser Api");
         }
         return ResponseEntity.ok(reservations);
@@ -60,8 +60,8 @@ public class ReservationController {
         String status = null;
         try {
             status = reservationService.saveAll(reservations);
-        }catch (Exception e){
-            log.error("Error occured while updating reservation :{}",e);
+        } catch (Exception e) {
+            log.error("Error occured while updating reservation :{}", e);
             return ResponseEntity.status(400).body(e.getMessage());
         }
         return ResponseEntity.ok(status);
@@ -71,10 +71,10 @@ public class ReservationController {
     public ResponseEntity<?> updateReservation(@RequestBody List<Reservation> reservations) throws Exception {
         log.info("Entering updateReservation Api");
         String status = null;
-        try{
+        try {
             status = reservationService.updateReservation(reservations);
-        }catch (Exception e){
-            log.error("Error occured while updating reservation :{}",e);
+        } catch (Exception e) {
+            log.error("Error occured while updating reservation :{}", e);
             return ResponseEntity.status(400).body(e.getMessage());
         }
         return ResponseEntity.ok(status);
