@@ -3,17 +3,27 @@ import NavBar from "../common/navbar";
 //import FlightData from '../models/flightData';
 import { useGetFlightData } from '../common/getFlightData'
 import LoginModal from '../login/loginPopup';
+import {Button} from 'react-bootstrap';
 
 export default function FlightsList(props) {
     let flightID = "";
 
+
+    const selectFlight = function (e) {
+        console.log("flightID " + e);
+    }
+
     const submitButton = function (i) {
-        if (localStorage.getItem("token").length>0) {
+        if (localStorage.getItem("token").length > 0) {
             return
             (
-                <a type="button"
-                    className="btn btn-success btn-just-icon btn-sm"
-                    href={"/select/" + flightList[i].id}>Select</a>
+                // <a type="button"
+                //     className="btn btn-success btn-just-icon btn-sm"
+                //     href={"/select/" + flightList[i].id}>Select</a>
+
+                <Button key={flightList[i].id} variant="primary" className="pure-u-1-6 btn-spacing" onClick={(e) => selectFlight(e.target.key)}>
+                    Select
+                </Button>
             );
         }
         else {
