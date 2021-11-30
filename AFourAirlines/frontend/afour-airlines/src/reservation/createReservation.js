@@ -19,7 +19,6 @@ export default function CreateReservation(props){
 
     const handleCreate = () => {
         console.log(JSON.stringify(passList));
-        console.log(JSON.stringify(passList).replace('[','{').replace(']','}'));
     }
 
     var availableSeats = JSON.parse(localStorage.getItem("availableSeats"));
