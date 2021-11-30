@@ -111,7 +111,13 @@ function NavBar({ handleLoginClick, props}) {
                             Login</span>
                         </div>
                     </li>
-                    )} 
+                    )}
+                    {(role !== "ADMIN") && (<li className="nav-menu-item">
+                        <NavLink to="/user/userTrips" className="nav-menu-link" activeClassName="nav-menu-link-active" isActive={checkActive}>
+                            My Trips
+                        </NavLink>
+                        {token === null && <p align="right">*Login to reserve</p>}
+                    </li>)}
                     {(role === "ADMIN") && (
                     <li className="nav-menu-item">
                         <NavLink to="/admin/home" className="nav-menu-link" activeClassName="nav-menu-link-active">
