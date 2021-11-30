@@ -14,6 +14,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/api/admin")
@@ -30,19 +32,23 @@ public class AdminController {
     private JwtTokenUtil jwtTokenUtil;
 
     @PostMapping("/authenticate")
-    public ResponseEntity<JwtResponse> authenticate(@RequestBody User user) {
+    public ResponseEntity<?> authenticate(@RequestBody User user) {
         String token = null;
         try {
-            log.error("user request is {}",user);
+            log.error("user request is {}", user);
             authenticate(user.getUsername(), user.getPassword());
 
             final UserDetails userDetails = userService
                     .loadUserByUsername(user.getUsername());
 
             token = jwtTokenUtil.generateToken(userDetails);
+
+            log.debug("Token generated is {}", token);
         } catch (Exception e) {
             log.error("Exception occured {}", e);
-            throw new BadCredentialsException(user.getUsername());
+            return ResponseEntity.status(400).body(e.getMessage());
+        } finally {
+            log.info("Exiting authenticate Api");
         }
         return ResponseEntity.ok(new JwtResponse(token));
 
@@ -63,11 +69,17 @@ public class AdminController {
 
     @GetMapping("/get-all-user-details")
     public ResponseEntity<?> getAllUserDetails() throws Exception {
-        return ResponseEntity.ok(userService.getAllUserDetails());
+        log.info("Entering getAllUserDetails Api");
+        Iterable<User> userList = null;
+        try {
+            userList = userService.getAllUserDetails();
+        } catch (Exception e) {
+            log.error("Error occured in getAllUserDetails :{}", e);
+            return ResponseEntity.status(400).body(e.getMessage());
+        } finally {
+            log.info("Exiting getAllUserDetails Api");
+        }
+        return ResponseEntity.ok(userList);
     }
 
-    @GetMapping("/hello")
-    public String helloAdmin() {
-        return "hello admin";
-    }
 }

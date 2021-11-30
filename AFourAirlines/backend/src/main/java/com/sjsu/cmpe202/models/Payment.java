@@ -1,9 +1,7 @@
 package com.sjsu.cmpe202.models;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity @Getter @Setter @ToString @AllArgsConstructor @NoArgsConstructor
@@ -25,6 +23,7 @@ billing_address_id
 int
     */
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @Column(name = "username")
     private String userName;

@@ -34,9 +34,17 @@ public class UserService implements UserDetailsService {
         }
     }
 
-    public User save(User user) {
-        user.setPassword(bcryptEncoder.encode(user.getPassword()));
-        return userRepository.save(user);
+    public String save(User user) {
+        log.info("Entering UserService.save ");
+        String status = "failed";
+        try{
+            user.setPassword(bcryptEncoder.encode(user.getPassword()));
+            User user_returned = userRepository.save(user);
+            status = user_returned!=null?"success":status;
+        }finally {
+            log.info("Exiting UserService.save ");
+        }
+        return status;
     }
 
     public Optional<User> getUserDetails(String userName) {

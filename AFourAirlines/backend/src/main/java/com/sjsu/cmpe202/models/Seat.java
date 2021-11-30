@@ -1,9 +1,7 @@
 package com.sjsu.cmpe202.models;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity @Getter @Setter @ToString @AllArgsConstructor @NoArgsConstructor
 public class Seat {
@@ -18,6 +16,7 @@ reserved
 tinyint(1)
     */
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @Column(name = "number")
     private String number;

@@ -12,13 +12,15 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Reservation {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer number;
-    @Column(name = "PNR")
-    private String PNR;
-    @Column(name = "passenger")
-    private String passenger;
-    @OneToOne(cascade = CascadeType.ALL)
+    @Column(name = "pnr")
+    private String pnr;
+    @Column(name = "username")
+    private String username;
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "flight")
     private Flight flight;
     @OneToOne(cascade = CascadeType.ALL)

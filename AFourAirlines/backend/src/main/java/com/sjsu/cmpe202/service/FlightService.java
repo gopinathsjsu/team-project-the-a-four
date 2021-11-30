@@ -27,8 +27,17 @@ public class FlightService {
         return flightRepository.getFlights(sourceAirport, destinationAirport, departureDate, arrivalDate);
     }
 
-    public Flight save(Flight flight) {
-        return flightRepository.save(flight);
+    public String save(Flight flight) {
+        log.info("Entering FlightService.save");
+        String status = "failed";
+        Flight flight_ret = null;
+        try{
+            flight_ret = flightRepository.save(flight);
+            status = flight_ret!=null?"success":status;
+        }finally {
+            log.info("Exiting FlightService.save");
+        }
+        return status;
     }
 
     public ArrayList<Seat> getAvailableSeats(Integer flightId) {

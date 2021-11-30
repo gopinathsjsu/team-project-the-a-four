@@ -33,6 +33,7 @@ public class User {
     tinyint
      */
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(length = 15)
     private String username;
     @Column(name = "password")
@@ -60,13 +61,4 @@ public class User {
     @Column(name = "role")
     private String role;
 
-    /*@JsonIgnore
-    public String getPassword() {
-        return password;
-    }
-
-    @JsonProperty
-    public void setPassword(final String password) {
-        this.password = password;
-    }*/
 }
