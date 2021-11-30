@@ -14,8 +14,8 @@ export default function FlightsList(props) {
         //console.log("flightID " + flightId);
 
         var authToken = "Bearer " + localStorage.getItem("token");
-        //TODO: get synamic seats
-        fetch("http://localhost:8080/api/flights/get-available-seats?flightId=123", {
+        
+        fetch("http://localhost:8080/api/flights/get-available-seats?flightId=" + id, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

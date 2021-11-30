@@ -33,12 +33,12 @@ function AdminOptions(props) {
                 <h1 className="page-hearder">Manage</h1>
                 <div className="container-fluid d-flex justify-content-center card-row">
                     <div className="row">
-                        <div className="col-md-4 card-tile">
+                        {/* <div className="col-md-4 card-tile">
                             <Card cardTitle="Users" cardImg={userImg} cardAltText="User Icon" handleOnClick={optionOnClick}/>
                         </div>
                         <div className="col-md-4">
                             <Card cardTitle="Flights" cardImg={flightImg} cardAltText="Flight Icon" handleOnClick={optionOnClick}/>
-                        </div>
+                        </div> */}
                         <div className="col-md-4">
                             <Card cardTitle="Reservations" cardImg={rsrvImg} cardAltText="Reservation Icon" handleOnClick={optionOnClick}/>
                         </div>

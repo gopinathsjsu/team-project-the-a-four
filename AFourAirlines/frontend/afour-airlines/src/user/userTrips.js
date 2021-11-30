@@ -14,8 +14,10 @@ export default function UserTrips(props) {
     }
 
     const handleClick = (id) => {
-
-        window.location.assign("/reservation/manage?id=" + id);
+        return function (){
+            window.location.assign("/reservation/manage?id=" + id);
+        }
+        
     }
 
     let pathname = window.location.pathname

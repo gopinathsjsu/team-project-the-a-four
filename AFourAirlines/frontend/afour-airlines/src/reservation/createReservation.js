@@ -34,7 +34,8 @@ export default function CreateReservation(props){
 
     var seatListElements = renderSeatList()
     
-    let passList = [];
+    var noOfPass = localStorage.getItem("noOfPass") ? localStorage.getItem("noOfPass") : 1;
+    let [passList, setPassList] = useState({});
     let defaultPass = {
         passNumber: 0,
         firstName: "",
@@ -43,10 +44,14 @@ export default function CreateReservation(props){
         seat: "",
         dateOfBirth: ""
     }
-    passList.push(defaultPass);
 
+    for(var i = 0; i < noOfPass; i++){
+        passList[i] = defaultPass;
+    }
+
+    console.log("print pass list");
     console.log(passList);
-    var noOfPass = localStorage.getItem("noOfPass") ? localStorage.getItem("noOfPass") : 1;
+    
 
     var mileagePoints = 100;
 
@@ -71,13 +76,14 @@ export default function CreateReservation(props){
 
         const handleCreate = () => {
             console.log(JSON.stringify(passList));
-
+            debugger;
             var finalPrice = totalPrice + noOfPass*30;
     
             let bookBody = []
             var tempDetails = {};
-            for(var i = 1; i < passList.length; i++)
+            for(var i = 0; i < noOfPass; i++)
             {
+                debugger;
                 tempDetails = {
                     "number": passList[i].passNumber,
                     "username": userData.username,
@@ -112,13 +118,13 @@ export default function CreateReservation(props){
                     mode: 'cors'
                 })
             .then(async response => {
-                const resData = await response.json();
+                // const resData = await response.json();
 
-                if(!response.ok){
-                    const error = (resData && resData.message) || response.statusText;
-                    return Promise.reject(error);
-                }
-
+                // if(!response.ok){
+                //     const error = (resData && resData.message) || response.statusText;
+                //     return Promise.reject(error);
+                // }
+                // console.log(resData);
                 window.location.assign("/");
             })
             .catch(error => {
@@ -133,7 +139,8 @@ export default function CreateReservation(props){
             <div className="help-page">
                 <FlightCard flightData={flightData} totalPrice={totalPrice}/>
                 <ReservationCard handleCreate={handleCreate} totalPrice={totalPrice} useMilesOption={useMilesOption} isUseMiles={isUseMiles}
-                    userData={userData} renderSeatList={seatListElements} noOfPass={noOfPass} passList={passList} mileagePoints={mileagePoints}/>
+                    userData={userData} renderSeatList={seatListElements} noOfPass={noOfPass} passList={passList} mileagePoints={mileagePoints}
+                    setPassList={setPassList}/>
             </div>
         </div>
 
