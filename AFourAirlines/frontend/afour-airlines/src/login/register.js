@@ -420,10 +420,10 @@ export default function Registration(){
             }}
           />
         </FormControl>
-        <FormControl className="register-checkbox-div">
+        {/* <FormControl className="register-checkbox-div">
           <Checkbox id="register-enroll-checkbox" onChange={(e) => setEnrollMileage(e.currentTarget.checked)}></Checkbox>
           <FormLabel>Enroll in Mileage Program!</FormLabel>
-        </FormControl>
+        </FormControl> */}
         <FormControl className="register-checkbox-div">
           <Checkbox id="register-tnc-checkbox" onChange={(e) => setTncCheckbox(e.currentTarget.checked)}></Checkbox>
           <FormLabel>Read and agree to the Terms, Conditions and Policies of our Airlines!</FormLabel>

@@ -9,6 +9,7 @@ export default function ReservationDetails(props){
         lastName: "",
         identificationNumber: "",
         seat: "",
+        dateOfBirth: ""
     }
 
     let [passData, setPassData] = useState(defaultPass);
@@ -29,6 +30,7 @@ export default function ReservationDetails(props){
             props.passList[i].lastName = passData.lastName;
             props.passList[i].identificationNumber = passData.identificationNumber;
             props.passList[i].seat = passData.seat;
+            props.passList[i].dateOfBirth = passData.dateOfBirth;
         }
     }
 
@@ -41,7 +43,7 @@ export default function ReservationDetails(props){
 
     return(
         <div className="pass-form-popup-content">
-            <h4 >Passenger {props.index}</h4>
+            <h4>Passenger {props.index}</h4>
             <Form className="form pass-form">
                 <Form.Group>
                     <Form.Label>First Name: </Form.Label>
@@ -59,6 +61,12 @@ export default function ReservationDetails(props){
                     <Form.Label>Passport Number: </Form.Label>
                     <Form.Control type="text" defaultValue="" onChange={(e) => {
               setPassData({...passData, identificationNumber: e.target.value});
+            }}/>
+                </Form.Group>
+                <Form.Group>
+                <Form.Label>Date of Birth: </Form.Label>
+                    <Form.Control type="date" defaultValue="" onChange={(e) => {
+              setPassData({...passData, dateOfBirth: e.target.value});
             }}/>
                 </Form.Group>
                 <Form.Group>

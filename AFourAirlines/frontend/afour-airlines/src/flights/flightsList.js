@@ -5,16 +5,16 @@ import {Button} from 'react-bootstrap';
 
 export default function FlightsList(props) {
     
-    let flightId = localStorage.getItem("flightId");
-
+    let flightId = "";
     let token = localStorage.getItem("token");
 
-    const selectFlight = function (e) {
-        console.log("flightID " + e.target.value);
-        localStorage.setItem("flightId",e.target.value);
+    const selectFlight = function (id) {
+        console.log("flightID " + id);
+        flightId = localStorage.setItem("flightId",id);
+        //console.log("flightID " + flightId);
 
         var authToken = "Bearer " + localStorage.getItem("token");
-
+        //TODO: get synamic seats
         fetch("http://localhost:8080/api/flights/get-available-seats?flightId=123", {
             method: 'GET',
             headers: {
@@ -58,7 +58,7 @@ export default function FlightsList(props) {
             cell.push(<td>{flightList[i].departureTime}</td>);
             cell.push(<td>{flightList[i].arrivalTime}</td>);
             cell.push(<td>{<Button value={flightList[i].id} variant="primary" className={token === null ? 'pure-u-1-6 btn-spacing not-allowed' : 'pure-u-1-6 btn-spacing'} 
-                                    onClick={e => selectFlight(e)} disabled={token === null} tool-tip="">
+                                    onClick={e => selectFlight(e.target.value)} disabled={token === null} tool-tip="">
                                     Select
                                 </Button>
                             }</td>);
