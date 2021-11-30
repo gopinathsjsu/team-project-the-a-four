@@ -12,7 +12,7 @@ export default function ReservationCard(props){
     function renderPassengerForm(){
         var passForms = [];
         for(var i = 0; i < props.noOfPass; i++){
-            passForms.push(<ReservationDetails index={i+1} renderSeatList={props.renderSeatList} passList={props.passList}/>);
+            passForms.push(<ReservationDetails index={i} renderSeatList={props.renderSeatList} passList={props.passList} setPassList={props.setPassList}/>);
         }
         return passForms;
     }
@@ -63,3 +63,15 @@ return(
 );
 
 }
+
+
+/*
+passList = {
+    passport: {
+        name: 
+        seat:
+    }
+}
+
+passList['passportNumber']
+*/
