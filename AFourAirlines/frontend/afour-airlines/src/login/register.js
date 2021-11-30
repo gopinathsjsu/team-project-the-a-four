@@ -63,43 +63,7 @@ export default function Registration(){
     tncCheckbox: false,
   });
   
-
-  const validateFields = () => {
-    if (
-      userData.username.trim() === " " ||
-      userData.password.trim().length < 5 ||
-      userData.firstName.trim() === "" ||
-      userData.lastName.trim() === "" ||
-      userData.country.trim() === "" ||
-      userData.email.trim() === "" ||
-      userData.dateOfBirth.trim() === "" ||
-      userData.phone.trim() === ""||
-      userData.identificationNumber.trim() === ""
-    ) {
-      setError(true);
-      setMessage("Please fill all required fields");
-    } else if (
-      userData.email.includes(" ") ||
-      userData.password.includes(" ") 
-    ) {
-      setError(true);
-      setMessage("Space character not allowed in email_id and/or password");
-    } else if ( userData.username.trim().length > 15 ){
-      setError(true);
-      setMessage("Username cannot be more that 15 characters");
-    } else if(
-      userData.dateOfBirth.includes(" ")
-    ) {
-      setError(true);
-      setMessage("Please select a valid date");
-    } else if(!(tncCheckbox)) {
-      setError(true);
-      setMessage("Please accept the Terms, Conditions and Policies of our Airlines")
-    }
-    return;
-  }
-
-
+  
   const handleSubmit = (e) => {
     if (
       userData.username.trim() === " " ||

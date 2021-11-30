@@ -18,9 +18,7 @@ export default function CreateReservation(props){
 
     console.log(userData);
 
-    const handleCreate = () => {
-        console.log(JSON.stringify(passList));
-    }
+    
 
     var availableSeats = JSON.parse(localStorage.getItem("availableSeats"));
     console.log(availableSeats);
@@ -71,7 +69,62 @@ export default function CreateReservation(props){
             setUseMiles(!isUseMiles);
         }
 
-        
+        const handleCreate = () => {
+            console.log(JSON.stringify(passList));
+
+            var finalPrice = totalPrice + noOfPass*30;
+    
+            let bookBody = []
+            var tempDetails = {};
+            for(var i = 1; i < passList.length; i++)
+            {
+                tempDetails = {
+                    "number": passList[i].passNumber,
+                    "username": userData.username,
+                    "flight": flightData,
+                    "seat": {
+                        "id": passList[i].seat,
+                        "number": "A"+ passList[i].seat,
+                        "airplane": flightData.equipment,
+                        "flightId": flightId,
+                        "reserved": true,
+                        "price": 0
+                    },
+                    "price": finalPrice,
+                    "status": "scheduled",
+                    "identificationNumber": passList[i].identificationNumber,
+                    "firstName": passList[i].firstName,
+                    "lastName": passList[i].lastName,
+                    "dateOfBirth": passList[i].dateOfBirth
+                }
+                bookBody.push(tempDetails);
+            }
+            
+            var authToken = "Bearer " + localStorage.getItem('token');
+
+            fetch("http://localhost:8080/api/reservations/create-reservation",{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': authToken
+                    },
+                    body: JSON.stringify(bookBody),
+                    mode: 'cors'
+                })
+            .then(async response => {
+                const resData = await response.json();
+
+                if(!response.ok){
+                    const error = (resData && resData.message) || response.statusText;
+                    return Promise.reject(error);
+                }
+
+                window.location.assign("/");
+            })
+            .catch(error => {
+                console.error('There was an error!', error);
+            });
+        }
     
     return(
         <div>
