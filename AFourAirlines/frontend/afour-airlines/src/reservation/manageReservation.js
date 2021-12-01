@@ -10,81 +10,111 @@ export default function ManageReservation(props){
     const { pnr } = useParams();
     console.log("pnr: " + pnr);
 
-    let reservationList = [];
+    let [reservationList, setReservationList] = useState([]);
     let noOfPass = 2;
-    //TODO: get reservation info, set no of pas
+    //TODO: get reservation info, set no of pass
 
-    reservationList = [
+    var token = "Bearer " + localStorage.getItem("token");
+        
+        fetch("http://localhost:8080/api/flights/get-reservations-by-pnr?pnr=" + pnr, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token
+            },
+            mode: 'cors'
+            })
+        .then(async response => {
+            const data = await response.json();
+
+            // check for error response
+            if (!response.ok) {
+                // get error message from body or default to response statusText
+                const error = (data && data.message) || response.statusText;
+                return Promise.reject(error);
+            }
+
+            setReservationList(data);
+            noOfPass = reservationList.length;           
+            
+            
+        })
+        .catch(error => {
+            //this.setState({ errorMessage: error.toString() });
+            console.error('There was an error!', error);
+        });
+
+    // reservationList = [
     
-        {
-            "number": 30,
-            "username": "esha12345",
-            "flight": {
-                "id": 1,
-                "name": "QR701",
-                "sourceAirport": "SFO",
-                "destinationAirport": "HYD",
-                "sourceTerminal": "12",
-                "destinationTerminal": "11",
-                "sourceGate": "1",
-                "destinationGate": "1",
-                "departureDate": "2021-12-19",
-                "arrivalDate": "2021-12-21",
-                "departureTime": "09:00:00",
-                "arrivalTime": "05:00:00",
-                "equipment": 777,
-                "basePrice": 900
-            },
-            "seat": {
-                "id": 35,
-                "number": "A35",
-                "airplane": 777,
-                "flightId": 123,
-                "reserved": true,
-                "price": 120
-            },
-            "price": 900,
-            "status": "scheduled",
-            "identificationNumber": "IK1234",
-            "firstName": "Esha",
-            "lastName": "sah",
-            "dateOfBirth": "1995-02-02"
-        },
-        {
-            "number": 31,
-            "username": "esha12345",
-            "flight": {
-                "id": 1,
-                "name": "QR701",
-                "sourceAirport": "SFO",
-                "destinationAirport": "HYD",
-                "sourceTerminal": "12",
-                "destinationTerminal": "11",
-                "sourceGate": "1",
-                "destinationGate": "1",
-                "departureDate": "2021-12-19",
-                "arrivalDate": "2021-12-21",
-                "departureTime": "09:00:00",
-                "arrivalTime": "05:00:00",
-                "equipment": 777,
-                "basePrice": 900
-            },
-            "seat": {
-                "id": 36,
-                "number": "A36",
-                "airplane": 777,
-                "flightId": 123,
-                "reserved": true,
-                "price": 160
-            },
-            "price": 900,
-            "status": "scheduled",
-            "identificationNumber": "IND123",
-            "firstName": "tuba",
-            "lastName": "ahmed",
-            "dateOfBirth": "1995-06-02"
-        }
-    ];
+    //     {
+    //         "number": 30,
+    //         "username": "esha12345",
+    //         "flight": {
+    //             "id": 1,
+    //             "name": "QR701",
+    //             "sourceAirport": "SFO",
+    //             "destinationAirport": "HYD",
+    //             "sourceTerminal": "12",
+    //             "destinationTerminal": "11",
+    //             "sourceGate": "1",
+    //             "destinationGate": "1",
+    //             "departureDate": "2021-12-19",
+    //             "arrivalDate": "2021-12-21",
+    //             "departureTime": "09:00:00",
+    //             "arrivalTime": "05:00:00",
+    //             "equipment": 777,
+    //             "basePrice": 900
+    //         },
+    //         "seat": {
+    //             "id": 35,
+    //             "number": "A35",
+    //             "airplane": 777,
+    //             "flightId": 123,
+    //             "reserved": true,
+    //             "price": 120
+    //         },
+    //         "price": 900,
+    //         "status": "scheduled",
+    //         "identificationNumber": "IK1234",
+    //         "firstName": "Esha",
+    //         "lastName": "sah",
+    //         "dateOfBirth": "1995-02-02"
+    //     },
+    //     {
+    //         "number": 31,
+    //         "username": "esha12345",
+    //         "flight": {
+    //             "id": 1,
+    //             "name": "QR701",
+    //             "sourceAirport": "SFO",
+    //             "destinationAirport": "HYD",
+    //             "sourceTerminal": "12",
+    //             "destinationTerminal": "11",
+    //             "sourceGate": "1",
+    //             "destinationGate": "1",
+    //             "departureDate": "2021-12-19",
+    //             "arrivalDate": "2021-12-21",
+    //             "departureTime": "09:00:00",
+    //             "arrivalTime": "05:00:00",
+    //             "equipment": 777,
+    //             "basePrice": 900
+    //         },
+    //         "seat": {
+    //             "id": 36,
+    //             "number": "A36",
+    //             "airplane": 777,
+    //             "flightId": 123,
+    //             "reserved": true,
+    //             "price": 160
+    //         },
+    //         "price": 900,
+    //         "status": "scheduled",
+    //         "identificationNumber": "IND123",
+    //         "firstName": "tuba",
+    //         "lastName": "ahmed",
+    //         "dateOfBirth": "1995-06-02"
+    //     }
+    // ];
 
     console.log(reservationList);
     
@@ -103,9 +133,8 @@ export default function ManageReservation(props){
 
     let [flightList, setFlightList] = useState([]);
     let [altFlight, setAltFlight] = useState({});
-    //JSON.parse(localStorage.getItem("flightList"))
 
-    let flightId = "";
+    // let flightId = "";
 
     let [availableSeats, setAvailableSetas] = useState([]);
     
@@ -114,6 +143,7 @@ export default function ManageReservation(props){
         let index = e.target.dataset.key;
         let seatId = e.target.value;
         reservationList[index].seat.id = seatId;
+        reservationList[index].flight.id = altFlight.id;
         console.log(reservationList[index]);
     }
     
@@ -148,7 +178,7 @@ export default function ManageReservation(props){
 
     const selectFlight = function (id) {
         console.log("flight selected " + id);
-        flightId = localStorage.setItem("flightId",id);
+        //flightId = localStorage.setItem("flightId",id);
         
 
         debugger;
@@ -183,7 +213,7 @@ export default function ManageReservation(props){
 
             setAvailableSetas(data);
             
-                setSeatSelect(true);
+            setSeatSelect(true);
             
             
         })
@@ -247,7 +277,12 @@ export default function ManageReservation(props){
 
     const handleCancel = () => {
         console.log("cancel");
+        alert('This reservation will be cancelled.');
 
+        for(var k = 0; k < noOfPass; k++){
+            reservationList[k].status = 'canceled'
+        }
+//TODO : api call
         var authToken = "Bearer " + localStorage.getItem('token');
 
             fetch("http://localhost:8080/api/reservations/create-reservation",{
@@ -268,6 +303,24 @@ export default function ManageReservation(props){
 
     const handleUpdate = () =>{
         console.log("update reservation")
+        //TODO : api call
+
+        var authToken = "Bearer " + localStorage.getItem('token');
+
+            fetch("http://localhost:8080/api/reservations/update-reservation?",{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': authToken
+                    },
+                    mode: 'cors'
+                })
+            .then(async response => {
+                window.location.assign("/");
+            })
+            .catch(error => {
+                console.error('There was an error!', error);
+            });
     }
 
     let [isShowLogin, setIsShowLogin] = useState(false);
@@ -360,7 +413,6 @@ export default function ManageReservation(props){
                                 {isSeatSelect && 
                                     <div>
                                         <FlightCard flightData={altFlight} cardLable="Alternate flight details:"/>
-                                        {/* <ReschedSeatSelect availableSeats={availableSeats} reservationList={reservationList}/> */}
                                         <div  className="x-l-font resched-pass-list">{isResched && getSeatSelect()}</div>
                                         <div>
                                             <Form.Group>
