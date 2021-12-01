@@ -3,6 +3,66 @@
 
 ## Abul Hasan Mohammed
 
+
+### Sprint 1 -
+- **What tasks did I work on / complete?**
+    Discussed on the architecture and technologies to use on the backend. Communicated various PROS/CONS of each technology and settled on SpringBoot with Maven
+- **What am I planning to work on next?**
+  I plan to create a SprinBoot started project with all the dependencies and health check api.
+- **What tasks are blocked waiting on another team member?**
+ None
+- **XP Core Value:**
+  Respect because we were taking constant input from the team for the architecture & technologies for the project as well as communicating my ideas
+  
+### Sprint 2 -
+- **What tasks did I work on / complete?**
+  SprinBoot started project with all the dependencies and health check api. Tested integration with AWS RDS and created a JAR to help the teammate to deploy to EBS and test it
+  **What am I planning to work on next?**
+    Next, I plan on creating all User Api's and basic beans and POJOS for all the other APIs
+- **What tasks are blocked waiting on another team member?**
+  None.
+- **XP Core Value:**
+  Simplicity because i worked on making backend architecture as simple as possible with only necessary additions.
+  
+### Sprint 3 -
+- **What tasks did I work on / complete?**
+  Created all the User apis and basic beans/POJOs for all other APIs. Tested the changes. KT to Tuba to help him continue with his changes
+- **What am I planning to work on next?**
+  Next, I am planning on implementing Springboot security with JWT token authentication
+- **What tasks are blocked waiting on another team member?**
+  None.
+- **XP Core Value:**
+  Communication because was constantly involved with my other backend programming partner
+
+### Sprint 4 -
+- **What tasks did I work on / complete?**
+  Implemented Spring Boot security for the project and tested end to end flow of the api
+- **What am I planning to work on next?**
+  Next, I plan on implementing role based authorization to the API's and also migrate RDS from one account to another along with SEAT Api's
+- **What tasks are blocked waiting on another team member?**
+  None.
+- **XP Core Value:**
+  Feedback, as I reached out to my teammates for their input on role based actions.
+
+### Sprint 5 -
+- **What tasks did I work on / complete?**
+   Implemented Role based authorization to the Apis. Migrated RDS. Implemented SEAT Api's
+- **What am I planning to work on next?**
+  I plan on testing end to end flows of User, Flight and Reservation APIs.
+- **What tasks are blocked waiting on another team member?**
+    None
+- **XP Core Value:**
+  Communication because was constantly communicating design and changes to the team members.
+
+### Sprint 6 -
+- **What tasks did I work on / complete?**
+  Tested End to End flow of the User, Flight and Reservation APIs. Made schema and entity changes due to some challenges.Refactoring code and adding loggers. Help UI team with integration challenges
+- **What am I planning to work on next?**
+- **What tasks are blocked waiting on another team member?**
+ None
+- **XP Core Value:**
+  Communication because have to constantly sync up with UI team for integration challenges and backend API specifications.
+
 ## Esha Shubham Sah
 ### Sprint 1: 
 - **What tasks did I work on / complete?** Created UI mock-up for login and sign-up pages.
