@@ -34,7 +34,7 @@ export default function App() {
         <Route path="/travel/help" exact render={(props) => <HelpPage/>}/>
         <Route path="/admin/home" exact render={(props) => <AdminHome/>}/>
         <Route path="/flights/reservation" exact render={(props) => <CreateReservation/>}/>
-        <Route path="/reservation/manage:id" exact render={(props) => <ManageReservation/>}/>
+        <Route path="/reservation/manage/:pnr" exact render={(props) => <ManageReservation/>}/>
         </Switch>
       </Router>
     </BasePage>

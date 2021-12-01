@@ -34,7 +34,7 @@ public class ReservationService {
         integer = new AtomicInteger(reservationRepository.getLastPNRNumber() + 1);
     }
 
-    public Optional<Reservation> getReservationById(Integer reservationId) {
+    public Optional<Reservation> getReservationById(String reservationId) {
         return reservationRepository.findById(reservationId);
     }
 
