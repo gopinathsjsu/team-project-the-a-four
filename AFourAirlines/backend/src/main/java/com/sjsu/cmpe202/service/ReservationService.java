@@ -89,4 +89,8 @@ public class ReservationService {
         }
         return status;
     }
+
+    public Optional<ArrayList<Reservation>> getReservationsByPnr(String pnr) {
+        return reservationRepository.getReservationsByPnr(pnr);
+    }
 }
