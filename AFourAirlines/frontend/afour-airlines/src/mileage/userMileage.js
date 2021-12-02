@@ -1,17 +1,15 @@
 import React from "react";
-import { useGetMileageData } from "../common/getUserData";
 import icon from "../images/icon.png";
 
 export default function UserMileage (props){
-    let userName = localStorage.getItem("userName");
 
-    let { userData } = useGetMileageData(userName);
+    let userData = JSON.parse(localStorage.getItem("userData"));
     
     return (
         <div>
             <h1 className="page-hearder">Mileage Details</h1>
-            <div >
-                <h2 className="page-hearder">Hello, { userData.first_name } !</h2>
+            <div>
+                <h2 className="page-hearder">Hello, { userData.firstName + " " + userData.lastName} !</h2>
                 <div className="container-fluid justify-content-center card-row">
                 <div className="row">
                     <div className="miles-banner">
@@ -25,7 +23,7 @@ export default function UserMileage (props){
                                 Reward number
                             </div>
                             <div className="reward-number">
-                                { userData.reward_number }
+                                { userData.mileage.id }
                             </div>
                         </div>
                         <div id="div-trip-count" className="miles-banner-components col-md-3">
@@ -33,7 +31,7 @@ export default function UserMileage (props){
                                 Number of trips
                             </div>
                             <div className="reward-number">
-                                { userData.number_of_trips }
+                                { userData.mileage.numberOfTrips ? userData.mileage.numberOfTrips : 0 }
                             </div>
                         </div>
                         <div id="div-miles" className="miles-banner-components col-md-3">
@@ -41,7 +39,7 @@ export default function UserMileage (props){
                                 Miles earned
                             </div>
                             <div className="reward-number">
-                                { userData.mileage_points }
+                                { userData.mileage.miles }
                             </div>
                         </div>
                     </div>

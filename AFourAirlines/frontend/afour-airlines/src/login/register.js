@@ -14,111 +14,148 @@ import "react-datepicker/dist/react-datepicker.css";
 import FormLabel from "react-bootstrap/esm/FormLabel";
 
 export default function Registration(){
-  Axios.defaults.withCredentials = true;
+  // Axios.defaults.withCredentials = true;
 
   // States for registration
-  const [username, setUsername] = useState('');
-  const [first_name, setFirstName] = useState('');
-  const [last_name, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [dob, setDate] = useState(new Date());
-  const [country, setCountry] = useState('');
-  const [contact, setContact] = useState('');
-  const [id_number, setIDNumber] = useState('');
-  const [enrollMileage, setEnrollMileage] = useState(false);
-  const [tncCheckbox, setTncCheckbox] = useState(false);
+  const defaultValues = {
+    username: "",
+    dateOfBirth: "",
+    password: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    street: "",
+    city: "",
+    zip_code: "",
+    state: "",
+    country: "",
+    identificationNumber: "",
+    phone: "",
+    tncCheckbox: false,
+    enrollMileage : false,
+  };
+
+  let [userData, setUserData] = useState(defaultValues);
+
+  let [enrollMileage, setEnrollMileage] = useState(false);
+  let [tncCheckbox, setTncCheckbox] = useState(false);
   const regex = RegExp(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/);
 
   // States for checking the errors
-  const [submitted, setSubmitted] = useState(false);
-  const [hasError, setError] = useState(false);
-  const [message, setMessage] = useState("");
-  const history = useHistory();
+  let [submitted, setSubmitted] = useState(false);
+  let [hasError, setError] = useState(false);
+  let [message, setMessage] = useState("");
   
   const [invalid, setInvalid] = useState({
     username: false,
-    dob: false,
+    dateOfBirth: false,
     password: false,
-    first_name: false,
-    last_name: false,
+    firstName: false,
+    lastName: false,
     email: false,
+    street: false,
+    city: false,
+    zip_code: false,
+    state: false,
     country: false,
-    id_number: false,
-    contact: false,
+    identificationNumber: false,
+    phone: false,
+    tncCheckbox: false,
   });
   
-
-  const validateFields = () => {
+  
+  const handleSubmit = (e) => {
     if (
-      username.trim() === " " ||
-      password.trim().length < 5 ||
-      first_name.trim() === "" ||
-      last_name.trim() === "" ||
-      country.trim() === "" ||
-      email.trim() === "" ||
-      dob.trim() === "" ||
-      contact.trim() === ""||
-      id_number.trim() === ""
+      userData.username.trim() === " " ||
+      userData.password.trim().length < 5 ||
+      userData.firstName.trim() === "" ||
+      userData.lastName.trim() === "" ||
+      userData.country.trim() === "" ||
+      userData.email.trim() === "" ||
+      userData.dateOfBirth.trim() === "" ||
+      userData.phone.trim() === ""||
+      userData.identificationNumber.trim() === ""
     ) {
       setError(true);
-      setMessage("Please fill all fields");
+      setMessage("Please fill all required fields");
     } else if (
-      email.includes(" ") ||
-      password.includes(" ") 
+      userData.email.includes(" ") ||
+      userData.password.includes(" ") 
     ) {
       setError(true);
       setMessage("Space character not allowed in email_id and/or password");
-    } else if ( username.trim().length > 15 ){
+    } else if ( userData.username.trim().length > 15 ){
       setError(true);
       setMessage("Username cannot be more that 15 characters");
     } else if(
-      dob.includes(" ")
+      userData.dateOfBirth.includes(" ")
     ) {
       setError(true);
       setMessage("Please select a valid date");
     } else if(!(tncCheckbox)) {
       setError(true);
       setMessage("Please accept the Terms, Conditions and Policies of our Airlines")
-    }
-  }
-
-
-  const handleSubmit = (e) => {
-      validateFields();
-
-      if(hasError){
-        //setMessage("Has error");
-      }
-      else{
+    } else{
+        setError(false);
         setMessage("Success!");
-        //register();
+
+        debugger;
+        var raw = JSON.stringify({
+          "username": userData.username,
+          "password": userData.password,
+          "firstName": userData.firstName,
+          "lastName": userData.lastName,
+          "dateOfBirth": userData.dateOfBirth,
+          "phone": userData.phone,
+          "email": userData.email,
+          "address": {
+              "street": userData.street,
+              "city": userData.city,
+              "country": userData.country,
+              "state": userData.state,
+              "zip": userData.zip_code
+          },
+          "identificationNumber": userData.identificationNumber,
+          "mileage": {
+                    "balancePoints":0,
+                    "miles": 0,
+          },
+          "role": "USER"
+        })
+
+        fetch("http://localhost:8080/api/users/register",{
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: raw,
+            mode: 'cors'
+        })
+        .then(async response => {
+          const resData = await response.json();
+
+          if(!response.ok){
+            const error = (resData && resData.message) || response.statusText;
+            return Promise.reject(error);
+          }
+
+          localStorage.setItem("userName", resData.username);
+          localStorage.setItem("password", userData.password);
+          localStorage.setItem("userData", JSON.stringify(resData));
+          window.location.assign("/");
+        })
+        .catch(error => {
+          console.error('There was an error!', error);
+        });
       }
   }
-
-  const register = () => {
-      Axios.post("http://localhost:3001/register", {
-        
-      })
-        .then((response) => {
-          setMessage(
-            'Your User ID is "' +
-              response.data.user_id +
-              '" Contact admin for approval'
-          );
-        })
-        .catch((error) => {
-          setMessage(error.response.data.err);
-        });
-  };
-
 
   return (
     <div>
       <FormGroup>
         <FormControl>
           <TextField
-          helperText={invalid.first_name ? "1-25 characters" : ""}
+          helperText={invalid.firstName ? "1-25 characters" : ""}
             id="register-first-name"
             label="First Name"
             type="text"
@@ -128,26 +165,26 @@ export default function Registration(){
                 e.target.value.length > 25 || e.target.value === ""
                   ? true
                   : false;
-              setInvalid({ ...invalid, first_name: validation });
-              setFirstName(e.target.value);
+              setInvalid({ ...invalid, firstName: validation });
+              setUserData({...userData, firstName: e.target.value});
             }}
           />
         </FormControl>
         <FormControl>
           <TextField
             required
-            helperText={invalid.last_name ? "1-25 characters" : ""}
+            helperText={invalid.lastName ? "1-25 characters" : ""}
             id="register-last-name"
             label="Last Name"
             type="text"
-            error={invalid.last_name}
+            error={invalid.lastName}
             onChange={(e) => {
               const validation =
                 e.target.value.length > 25 || e.target.value === ""
                   ? true
                   : false;
-              setInvalid({ ...invalid, last_name: validation });
-              setLastName(e.target.value);
+              setInvalid({ ...invalid, lastName: validation });
+              setUserData({...userData, lastName: e.target.value});
             }}
           />
         </FormControl>
@@ -166,7 +203,7 @@ export default function Registration(){
                   ? true
                   : false;
               setInvalid({ ...invalid, email: validation });
-              setEmail(e.target.value);
+              setUserData({...userData, email: e.target.value});
             }}
           />
         </FormControl>
@@ -183,7 +220,7 @@ export default function Registration(){
                   ? true
                   : false;
               setInvalid({ ...invalid, username: validation });
-              setUsername(e.target.value);
+              setUserData({...userData, username: e.target.value});
             }}
           />
         </FormControl>
@@ -203,13 +240,13 @@ export default function Registration(){
                   ? true
                   : false;
               setInvalid({ ...invalid, password: validation });
-              setPassword(e.target.value);
+              setUserData({...userData, password: e.target.value});
             }}
           />
         </FormControl>
         <FormControl>
           <Input
-            id="register-dob"
+            id="register-dateOfBirth"
             label="Date of Birth"
             type="date"
             required
@@ -221,8 +258,8 @@ export default function Registration(){
                 e.target.value === ""
                   ? true
                   : false;
-              setInvalid({ ...invalid, dob: validation});
-              setDate(e.target.value);
+              setInvalid({ ...invalid, dateOfBirth: validation});
+              setUserData({...userData, dateOfBirth: e.target.value});
             }}
           />
         </FormControl>
@@ -240,14 +277,82 @@ export default function Registration(){
                   ? true
                   : false;
               setInvalid({ ...invalid, country: validation });
-              setCountry(e.target.value );
+              setUserData({...userData, country: e.target.value});
+            }}
+          />
+        </FormControl>
+        <FormControl>
+          <TextField
+            helperText={invalid.street ? "1-45 characters" : ""}
+            id="register-street"
+            label="Address"
+            type="text"
+            error={invalid.street}
+            onChange={(e) => {
+              const validation =
+                e.target.value.length > 45 || e.target.value === ""
+                  ? true
+                  : false;
+              setInvalid({ ...invalid, street: validation });
+              setUserData({...userData, street: e.target.value});
+            }}
+          />
+        </FormControl>
+        <FormControl>
+          <TextField
+            helperText={invalid.city ? "1-25 characters" : ""}
+            id="register-city"
+            label="City"
+            type="text"
+            error={invalid.city}
+            onChange={(e) => {
+              const validation =
+                e.target.value.length > 25 || e.target.value === ""
+                  ? true
+                  : false;
+              setInvalid({ ...invalid, city: validation });
+              setUserData({...userData, city: e.target.value});
+            }}
+          />
+        </FormControl>
+        <FormControl>
+          <TextField
+            helperText={invalid.state ? "1-45 characters" : ""}
+            id="register-state"
+            label="State"
+            type="text"
+            error={invalid.state}
+            onChange={(e) => {
+              const validation =
+                e.target.value.length > 45 || e.target.value === ""
+                  ? true
+                  : false;
+              setInvalid({ ...invalid, state: validation });
+              setUserData({...userData, state: e.target.value});
+            }}
+          />
+        </FormControl>
+        <FormControl>
+          <TextField
+            helperText={invalid.zip_code ? "1-25 characters" : ""}
+            id="register-zip"
+            label="Zip code"
+            type="text"
+            error={invalid.zip_code}
+            onChange={(e) => {
+              const validation =
+                e.target.value.length > 10 || e.target.value === ""
+                  ? true
+                  : false;
+              setInvalid({ ...invalid, zip_code: validation });
+              setUserData({...userData, zip_code: e.target.value});
             }}
           />
         </FormControl>
         <FormControl>
           <TextField
             required
-            helperText={invalid.id_number ? "7 characters" : ""}
+            helperText={invalid.identificationNumber ? "7 characters" : ""}
             id="register-id-number"
             label="Passport Number"
             type="text"
@@ -257,44 +362,40 @@ export default function Registration(){
                 e.target.value.length > 7 || e.target.value === ""
                   ? true
                   : false;
-              setInvalid({ ...invalid, id_number: validation });
-              setIDNumber(e.target.value );
+              setInvalid({ ...invalid, identificationNumber: validation });
+              setUserData({...userData, identificationNumber: e.target.value});
             }}
           />
         </FormControl>
         <FormControl>
           <TextField
-            required
-            helperText={invalid.contact ? "10 characters" : ""}
-            id="register-contact"
+            helperText={invalid.phone ? "17 characters" : ""}
+            id="register-phone"
             label="Phone/Mobile Number"
             type="text"
-            error={invalid.contact}
+            error={invalid.phone}
             onChange={(e) => {
               const validation =
-                e.target.value.length > 10 || e.target.value === ""
+                e.target.value.length > 17 || e.target.value === ""
                   ? true
                   : false;
-              setInvalid({ ...invalid, contact: validation });
-              setContact(e.target.value );
+              setInvalid({ ...invalid, phone: validation });
+              setUserData({...userData, phone: e.target.value});
             }}
           />
         </FormControl>
-        <FormControl className="register-checkbox-div">
+        {/* <FormControl className="register-checkbox-div">
           <Checkbox id="register-enroll-checkbox" onChange={(e) => setEnrollMileage(e.currentTarget.checked)}></Checkbox>
           <FormLabel>Enroll in Mileage Program!</FormLabel>
-        </FormControl>
+        </FormControl> */}
         <FormControl className="register-checkbox-div">
           <Checkbox id="register-tnc-checkbox" onChange={(e) => setTncCheckbox(e.currentTarget.checked)}></Checkbox>
           <FormLabel>Read and agree to the Terms, Conditions and Policies of our Airlines!</FormLabel>
         </FormControl>
         <FormControl className="btn-group">
         <div className="">
-          <Button variant="contained" color="primary" className="pure-u-1-6 btn-spacing" onClick={handleSubmit}>
+          <Button variant="contained" color="primary" className="pure-u-1-6 btn-spacing" onClick={(e) => handleSubmit(e)}>
             Register
-          </Button>
-          <Button variant="contained" color="tertiary" className="pure-u-1-6 btn-spacing" onClick={history.goBack}>
-            Cancel
           </Button>
           </div>
         </FormControl>

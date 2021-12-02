@@ -15,6 +15,9 @@ import UserProfile from "./user/userProfile";
 import HelpPage from "./help/helpPage";
 import UserType from "./flights/userType";
 import AdminHome from "./admin/adminHome";
+import CreateReservation from "./reservation/createReservation";
+import UserTrips from "./user/userTrips";
+import ManageReservation from "./reservation/manageReservation";
 
 export default function App() {
 
@@ -24,13 +27,16 @@ export default function App() {
         <Switch>
         <Route path="/" exact render={(props) => <Search />} />
         <Route path="/mileageProgram" exact render={(props) => <MileageProgram />} />
-        <Route path ="/flightsList.js" exact render={(props) => <FlightsList/>} />
+        <Route path ="/flights/flightsList" exact render={(props) => <FlightsList/>} />
         <Route path ="/flightPayment" exact render={(props) => <FlightPayment/>} />
         <Route path ="/userType" exact render={(props) => <UserType/>} />
         <Route path="/newUser/Register" exact render={(props) => <NewRegistration/>}/>
         <Route path="/user/UserProfile/" exact render={(props) => <UserProfile/>}/>
         <Route path="/travel/help" exact render={(props) => <HelpPage/>}/>
         <Route path="/admin/home" exact render={(props) => <AdminHome/>}/>
+        <Route path="/user/userTrips" exact render={(props) => <UserTrips/>}/>
+        <Route path="/flights/reservation" exact render={(props) => <CreateReservation/>}/>
+        <Route path="/reservation/manage/:pnr" exact render={(props) => <ManageReservation/>}/>
         </Switch>
       </Router>
     </BasePage>

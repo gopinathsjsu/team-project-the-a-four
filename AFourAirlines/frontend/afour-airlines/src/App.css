@@ -284,18 +284,18 @@ tbody tr:hover {
 }
 
 .popup-close-button {
-  cursor: pointer;
-  position:absolute;
   top: 20px;
   right: 40px;
-  width: 10px;
-  height: 10px;
+  width: 40px;
+  height: 40px;
   padding: 0;
   z-index: 10;
+  margin-left: -30px;
+
 }
 
 .popup-close-button img {
-  width: 30px;
+  width: 40px;
 }
 
 
@@ -337,6 +337,7 @@ tbody tr:hover {
   padding-bottom: 3%;
   border-bottom: solid 0.25px;
   margin-top: 3%;
+  padding-top: 3%;
 }
 
 .card-image-container{
@@ -360,4 +361,115 @@ tbody tr:hover {
   border-bottom: solid 0.20px #a3a9ad;
   margin-top: 3%;
   text-align: center;
+}
+
+
+.pass-form {
+  display: flex;
+}
+
+.pass-form div {
+  padding: 0 3% 3% 1.5%;
+}
+
+.pass-form-popup-content{
+  display: "inline-block";
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.8;
+  color: #141414;
+  border-top: solid 0.25px #a3a9ad;
+  padding-top: 1.5%;
+}
+
+.not-allowed {
+  cursor: not-allowed;
+}
+
+.xx-l-font{
+  font-size: xx-large;
+}
+
+.x-l-font{
+  font-size: x-large;
+}
+.l-font{
+  font-size: large;
+}
+
+.card-form{
+  display: flex;
+}
+
+.card-form div{
+  padding: 0 2% 2% 1.5%;
+}
+
+.card-input{
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0.25rem;
+}
+
+.pure-table{
+    border: 1px solid #cbcbcb;
+    border-spacing: 0;
+    empty-cells: show;
+}
+.table{
+  margin-bottom: var(--ifm-spacing-vertical);
+    display: table;
+    width: auto;
+}
+.pure-table, table {
+  border-collapse: collapse;
+}
+
+.pure-table thead {
+  background-color: #e0e0e0;
+  color: #000;
+  text-align: left;
+  vertical-align: bottom;
+}
+
+.table tr {
+  background-color: var(--ifm-table-background);
+  border-top: var(--ifm-table-border-width) solid var(--ifm-table-border-color);
+}
+
+.table thead tr {
+  border-bottom: 2px solid var(--ifm-table-border-color);
+}
+
+.pure-table td, .pure-table th {
+  border-bottom-width: 0;
+  border-left: 1px solid #cbcbcb;
+  border-right-width: 0;
+  border-top-width: 0;
+  font-size: inherit;
+  margin: 0;
+  overflow: visible;
+  padding: 0.5em 1em;
+}
+
+.resched-header {
+    border-bottom: solid 0.25px;
+    padding-bottom: 2%;
+}
+
+
+.resched-pass-list div {
+  display: flex;
+  padding: 2% 2% 0% 0.5%;
 }

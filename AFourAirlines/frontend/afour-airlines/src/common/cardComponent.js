@@ -8,7 +8,7 @@ const Card = props => {
                 <img src={props.cardImg} alt={props.cardAltText} className="card-img-top"/>
             </div>
             <div className="card-body text-dark">
-                <Button variant="secondary" className="pure-u-1-6 btn-spacing" onClick={props.handleOnClick}>
+                <Button variant="secondary" className="pure-u-1-6 btn-spacing" value={props.cardTitle} onClick={(e) => props.handleOnClick(e.target.value)}>
                     {props.cardTitle}
                 </Button>
             </div>

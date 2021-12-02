@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Modal, Button, Form} from 'react-bootstrap';
-import { useGetUserData } from "../common/getUserData";
 
 export default function LoginModal({isShowLogin, setIsShowLogin, pathname}) {
 
@@ -9,9 +8,6 @@ export default function LoginModal({isShowLogin, setIsShowLogin, pathname}) {
   let [password, setPassword] = useState("");
 
   let [errorMsg, setErrorMsg] = useState("");
-  
-  let [loginStatus, setLoginStatus] = useState(false);
-  let [isUserAuthenticated, setUserAuthenticated] = useState(false);
 
   function validateForm(){
     if (username === "" || password === "") {
@@ -63,7 +59,7 @@ export default function LoginModal({isShowLogin, setIsShowLogin, pathname}) {
             console.log("userName: " + username);
             if(username){
                 var authToken = "Bearer " + data.token;
-                fetch("http://localhost:8080/api/users/get-user-details", {
+                fetch("http://localhost:8080/api/users/get-user-details?username=" + username, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',
@@ -80,9 +76,14 @@ export default function LoginModal({isShowLogin, setIsShowLogin, pathname}) {
                     return Promise.reject(error);
                 }
                 
-                localStorage.setItem("userData", resData.role);
+                localStorage.setItem("userData", JSON.stringify(resData));
                 console.log(resData.role);
-                // //window.location.assign(pathname);
+                if(resData.role === "ADMIN"){
+                  window.location.assign("/admin/home");
+                }
+                else{
+                  window.location.assign(pathname);
+                }                
 
                 })
                 .catch(error => {
@@ -102,21 +103,9 @@ export default function LoginModal({isShowLogin, setIsShowLogin, pathname}) {
 
     function handleSubmit(event){
         event.preventDefault();
-        //debugger;
         validateForm();
         try {
-          //await Auth.signIn(username, password);
-          //setUserAuthenticated(true);
           authenticate();
-          console.log("isUserAuthenticated - " + true);
-          //if(isUserAuthenticated){
-
-            
-            //localStorage.setItem("token", "abctoken");
-            setLoginStatus(true);
-            setIsShowLogin(false);
-            
-          //}
         } catch (e) {
           alert(e.message);
         }

@@ -3,7 +3,8 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 export const useGetUserData = (props) => {
-  const deafultUser = {
+  //const [userData, setUserData] = useState({});
+  const userData = {
     username : "eshasah",
     first_name :"Esha",
     last_name : "Sah",
@@ -13,47 +14,49 @@ export const useGetUserData = (props) => {
     auth_id : 0,
   };
 
-  var username = localStorage.getItem("userName");
-  debugger;
+  
 
-  useEffect(() => {
-    console.log("userName" + username);
-    if(username){
-      var token = localStorage.getItem("token");
+  // useEffect(() => {
+    
+    // console.log("userName" + username);
+    // if(username){
+    //   var token = localStorage.getItem("token");
       
-      var myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");
-        myHeaders.append("Authorization", "Bearer " + token);
+    //   var myHeaders = new Headers();
+    //     myHeaders.append("Content-Type", "application/json");
+    //     myHeaders.append("Authorization", "Bearer " + token);
 
-        var raw = JSON.stringify({
-        "username": localStorage.getItem("userName")
-        });
+    //     var raw = JSON.stringify({
+    //     "username": localStorage.getItem("userName")
+    //     });
 
-        var requestOptions = {
-        method: 'GET',
-        headers: myHeaders,
-        body: raw,
-        mode: 'cors'
-        };
+    //     var requestOptions = {
+    //     method: 'GET',
+    //     headers: myHeaders,
+    //     body: raw,
+    //     mode: 'cors'
+    //     };
 
-        fetch('http://localhost:8080/api/users/get-user-details?userName=' + username, requestOptions)
-        .then(async response => {
-          const resData = await response.json();
+    //     fetch('http://localhost:8080/api/users/get-user-details?userName=' + username, requestOptions)
+    //     .then(async response => {
+    //       const resData = await response.json();
 
-          if(!response.ok){
-            // get error message from body or default to response statusText
-            const error = (resData && resData.message) || response.statusText;
-            return Promise.reject(error);
-          }
-          localStorage.setItem("userData", resData)
+    //       if(!response.ok){
+    //         // get error message from body or default to response statusText
+    //         const error = (resData && resData.message) || response.statusText;
+    //         return Promise.reject(error);
+    //       }
+    //       localStorage.setItem("userData", resData)
 
-        })
-        .catch(error => {
-          //this.setState({ errorMessage: error.toString() });
-          console.error('There was an error!', error);
-      });
-    }
-  }, []);
+    //     })
+    //     .catch(error => {
+    //       //this.setState({ errorMessage: error.toString() });
+    //       console.error('There was an error!', error);
+    //   });
+    // }
+  //}, []);
+
+  return { userData };
 };
 
 

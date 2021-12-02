@@ -19,7 +19,7 @@ export default function NewRegistration(props){
             {isShowLogin && <LoginModal isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} pathname={pathname}/>}
             <div>
                 <div>
-                    <h1 style={{ textAlign: "center" }}>Get an account by filling few details.</h1>
+                    <h1 className="page-hearder">Get an account by filling few details.</h1>
                 </div>
                 <div className="popup-content">
                     <Registration></Registration>
