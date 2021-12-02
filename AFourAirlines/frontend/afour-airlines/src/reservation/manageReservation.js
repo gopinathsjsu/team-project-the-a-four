@@ -213,7 +213,7 @@ export default function ManageReservation(props){
         let rows = [];
         for (var i = 0; i < flightList.length; i++) {
             //TODO : enable this condition on dynamic
-            //if(flightList[i].id !== flightId){
+            if(flightList[i].id !== flightData.id){
                 let cell = []
                 cell.push(<td>{flightList[i].id}</td>);
                 cell.push(<td>{flightList[i].sourceAirport}</td>);
@@ -226,7 +226,7 @@ export default function ManageReservation(props){
                                     </Button>
                                 }</td>);
                 rows.push(<tr>{cell}</tr>)
-            //}
+            }
         }
         return rows;
     }
@@ -304,6 +304,10 @@ export default function ManageReservation(props){
         console.log(reservationList);
         //TODO : api call
 
+        const reservData = reservationList.map((item) => {
+            return item;
+        });
+
         var authToken = "Bearer " + localStorage.getItem('token');
 
             fetch("http://3.143.245.196:8080/api/reservations/update-reservation",{
@@ -312,7 +316,7 @@ export default function ManageReservation(props){
                         'Content-Type': 'application/json',
                         'Authorization': authToken
                     },
-                    body: JSON.stringify(reservationList),
+                    body: JSON.stringify(reservData),
                     mode: 'cors'
                 })
             .then(async response => {
