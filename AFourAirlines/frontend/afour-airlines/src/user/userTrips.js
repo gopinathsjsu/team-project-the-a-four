@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import NaviBar from "../common/navbar";
 import LoginModal from '../login/loginPopup';
 import { Button } from 'react-bootstrap';
@@ -6,6 +6,10 @@ import { Button } from 'react-bootstrap';
 export default function UserTrips(props) {
 
     let token = "Bearer " + localStorage.getItem('token');
+
+    useEffect(()=>{
+        fetchData();
+        }, []);
 
     let [isShowLogin, setIsShowLogin] = useState(false);
 
@@ -29,63 +33,68 @@ export default function UserTrips(props) {
     //tripsList = JSON.parse(localStorage.getItem("tripsList"));
 
     const getTripsMarkup = function () {
-        fetchData();
+        //fetchData();
         let tripsList = JSON.parse(localStorage.getItem("tripsList"));
         console.log("Trips" + tripsList);
         //<OverlayTrigger placement="top" overlay={renderTooltip}></OverlayTrigger>
         let rows = [];
-        for (var i = 0; i < tripsList.length; i++) {
-            let cell = []
-            console.log(tripsList);
-            if (tripsList[i].status === "scheduled") {
-                //TODO : is it pnr or id?
-                cell.push(<td>{tripsList[i].pnr}</td>);
-                cell.push(<td>{tripsList[i].flight.sourceAirport}</td>);
-                cell.push(<td>{tripsList[i].flight.destinationAirport}</td>);
-                cell.push(<td>{tripsList[i].flight.departureDate}</td>);
-                cell.push(<td>{tripsList[i].flight.arrivalDate}</td>);
-                cell.push(<td>{tripsList[i].flight.departureTime}</td>);
-                cell.push(<td>{tripsList[i].flight.arrivalTime}</td>);
-                cell.push(<td>{<Button variant="primary" className={token === null ? 'pure-u-1-6 btn-spacing not-allowed' : 'pure-u-1-6 btn-spacing'}
-                 onClick={handleClick(tripsList[i].pnr)} disabled={token === null} tool-tip="">
-                    Manage
-                </Button>
-                }</td>);
+        if (tripsList) {
+            for (var i = 0; i < tripsList.length; i++) {
+                let cell = []
+                console.log(tripsList);
+                if (tripsList[i].status === "scheduled") {
+                    //TODO : is it pnr or id?
+                    cell.push(<td>{tripsList[i].pnr}</td>);
+                    cell.push(<td>{tripsList[i].flight.sourceAirport}</td>);
+                    cell.push(<td>{tripsList[i].flight.destinationAirport}</td>);
+                    cell.push(<td>{tripsList[i].flight.departureDate}</td>);
+                    cell.push(<td>{tripsList[i].flight.arrivalDate}</td>);
+                    cell.push(<td>{tripsList[i].flight.departureTime}</td>);
+                    cell.push(<td>{tripsList[i].flight.arrivalTime}</td>);
+                    cell.push(<td>{<Button variant="primary" className={token === null ? 'pure-u-1-6 btn-spacing not-allowed' : 'pure-u-1-6 btn-spacing'}
+                     onClick={handleClick(tripsList[i].pnr)} disabled={token === null} tool-tip="">
+                        Manage
+                    </Button>
+                    }</td>);
+                }
+    
+                rows.push(<tr>{cell}</tr>)
             }
-
-            rows.push(<tr>{cell}</tr>)
         }
         return rows;
     }
 
 
     const getPTripsMarkup = function () {
-        fetchData();
+        //fetchData();
         let tripsList = JSON.parse(localStorage.getItem("tripsList"));
         console.log("Trips" + tripsList);
         //<OverlayTrigger placement="top" overlay={renderTooltip}></OverlayTrigger>
         let rows = [];
-        for (var i = 0; i < tripsList.length; i++) {
-            let cell = []
-            console.log(tripsList);
-
-            if (tripsList[i].status !== "scheduled") {
-                
-                //TODO : is it pnr or id?
-
-                cell.push(<td>{tripsList[i].pnr}</td>);
-                cell.push(<td>{tripsList[i].flight.sourceAirport}</td>);
-                cell.push(<td>{tripsList[i].flight.destinationAirport}</td>);
-                cell.push(<td>{tripsList[i].flight.departureDate}</td>);
-                cell.push(<td>{tripsList[i].flight.arrivalDate}</td>);
-                cell.push(<td>{tripsList[i].flight.departureTime}</td>);
-                cell.push(<td>{tripsList[i].flight.arrivalTime}</td>);
+        if (tripsList) {
+            for (var i = 0; i < tripsList.length; i++) {
+                let cell = []
+                console.log(tripsList);
+    
+                if (tripsList[i].status !== "scheduled") {
+                    
+                    //TODO : is it pnr or id?
+    
+                    cell.push(<td>{tripsList[i].pnr}</td>);
+                    cell.push(<td>{tripsList[i].flight.sourceAirport}</td>);
+                    cell.push(<td>{tripsList[i].flight.destinationAirport}</td>);
+                    cell.push(<td>{tripsList[i].flight.departureDate}</td>);
+                    cell.push(<td>{tripsList[i].flight.arrivalDate}</td>);
+                    cell.push(<td>{tripsList[i].flight.departureTime}</td>);
+                    cell.push(<td>{tripsList[i].flight.arrivalTime}</td>);
+                }
+    
+                rows.push(<tr>{cell}</tr>)
             }
-
-            rows.push(<tr>{cell}</tr>)
         }
         return rows;
     }
+
 
 
 

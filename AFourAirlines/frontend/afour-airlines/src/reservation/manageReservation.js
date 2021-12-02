@@ -111,7 +111,6 @@ export default function ManageReservation(props){
     let [availableSeats, setAvailableSetas] = useState([]);
     
     const handleSeatChange = function (e) {
-        debugger;
         console.log("seat selected for: index = "+ e.target.dataset.key + " seatid = " + e.target.value);
         let index = e.target.dataset.key;
         let seatId = e.target.value;
@@ -301,7 +300,6 @@ export default function ManageReservation(props){
     }
 
     const handleUpdate = () =>{
-        debugger;
         console.log("update reservation");
         console.log(reservationList);
         //TODO : api call
