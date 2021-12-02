@@ -97,13 +97,18 @@ function NavBar({ handleLoginClick, props}) {
                         </NavLink>
                     </li>
                     )}
-                    {(role !== "ADMIN") && userName && (
+                    {/* {(role !== "ADMIN") && userName && (
                     <li className="nav-menu-item">
                         <NavLink to="/user/UserProfile/" className="nav-menu-link" activeClassName="nav-menu-link-active">
                             My Profile
                         </NavLink>
                     </li>
-                    )}
+                    )} */}
+                    {userName && (role !== "ADMIN") && (<li className="nav-menu-item">
+                        <NavLink to="/user/userTrips" className="nav-menu-link" activeClassName="nav-menu-link-active">
+                            My Trips
+                        </NavLink>
+                    </li>)}
                     {!userName && (
                     <li className="nav-menu-item">
                         <div>
@@ -112,12 +117,6 @@ function NavBar({ handleLoginClick, props}) {
                         </div>
                     </li>
                     )}
-                    {(role !== "ADMIN") && (<li className="nav-menu-item">
-                        <NavLink to="/user/userTrips" className="nav-menu-link" activeClassName="nav-menu-link-active" isActive={checkActive}>
-                            My Trips
-                        </NavLink>
-                        {token === null && <p align="right">*Login to reserve</p>}
-                    </li>)}
                     {(role === "ADMIN") && (
                     <li className="nav-menu-item">
                         <NavLink to="/admin/home" className="nav-menu-link" activeClassName="nav-menu-link-active">

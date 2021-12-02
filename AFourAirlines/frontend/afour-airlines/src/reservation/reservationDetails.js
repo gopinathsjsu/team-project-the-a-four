@@ -3,38 +3,6 @@ import { useState } from 'react';
 
 export default function ReservationDetails(props){
 
-    // let defaultPass = {
-    //     passNumber: props.index,
-    //     firstName: "",
-    //     lastName: "",
-    //     identificationNumber: "",
-    //     seat: "",
-    //     dateOfBirth: ""
-    // }
-
-    // let [passData, setPassData] = useState(defaultPass);
-
-    // const addPass = (passData) => {
-    //     console.log("addPass called");
-    //     console.log(passData);
-    //     var i = 0;
-    //     for(i = 1; i < props.passList.length; i++){
-    //         if(props.passList[i].passNumber === passData.passNumber){
-    //             break;
-    //         }
-    //     }
-    //     if(i === props.passList.length){
-    //         props.passList.push(passData);
-    //     }
-    //     else{
-    //         props.passList[i].firstName = passData.firstName;
-    //         props.passList[i].lastName = passData.lastName;
-    //         props.passList[i].identificationNumber = passData.identificationNumber;
-    //         props.passList[i].seat = passData.seat;
-    //         props.passList[i].dateOfBirth = passData.dateOfBirth;
-    //     }
-
-    // }
     
     let [selectedValue, setSelectedVale] = useState(0);
     return(

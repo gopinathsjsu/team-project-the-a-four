@@ -6,7 +6,6 @@ import Alert from "@material-ui/lab/Alert";
 
 export default function ReservationCard(props){
 
-    let [hasBalance, setHasBalance] = useState(false);
     let [isUseMiles, setUseMiles] = useState(false);
     let [message,setMessage] = useState("");
     function renderPassengerForm(){
@@ -63,15 +62,3 @@ return(
 );
 
 }
-
-
-/*
-passList = {
-    passport: {
-        name: 
-        seat:
-    }
-}
-
-passList['passportNumber']
-*/

@@ -6,14 +6,14 @@ export default function FlightCard(props){
         return (
             <div className="baggage-policy-container">
                 <div>
-                    <h2>Flight detials:</h2>
+                    <h2>{props.cardLable}</h2>
                 </div>
                 <div >
                     <Form className="form pass-form">
                         <Form.Group className="xx-l-font">
                             <Form.Label>{props.flightData.sourceAirport}</Form.Label>
                         </Form.Group>
-                        <Form.Group>
+                        <Form.Group className="popup-close-button">
                             <img src={planeIcon} alt="plane-icon"/>
                         </Form.Group>
                         <Form.Group className="xx-l-font">
@@ -23,14 +23,11 @@ export default function FlightCard(props){
                             <Form.Label>{props.flightData.departureDate}</Form.Label>
                         </Form.Group>
                         <Form.Group>
-                            <Form.Label>{props.flightData.arrivalDate}</Form.Label>
+                            <Form.Label>{props.flightData.departureTime}</Form.Label>
                         </Form.Group>
-                        <Form.Group>
-                            <Form.Label>{props.flightData.noOfPass}</Form.Label>
-                        </Form.Group>
-                        <Form.Group className="xx-l-font">
+                        {props.totalPrices && <Form.Group className="xx-l-font">
                             <Form.Label>${props.totalPrice}</Form.Label>
-                        </Form.Group>
+                        </Form.Group>}
                     </Form>
                 </div>
             </div>

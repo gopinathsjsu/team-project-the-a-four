@@ -39,7 +39,7 @@ function AdminOptions(props) {
                         <div className="col-md-4">
                             <Card cardTitle="Flights" cardImg={flightImg} cardAltText="Flight Icon" handleOnClick={optionOnClick}/>
                         </div> */}
-                        <div className="col-md-4">
+                        <div className="col-md-12">
                             <Card cardTitle="Reservations" cardImg={rsrvImg} cardAltText="Reservation Icon" handleOnClick={optionOnClick}/>
                         </div>
                     </div>

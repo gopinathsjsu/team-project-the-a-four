@@ -13,9 +13,10 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class Reservation {
 
-    @Id
+    //@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer number;
+    @Id
     @Column(name = "pnr")
     private String pnr;
     @Column(name = "username")

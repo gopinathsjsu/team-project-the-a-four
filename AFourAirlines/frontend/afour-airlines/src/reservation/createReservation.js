@@ -26,12 +26,14 @@ export default function CreateReservation(props){
     function renderSeatList(){
         var seatList = [];
         seatList.push(<option key="0" value="0">Select seat</option>);
-        for(var i = 0; i < availableSeats.length; i++){
-            seatList.push(<option key={availableSeats[i].id} value={availableSeats[i].id}>{availableSeats[i].number}</option>);
+        if(availableSeats !== null){
+            for(var i = 0; i < availableSeats.length; i++){
+                seatList.push(<option key={availableSeats[i].id} value={availableSeats[i].id}>{availableSeats[i].number}</option>);
+            }
         }
-        return seatList;
-    }
-
+            return seatList;
+        }
+        
     var seatListElements = renderSeatList()
     
     var noOfPass = localStorage.getItem("noOfPass") ? localStorage.getItem("noOfPass") : 1;
@@ -57,15 +59,20 @@ export default function CreateReservation(props){
 
     let flightData = {};
     let flightId = localStorage.getItem("flightId");
-    var flightList = JSON.parse(localStorage.getItem("flightList"));
+    let [flightList, setFlightList] = useState([]);
+
+    setFlightList(JSON.parse(localStorage.getItem("flightList")));
     var totalPrice = 0;
         
-        for(var i = 0; i < flightList.length; i++){
-            console.log(flightList[i]);
-            if(flightList[i].id === parseInt(flightId)){
-                console.log("here");
-                flightData = flightList[i];
-                totalPrice = flightList[i].basePrice*(1 + tax/100);
+        // for(var i = 0; i < flightList.length; i++)
+        if(flightList !== null){
+            for(var i = 0; i < flightList.length; i++){
+                console.log(flightList[i]);
+                if(flightList[i].id === parseInt(flightId)){
+                    console.log("here");
+                    flightData = flightList[i];
+                    totalPrice = flightList[i].basePrice*(1 + tax/100) + noOfPass*30;
+                }
             }
         }
 
@@ -77,7 +84,7 @@ export default function CreateReservation(props){
         const handleCreate = () => {
             console.log(JSON.stringify(passList));
             debugger;
-            var finalPrice = totalPrice + noOfPass*30;
+            var finalPrice = totalPrice;
     
             let bookBody = []
             var tempDetails = {};
@@ -137,7 +144,7 @@ export default function CreateReservation(props){
             <NavBar handleLoginClick={handleLoginClicked}></NavBar>
             {isShowLogin && <LoginModal isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} pathname={pathname}/>}
             <div className="help-page">
-                <FlightCard flightData={flightData} totalPrice={totalPrice}/>
+                <FlightCard flightData={flightData} totalPrice={totalPrice} cardLable="Flight details:"/>
                 <ReservationCard handleCreate={handleCreate} totalPrice={totalPrice} useMilesOption={useMilesOption} isUseMiles={isUseMiles}
                     userData={userData} renderSeatList={seatListElements} noOfPass={noOfPass} passList={passList} mileagePoints={mileagePoints}
                     setPassList={setPassList}/>

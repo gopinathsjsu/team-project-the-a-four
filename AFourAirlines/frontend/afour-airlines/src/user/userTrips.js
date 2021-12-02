@@ -13,9 +13,11 @@ export default function UserTrips(props) {
         setIsShowLogin(!isShowLogin);
     }
 
-    const handleClick = (id) => {
+    const handleClick = (pnr) => {
         return function (){
-            window.location.assign("/reservation/manage?pnr=" + id);
+
+            window.location.assign("/reservation/manage/" + pnr);
+
         }
         
     }
@@ -36,7 +38,8 @@ export default function UserTrips(props) {
             let cell = []
             console.log(tripsList);
             if (tripsList[i].status === "scheduled") {
-                cell.push(<td>{tripsList[i].flight.pnr}</td>);
+                //TODO : is it pnr or id?
+                cell.push(<td>{tripsList[i].pnr}</td>);
                 cell.push(<td>{tripsList[i].flight.sourceAirport}</td>);
                 cell.push(<td>{tripsList[i].flight.destinationAirport}</td>);
                 cell.push(<td>{tripsList[i].flight.departureDate}</td>);
@@ -48,16 +51,6 @@ export default function UserTrips(props) {
                     Manage
                 </Button>
                 }</td>);
-            }
-            else {
-                cell.push(<td></td>);
-                cell.push(<td></td>);
-                cell.push(<td></td>);
-                cell.push(<td></td>);
-                cell.push(<td></td>);
-                cell.push(<td></td>);
-                cell.push(<td></td>);
-                cell.push(<td></td>);
             }
 
             rows.push(<tr>{cell}</tr>)
@@ -75,17 +68,12 @@ export default function UserTrips(props) {
         for (var i = 0; i < tripsList.length; i++) {
             let cell = []
             console.log(tripsList);
-            if (tripsList[i].status === "scheduled") {
-                cell.push(<td></td>);
-                cell.push(<td></td>);
-                cell.push(<td></td>);
-                cell.push(<td></td>);
-                cell.push(<td></td>);
-                cell.push(<td></td>);
-                cell.push(<td></td>);
-            }
-            else {
-                cell.push(<td>{tripsList[i].flight.pnr}</td>);
+
+            if (tripsList[i].status !== "scheduled") {
+                
+                //TODO : is it pnr or id?
+
+                cell.push(<td>{tripsList[i].pnr}</td>);
                 cell.push(<td>{tripsList[i].flight.sourceAirport}</td>);
                 cell.push(<td>{tripsList[i].flight.destinationAirport}</td>);
                 cell.push(<td>{tripsList[i].flight.departureDate}</td>);

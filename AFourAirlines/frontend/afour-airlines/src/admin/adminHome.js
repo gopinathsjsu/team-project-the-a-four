@@ -71,6 +71,7 @@ export default function AdminHome(){
             case "Reservations":
                 console.log("reservation selected: " + entityId)
                 setIsReservation(true);
+                window.location.assign("/reservation/manage/" + entityId);
                 break;
 
             default:

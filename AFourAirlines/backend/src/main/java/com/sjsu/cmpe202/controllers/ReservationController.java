@@ -1,5 +1,6 @@
 package com.sjsu.cmpe202.controllers;
 
+import com.sjsu.cmpe202.models.Flight;
 import com.sjsu.cmpe202.models.Reservation;
 import com.sjsu.cmpe202.service.ReservationService;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +25,7 @@ public class ReservationController {
     ReservationService reservationService;
 
     @GetMapping("/get-reservation-by-id")
-    public ResponseEntity<?> getReservationById(@RequestParam Integer reservationId) throws Exception {
+    public ResponseEntity<?> getReservationById(@RequestParam String reservationId) throws Exception {
         log.info("Entering getReservationById Api");
         Optional<Reservation> reservation = null;
         try {
@@ -36,6 +37,21 @@ public class ReservationController {
             log.info("Exiting getReservationById Api");
         }
         return ResponseEntity.ok(reservation);
+    }
+
+    @GetMapping("/get-reservations-by-pnr")
+    public ResponseEntity<?> getReservationsByPnr(@RequestParam String pnr) throws Exception {
+        log.info("Entering getReservationByPnr Api");
+        Optional<ArrayList<Reservation>> reservations = null;
+        try {
+            reservations = reservationService.getReservationsByPnr(pnr);
+        } catch (Exception e) {
+            log.error("Error occured in getReservationById :{}", e);
+            return ResponseEntity.status(400).body(e.getMessage());
+        } finally {
+            log.info("Exiting getReservationByPnr Api");
+        }
+        return ResponseEntity.ok(reservations);
     }
 
     @GetMapping("/get-reservations-for-user")
