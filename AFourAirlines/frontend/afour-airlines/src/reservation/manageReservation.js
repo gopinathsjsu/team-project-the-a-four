@@ -1,5 +1,5 @@
 import FlightCard from "../flights/flightCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
 import NavBar from "../common/navbar";
@@ -10,13 +10,54 @@ export default function ManageReservation(props){
     const { pnr } = useParams();
     console.log("pnr: " + pnr);
 
-    let [reservationList, setReservationList] = useState([]);
-    let noOfPass = 2;
+    let defaultReservation = [
+        {
+            "number": 0,
+            "username": "",
+            "flight": {
+                "id": 0,
+                "name": "",
+                "sourceAirport": "",
+                "destinationAirport": "",
+                "sourceTerminal": "",
+                "destinationTerminal": "",
+                "sourceGate": "",
+                "destinationGate": "",
+                "departureDate": "",
+                "arrivalDate": "",
+                "departureTime": "",
+                "arrivalTime": "",
+                "equipment": 777,
+                "basePrice": 900
+            },
+            "seat": {
+                "id": 0,
+                "number": "A0",
+                "airplane": 777,
+                "flightId": 123,
+                "reserved": true,
+                "price": 120
+            },
+            "price": 900,
+            "status": "scheduled",
+            "identificationNumber": "",
+            "firstName": "",
+            "lastName": "",
+            "dateOfBirth": ""
+        }
+    ];
+
+
+    let [reservationList, setReservationList] = useState(defaultReservation);
+    let [noOfPass, setNoOfPass] = useState(1);
     //TODO: get reservation info, set no of pass
 
+    const fetchData = () =>{
+
+    
     var token = "Bearer " + localStorage.getItem("token");
         
-        fetch("http://localhost:8080/api/flights/get-reservations-by-pnr?pnr=" + pnr, {
+        fetch("http://localhost:8080/api/reservations/get-reservations-by-pnr?pnr=" + pnr, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -35,7 +76,7 @@ export default function ManageReservation(props){
             }
 
             setReservationList(data);
-            noOfPass = reservationList.length;           
+            setNoOfPass = data.length;           
             
             
         })
@@ -43,88 +84,19 @@ export default function ManageReservation(props){
             //this.setState({ errorMessage: error.toString() });
             console.error('There was an error!', error);
         });
+    }
 
-    // reservationList = [
-    
-    //     {
-    //         "number": 30,
-    //         "username": "esha12345",
-    //         "flight": {
-    //             "id": 1,
-    //             "name": "QR701",
-    //             "sourceAirport": "SFO",
-    //             "destinationAirport": "HYD",
-    //             "sourceTerminal": "12",
-    //             "destinationTerminal": "11",
-    //             "sourceGate": "1",
-    //             "destinationGate": "1",
-    //             "departureDate": "2021-12-19",
-    //             "arrivalDate": "2021-12-21",
-    //             "departureTime": "09:00:00",
-    //             "arrivalTime": "05:00:00",
-    //             "equipment": 777,
-    //             "basePrice": 900
-    //         },
-    //         "seat": {
-    //             "id": 35,
-    //             "number": "A35",
-    //             "airplane": 777,
-    //             "flightId": 123,
-    //             "reserved": true,
-    //             "price": 120
-    //         },
-    //         "price": 900,
-    //         "status": "scheduled",
-    //         "identificationNumber": "IK1234",
-    //         "firstName": "Esha",
-    //         "lastName": "sah",
-    //         "dateOfBirth": "1995-02-02"
-    //     },
-    //     {
-    //         "number": 31,
-    //         "username": "esha12345",
-    //         "flight": {
-    //             "id": 1,
-    //             "name": "QR701",
-    //             "sourceAirport": "SFO",
-    //             "destinationAirport": "HYD",
-    //             "sourceTerminal": "12",
-    //             "destinationTerminal": "11",
-    //             "sourceGate": "1",
-    //             "destinationGate": "1",
-    //             "departureDate": "2021-12-19",
-    //             "arrivalDate": "2021-12-21",
-    //             "departureTime": "09:00:00",
-    //             "arrivalTime": "05:00:00",
-    //             "equipment": 777,
-    //             "basePrice": 900
-    //         },
-    //         "seat": {
-    //             "id": 36,
-    //             "number": "A36",
-    //             "airplane": 777,
-    //             "flightId": 123,
-    //             "reserved": true,
-    //             "price": 160
-    //         },
-    //         "price": 900,
-    //         "status": "scheduled",
-    //         "identificationNumber": "IND123",
-    //         "firstName": "tuba",
-    //         "lastName": "ahmed",
-    //         "dateOfBirth": "1995-06-02"
-    //     }
-    // ];
+    //fetchData();
+    useEffect(()=>{
+
+        fetchData();
+        
+        }, [])
+        
 
     console.log(reservationList);
     
-    let flightData = {
-        sourceAirport: reservationList[0].flight.sourceAirport,
-        destinationAirport: reservationList[0].flight.destinationAirport,
-        departureDate: reservationList[0].flight.departureDate,
-        departureTime: reservationList[0].flight.departureTime,
-        arrivalDate: reservationList[0].flight.arrivalDate
-    }
+    let flightData = reservationList[0].flight;
 
     console.log(flightData);
 
@@ -139,11 +111,26 @@ export default function ManageReservation(props){
     let [availableSeats, setAvailableSetas] = useState([]);
     
     const handleSeatChange = function (e) {
+        debugger;
         console.log("seat selected for: index = "+ e.target.dataset.key + " seatid = " + e.target.value);
         let index = e.target.dataset.key;
         let seatId = e.target.value;
-        reservationList[index].seat.id = seatId;
-        reservationList[index].flight.id = altFlight.id;
+
+        for(var m = 0; m < availableSeats.length; m++){
+            if(availableSeats[m].id === parseInt(seatId)){
+                var tempSeat = availableSeats[m];
+                setReservationList((old) => {
+                    old[index] = { ...old[index], seat: tempSeat};
+                    return old;
+                  });
+                break;
+            }
+        }
+
+        setReservationList((old) => {
+            old[index] = { ...old[index], flight: altFlight};
+            return old;
+          });
         console.log(reservationList[index]);
     }
     
@@ -278,23 +265,37 @@ export default function ManageReservation(props){
     const handleCancel = () => {
         console.log("cancel");
         alert('This reservation will be cancelled.');
+        debugger;
 
-        for(var k = 0; k < noOfPass; k++){
-            reservationList[k].status = 'canceled'
-        }
+        const datas = reservationList.map((item) => {
+            item = { ...item, "status": "canceled" };
+            return item;
+        });
+
+
 //TODO : api call
         var authToken = "Bearer " + localStorage.getItem('token');
 
-            fetch("http://localhost:8080/api/reservations/create-reservation",{
-                    method: 'POST',
+            fetch("http://localhost:8080/api/reservations/update-reservation",{
+                    method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': authToken
                     },
+                    body: JSON.stringify(datas),
                     mode: 'cors'
                 })
             .then(async response => {
-                window.location.assign("/");
+                var role = "USER";
+                if(localStorage.getItem("userData")){
+                    role = JSON.parse(localStorage.getItem("userData")).role
+                }
+                if(role === "ADMIN"){
+                    window.location.assign("/admin/home");
+                  }
+                  else{
+                    window.location.assign("/user/userTrips");
+                  }
             })
             .catch(error => {
                 console.error('There was an error!', error);
@@ -302,26 +303,38 @@ export default function ManageReservation(props){
     }
 
     const handleUpdate = () =>{
-        console.log("update reservation")
+        debugger;
+        console.log("update reservation");
+        console.log(reservationList);
         //TODO : api call
 
         var authToken = "Bearer " + localStorage.getItem('token');
 
-            fetch("http://localhost:8080/api/reservations/update-reservation?",{
-                    method: 'POST',
+            fetch("http://localhost:8080/api/reservations/update-reservation",{
+                    method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': authToken
                     },
+                    body: JSON.stringify(reservationList),
                     mode: 'cors'
                 })
             .then(async response => {
-                window.location.assign("/");
+                var role = localStorage.getItem("role");
+
+                if(role === "ADMIN"){
+                    window.location.assign("/admin/home");
+                  }
+                  else{
+                    window.location.assign("/user/userTrips");
+                  }
+                
             })
             .catch(error => {
                 console.error('There was an error!', error);
             });
     }
+
 
     let [isShowLogin, setIsShowLogin] = useState(false);
 
@@ -351,7 +364,8 @@ export default function ManageReservation(props){
                                     </tr>
                                 </thead>
                                 <tbody className="l-font">
-                                {reservationList.map(res =>
+                                {
+                                reservationList.map(res =>
                                 <tr key={res.identificationNumber} data-key={res.identificationNumber}>
                                 <td>{res.firstName} {res.lastName}</td>
                                 <td>{res.seat.number}</td>
