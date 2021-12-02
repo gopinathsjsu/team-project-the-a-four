@@ -286,10 +286,8 @@ export default function ManageReservation(props){
                     mode: 'cors'
                 })
             .then(async response => {
-                var role = "USER";
-                if(localStorage.getItem("userData")){
-                    role = JSON.parse(localStorage.getItem("userData")).role
-                }
+                var role = localStorage.getItem("role");
+
                 if(role === "ADMIN"){
                     window.location.assign("/admin/home");
                   }
