@@ -19,11 +19,14 @@ export default function MileageProgram (props){
     return(
         <div>
             <NaviBar props={username} handleLoginClick={handleLoginClicked}></NaviBar>
-            {isShowLogin && <LoginModal isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} pathname={pathname}/>}
-            {!username  && 
+            {isShowLogin && <LoginModal isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} pathname={pathname} />}
+            {!username &&
                 <GuestMileage></GuestMileage>}
             {username &&
-                <UserMileage></UserMileage>
+                <div>
+                    <UserMileage></UserMileage>
+                    <GuestMileage></GuestMileage>
+                </div>
             }
         </div>
         );
