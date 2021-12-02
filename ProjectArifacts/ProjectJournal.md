@@ -101,11 +101,66 @@
 - **XP Core Value:** Communication
 
 ## Mohammed Tuba Ahmed
-### Sprint 1 - 
-- What tasks did I work on / complete?
-- What am I planning to work on next?
-- What tasks are blocked waiting on another team member?
-- XP Core Value:
+
+### Sprint 1 -
+- **What tasks did I work on / complete?**
+  Worked with Hasan on evaluating various technologies for backend and decided on Java Spring Application.
+- **What am I planning to work on next?**
+  Basic table structure using RDS on AWS.
+- **What tasks are blocked waiting on another team member?**
+  N/A
+- **XP Core Value:**
+  Communication: We discussed all the requirements in detail and there was clear communication on the module distribution.
+  
+### Sprint 2 -
+- **What tasks did I work on / complete?**
+  I worked on creating a basic entity structure on Relational DB service (AWS Service)
+  **What am I planning to work on next?**
+  Will be working with Hasan to get basic CRUD APIs for User entity in place.
+- **What tasks are blocked waiting on another team member?**
+  None.
+- **XP Core Value:**
+  Simplicity and Communication: Worked to de-clutter initial DB design and communicated with team members regarding the same.
+  
+### Sprint 3 -
+- **What tasks did I work on / complete?**
+  Worked with Hasan to get an understanding of the Spring framework and backend code changes. Contributed code changes to the '/api/user' API.
+- **What am I planning to work on next?**
+  Will be working on creating CRUD APIs for three other entities.
+- **What tasks are blocked waiting on another team member?**
+  None.
+- **XP Core Value:**
+  Respect: I think the team displayed a great deal of respect to each other's knowledge and there were a couple of smooth Knowledge transfer sessions.
+
+### Sprint 4 -
+- **What tasks did I work on / complete?**
+  Implemented APIs for the Flight and Reservation entities (FlightController and ReservationController).
+- **What am I planning to work on next?**
+  I'll be finishing up on other API requests that are needed after discussion with Esha and Rushi.
+- **What tasks are blocked waiting on another team member?**
+  None.
+- **XP Core Value:**
+  Simplicity: Only essential APIs that were needed were added. There is constant input from front-end team regarding APIs that are needed.
+
+### Sprint 5 -
+- **What tasks did I work on / complete?**
+  Wrapped up the required APIs and deployed on Elastic Beanstalk (Another AWS Service)
+- **What am I planning to work on next?**
+  I'll be working in tandem with Hasan for the Backend API testing and also with Esha for integrating with the UI.
+- **What tasks are blocked waiting on another team member?**
+    None
+- **XP Core Value:**
+  Communication: I think the team demonstrated clear and candid communication to clear all doubts and implement any design changes if ready.
+
+### Sprint 6 -
+- **What tasks did I work on / complete?**
+  Worked with the front-end team (Esha and Rushi) to integrate the backend changes. Also, there was some help needed on the UI side (Mileage page) that I contributed to. There were some blockers that I removed regarding usage of 'fetch' API.
+- **What am I planning to work on next?**
+  I'll continue to work with Esha to resolve further issues till the demo day.
+- **What tasks are blocked waiting on another team member?**
+  None
+- **XP Core Value:**
+  Feedback: There was constant feedback from team members on what can be done better in terms of integration and testing.
 
 ## Rushi Sharma
 ### Sprint 1 -
