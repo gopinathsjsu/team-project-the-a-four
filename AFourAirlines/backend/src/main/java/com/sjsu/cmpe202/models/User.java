@@ -33,7 +33,6 @@ public class User {
     tinyint
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(length = 15)
     private String username;
     @Column(name = "password")
