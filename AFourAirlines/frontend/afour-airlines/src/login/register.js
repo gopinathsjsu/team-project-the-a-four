@@ -123,7 +123,7 @@ export default function Registration(){
           "role": "USER"
         })
 
-        fetch("http://localhost:8080/api/users/register",{
+        fetch("http://3.143.245.196:8080/api/users/register",{
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

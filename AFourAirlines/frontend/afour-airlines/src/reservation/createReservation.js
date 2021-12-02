@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import NavBar from "../common/navbar";
+import NaviBar from "../common/navbar";
 import LoginModal from "../login/loginPopup";
 import ReservationCard from "./reservationCard";
 import FlightCard from "../flights/flightCard";
@@ -115,7 +115,7 @@ export default function CreateReservation(props){
             
             var authToken = "Bearer " + localStorage.getItem('token');
 
-            fetch("http://localhost:8080/api/reservations/create-reservation",{
+            fetch("http://3.143.245.196:8080/api/reservations/create-reservation",{
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -141,7 +141,7 @@ export default function CreateReservation(props){
     
     return(
         <div>
-            <NavBar handleLoginClick={handleLoginClicked}></NavBar>
+            <NaviBar handleLoginClick={handleLoginClicked}></NaviBar>
             {isShowLogin && <LoginModal isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} pathname={pathname}/>}
             <div className="help-page">
                 <FlightCard flightData={flightData} totalPrice={totalPrice} cardLable="Flight details:"/>

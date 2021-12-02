@@ -67,6 +67,13 @@
   width:100%;
 }
 
+.search-flight-form-container {
+  display: flex;
+  column-gap: 20px;
+  row-gap: 20px;
+  padding: 10%;
+  justify-content: space-between;
+}
 
 .user-details{
   text-align: center;
@@ -104,7 +111,7 @@ tbody tr:hover {
   height: 85px;
   display: flex;
   justify-content: space-between;
-  kpadding: 0.2rem calc((100vw - 1000px) / 2);
+  padding: 0.2rem calc((100vw - 1000px) / 2);
   z-index: 12;
 }
   
@@ -127,7 +134,7 @@ tbody tr:hover {
     display: none;
   }
 }
-  
+
 .nav-menu-link{
   border-radius: 4px;
   padding: 10px 22px;

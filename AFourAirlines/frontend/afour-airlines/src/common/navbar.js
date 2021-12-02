@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-
-function NavBar({ handleLoginClick, props}) { 
+import { Navbar, Container, Nav, Button } from "react-bootstrap";
+function NaviBar({ handleLoginClick, props}) { 
         
     let userName = localStorage.getItem("userName");
     let token = localStorage.getItem("token");
@@ -26,7 +26,7 @@ function NavBar({ handleLoginClick, props}) {
         mode: 'cors'
         };
 
-        fetch("http://localhost:8080/api/users/authenticate", requestOptions)
+        fetch("http://3.143.245.196:8080/api/users/authenticate", requestOptions)
         .then(async response => {
             const data = await response.json();
 
@@ -51,13 +51,8 @@ function NavBar({ handleLoginClick, props}) {
     if(localStorage.getItem("userData")){
         role = JSON.parse(localStorage.getItem("userData")).role
     }
-    //let role = JSON.parse(localStorage.getItem("userData")).role;
 
     const handleLogout = () => {
-        // localStorage.setItem("userName", "");
-        // localStorage.setItem("token", "");
-        // localStorage.setItem("userData", "");
-        // localStorage.setItem("displayData", "");
         window.localStorage.clear();
         window.location.assign("/");
     }
@@ -71,7 +66,24 @@ function NavBar({ handleLoginClick, props}) {
     
 
         return(
-            <div className="nav-horizontal" style={{display:"flex"}}>
+        <div>
+  <Navbar expand="lg" bg="dark" variant="dark">
+    <Container fluid>
+    <Navbar.Brand href="#home">A-4 Airlines</Navbar.Brand>
+    <Nav className="me-auto">
+        {(role !== "ADMIN") && <Nav.Link href="/">Search Flights</Nav.Link>}
+        {(role !== "ADMIN") && <Nav.Link href="/mileageProgram">Mileage Program</Nav.Link>}
+        {(role !== "ADMIN") && <Nav.Link href="/travel/help">Help</Nav.Link>}
+        {!userName && <Nav.Link href="/newUser/Register">Register</Nav.Link>}
+        {userName && (role !== "ADMIN") && <Nav.Link href="/user/userTrips">My Trips</Nav.Link>}
+        {(role === "ADMIN") && <Nav.Link href="/admin/home">Admin</Nav.Link>}
+    </Nav>
+    {userName && <Navbar.Text style={{paddingRight: "15px"}}> Signed in as: {userName}</Navbar.Text>}
+        {!userName && <Button variant="outline-success" className="d-flex justify-content-end" onClick={handleLoginClick}>Login</Button>}
+        {userName && <Button variant="outline-danger" className="d-flex justify-content-end" onClick={handleLogout}>Logout</Button>}
+    </Container>
+  </Navbar>
+            {/*<div className="nav-horizontal">
                 <ul className="nav-menu">
                     {(role !== "ADMIN") && (<li className="nav-menu-item">
                         <NavLink to="/" className="nav-menu-link" activeClassName="nav-menu-link-active" isActive={checkActive}>
@@ -97,13 +109,6 @@ function NavBar({ handleLoginClick, props}) {
                         </NavLink>
                     </li>
                     )}
-                    {/* {(role !== "ADMIN") && userName && (
-                    <li className="nav-menu-item">
-                        <NavLink to="/user/UserProfile/" className="nav-menu-link" activeClassName="nav-menu-link-active">
-                            My Profile
-                        </NavLink>
-                    </li>
-                    )} */}
                     {userName && (role !== "ADMIN") && (<li className="nav-menu-item">
                         <NavLink to="/user/userTrips" className="nav-menu-link" activeClassName="nav-menu-link-active">
                             My Trips
@@ -136,9 +141,9 @@ function NavBar({ handleLoginClick, props}) {
                 {userName && (
                         <label className="nav-user-greeting"> Hello {userName} !</label>
                     )}
-            </div>
+                </div>*/} </div>
         );
     
 } 
 
-export default NavBar;
+export default NaviBar;

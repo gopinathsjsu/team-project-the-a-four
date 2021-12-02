@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Container, Row, Col } from 'react-bootstrap';
-import NavBar from "../common/navbar";
+import NaviBar from "../common/navbar";
 import UserDetails from "../user/userDetails";
 
 export default function UserProfile () {
@@ -20,7 +20,7 @@ export default function UserProfile () {
     
         return (
             <div>
-                <NavBar handleLoginClick={handleLoginClicked}></NavBar>
+                <NaviBar handleLoginClick={handleLoginClicked}></NaviBar>
                 <div className="popup-content">
                     <Container>
                         <Row>

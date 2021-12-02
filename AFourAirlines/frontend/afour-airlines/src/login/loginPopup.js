@@ -43,7 +43,7 @@ export default function LoginModal({isShowLogin, setIsShowLogin, pathname}) {
         mode: 'cors'
         };
 
-        fetch("http://localhost:8080/api/users/authenticate", requestOptions)
+        fetch("http://3.143.245.196:8080/api/users/authenticate", requestOptions)
         .then(async response => {
             const data = await response.json();
 
@@ -59,7 +59,7 @@ export default function LoginModal({isShowLogin, setIsShowLogin, pathname}) {
             console.log("userName: " + username);
             if(username){
                 var authToken = "Bearer " + data.token;
-                fetch("http://localhost:8080/api/users/get-user-details?username=" + username, {
+                fetch("http://3.143.245.196:8080/api/users/get-user-details?username=" + username, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded',

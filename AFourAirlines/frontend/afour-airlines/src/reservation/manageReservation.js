@@ -2,7 +2,7 @@ import FlightCard from "../flights/flightCard";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
-import NavBar from "../common/navbar";
+import NaviBar from "../common/navbar";
 import LoginModal from '../login/loginPopup';
 
 export default function ManageReservation(props){
@@ -57,7 +57,7 @@ export default function ManageReservation(props){
     
     var token = "Bearer " + localStorage.getItem("token");
         
-        fetch("http://localhost:8080/api/reservations/get-reservations-by-pnr?pnr=" + pnr, {
+        fetch("http://3.143.245.196:8080/api/reservations/get-reservations-by-pnr?pnr=" + pnr, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -180,7 +180,7 @@ export default function ManageReservation(props){
         
         var authToken = "Bearer " + localStorage.getItem("token");
         
-        fetch("http://localhost:8080/api/flights/get-available-seats?flightId=" + id, {
+        fetch("http://3.143.245.196:8080/api/flights/get-available-seats?flightId=" + id, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -236,7 +236,7 @@ export default function ManageReservation(props){
         console.log("Reschedule");
         setIsResched(true);
 
-        fetch("http://localhost:8080/api/flights/get-flights?sourceAirport=" 
+        fetch("http://3.143.245.196:8080/api/flights/get-flights?sourceAirport=" 
                         + flightData.sourceAirport + "&destinationAirport=" + flightData.destinationAirport + "&departureDateString=" 
                             + flightData.departureDate + "&arrivalDateString=" + flightData.arrivalDate, {
                     method: 'GET',
@@ -276,7 +276,7 @@ export default function ManageReservation(props){
 //TODO : api call
         var authToken = "Bearer " + localStorage.getItem('token');
 
-            fetch("http://localhost:8080/api/reservations/update-reservation",{
+            fetch("http://3.143.245.196:8080/api/reservations/update-reservation",{
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -308,7 +308,7 @@ export default function ManageReservation(props){
 
         var authToken = "Bearer " + localStorage.getItem('token');
 
-            fetch("http://localhost:8080/api/reservations/update-reservation",{
+            fetch("http://3.143.245.196:8080/api/reservations/update-reservation",{
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -344,7 +344,7 @@ export default function ManageReservation(props){
 
     return(
         <div>
-            <NavBar handleLoginClick={handleLoginClicked}></NavBar>
+            <NaviBar handleLoginClick={handleLoginClicked}></NaviBar>
                 {isShowLogin && <LoginModal isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} pathname={pathname} />}
                 
             <div className="help-page">

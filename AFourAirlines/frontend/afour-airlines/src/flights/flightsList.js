@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import NavBar from "../common/navbar";
+import NaviBar from "../common/navbar";
 import LoginModal from '../login/loginPopup';
 import {Button} from 'react-bootstrap';
 
@@ -15,7 +15,7 @@ export default function FlightsList(props) {
 
         var authToken = "Bearer " + localStorage.getItem("token");
         
-        fetch("http://localhost:8080/api/flights/get-available-seats?flightId=" + id, {
+        fetch("http://3.143.245.196:8080/api/flights/get-available-seats?flightId=" + id, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -110,7 +110,7 @@ export default function FlightsList(props) {
 
     return (
         <div>
-            <NavBar handleLoginClick={handleLoginClicked}></NavBar>
+            <NaviBar handleLoginClick={handleLoginClicked}></NaviBar>
             {isShowLogin && <LoginModal isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} pathname={pathname} />}
             <div className="container">
                 <div className="row">

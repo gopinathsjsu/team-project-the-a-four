@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { Redirect } from 'react-router';
-import NavBar from "../common/navbar";
+import NaviBar from "../common/navbar";
 import LoginModal from "../login/loginPopup";
+import {Button, Form} from 'react-bootstrap';
 
 export default function Search(props) {
 
@@ -39,7 +40,7 @@ export default function Search(props) {
                 // output = selectElement.value;
                 // document.querySelector('.output').textContent = output;
 
-                fetch("http://localhost:8080/api/flights/get-flights?sourceAirport=" 
+                fetch("http://3.143.245.196:8080/api/flights/get-flights?sourceAirport=" 
                         + source_airport + "&destinationAirport=" + dest_airport + "&departureDateString=" 
                             + dep_date + "&arrivalDateString=" + arr_date, {
                     method: 'GET',
@@ -104,9 +105,9 @@ export default function Search(props) {
 
     return (
         <div align="center">
-            <NavBar handleLoginClick={handleLoginClicked}></NavBar>
+            <NaviBar handleLoginClick={handleLoginClicked}></NaviBar>
             {isShowLogin && <LoginModal isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} pathname={pathname} />}
-            <div class="col-md-5 col-md-offset-1" align="center">
+            <div class="search-flight-form-container" align="center">
                 <section id="first-tab-group" class="tabgroup">
                     <div id="tab1">
                         <div class="submit-form">
@@ -114,10 +115,10 @@ export default function Search(props) {
                             <form id="form-submit" action="" method="get">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <fieldset>
-                                            <label for="from">From: </label>                                            
-                                                <select value={source_airport} required name='from' onChange={e=>setDepAirport(e.target.value)}>
-                                                    <option value="">Select departure location</option>
+                                        <Form.Group >
+                                            <Form.Label>From: </Form.Label>
+                                            <Form.Select value={source_airport} required name='from' onChange={e=>setDepAirport(e.target.value)}>
+                                                    <option value="">Select Departure Airport</option>
                                                     <option value="LAX">LAX</option>
                                                     <option value="SFO">SFO</option>
                                                     <option value="SJC">SJC</option>
@@ -127,25 +128,25 @@ export default function Search(props) {
                                                     <option value="FUL">FUL</option>
                                                     <option value="RIV">RIV</option>
                                                     <option value="HYD">HYD</option>
-                                                </select>                                                                 
-                                        </fieldset>
+                                            </Form.Select>         
+                                        </Form.Group>
                                     </div>
                                     <div class="col-md-6">
-                                        <fieldset>
-                                            <label for="to">To: </label>
-                                            <select value={dest_airport} required name='to' onChange={e => setArrAirport(e.target.value)}>
-                                                <option value="">Select arrival location</option>
-                                                <option value="LAX">LAX</option>
-                                                <option value="SFO">SFO</option>
-                                                <option value="SJC">SJC</option>
-                                                <option value="SMF">SMF</option>
-                                                <option value="SAN">SAN</option>
-                                                <option value="SBA">SBA</option>
-                                                <option value="FUL">FUL</option>
-                                                <option value="RIV">RIV</option>
-                                                <option value="HYD">HYD</option>
-                                            </select>
-                                        </fieldset>
+                                        <Form.Group >
+                                            <Form.Label>To: </Form.Label>
+                                            <Form.Select value={dest_airport} required name='to' onChange={e=>setArrAirport(e.target.value)}>
+                                                    <option value="">Select Destination Airport</option>
+                                                    <option value="LAX">LAX</option>
+                                                    <option value="SFO">SFO</option>
+                                                    <option value="SJC">SJC</option>
+                                                    <option value="SMF">SMF</option>
+                                                    <option value="SAN">SAN</option>
+                                                    <option value="SBA">SBA</option>
+                                                    <option value="FUL">FUL</option>
+                                                    <option value="RIV">RIV</option>
+                                                    <option value="HYD">HYD</option>
+                                            </Form.Select>         
+                                        </Form.Group>
                                     </div>
                                     <div class="col-md-6">
                                         <fieldset>
@@ -155,45 +156,35 @@ export default function Search(props) {
                                     </div>
                                     <div class="col-md-6">
                                         <fieldset>
-                                            <label for="return" value={arr_date}>Return date: </label>
+                                            <label for="return" value={arr_date}>Arrival date: </label>
                                             <input name="return" type="date" class="form-control date" id="return" placeholder="Select a date" required="" onChange={e => setArrDate(e.target.value)} />
                                         </fieldset>
                                     </div>
                                     <div class="col-md-6">
-                                        <fieldset>
-                                            <label for="noOfPass">Number of passengers: </label>
-                                            <select required name='noOfPass' value={noOfPass} onChange={e => setNoOfPass(e.target.value)}>
+                                        <Form.Group >
+                                            <Form.Label>Number of passengers: </Form.Label>
+                                            <Form.Select required name='noOfPass' value={noOfPass} onChange={e => setNoOfPass(e.target.value)}>
                                                 <option value="0">Select number of passengers</option>
                                                 <option value="1">1</option>
                                                 <option value="2">2</option>
                                                 <option value="3">3</option>
-                                            </select>
-                                        </fieldset>
+                                            </Form.Select>         
+                                        </Form.Group>
                                     </div>
-                                    {/* <div class="col-md-6">
-                                        <div class="radio-select">
-                                            <div class="row">
-                                                <div class="col-md-6 col-sm-6 col-xs-6">
-                                                    <label for="round">Round trip</label>
-                                                    <input type="radio" name="trip" id="round" value="round" required="required" onchange='this.form.()' />
-                                                </div>
-                                                <div class="col-md-6 col-sm-6 col-xs-6">
-                                                    <label for="oneway">One-way trip</label>
-                                                    <input type="radio" name="trip" id="oneway" value="one-way" required="required" onchange='this.form.()' />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> */}
-                                    <div class="col-md-6" align="center">
-                                        <fieldset>
-                                            {/*<button type="submit" id="btn-form-submit" class="btn" align="center" onClick={searchResult}>Search</button>*/}
-                                            <button variant="primary" className="pure-u-1-6 btn-spacing" align="center" onClick={searchResult}> Search </button>
-                                            {/* <script type="text/javascript">
-                                                    document.getElementById("button").onclick = function () {
-                                                       window.location.href = './searchPage'
-                                                       };
-                                                </script> */}
-                                        </fieldset>
+                                    <div class="col-md-6">
+                                        <Form.Group >
+                                            <Form.Label>Trip Type: </Form.Label>
+                                            <Form.Select>
+                                                <option value="0">Select Trip Type</option>
+                                                <option value="one-way">One-Way</option>
+                                                <option value="round-trip">Round Trip</option>
+                                            </Form.Select>         
+                                        </Form.Group>
+                                    </div>
+                                    <div align="center">
+                                    <Button variant="secondary" className="pure-u-1-6 btn-spacing"  align="center" onClick={searchResult}>
+                                            Search
+                                    </Button>
                                     </div>
                                 </div>
                             </form>

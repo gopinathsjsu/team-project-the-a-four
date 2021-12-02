@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import NavBar from "../common/navbar";
+import NaviBar from "../common/navbar";
 import UserMileage from "./userMileage";
 import GuestMileage from "./guestMileage.js";
 import LoginModal from "../login/loginPopup"
@@ -18,7 +18,7 @@ export default function MileageProgram (props){
 
     return(
         <div>
-            <NavBar props={username} handleLoginClick={handleLoginClicked}></NavBar>
+            <NaviBar props={username} handleLoginClick={handleLoginClicked}></NaviBar>
             {isShowLogin && <LoginModal isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} pathname={pathname}/>}
             {!username  && 
                 <GuestMileage></GuestMileage>}

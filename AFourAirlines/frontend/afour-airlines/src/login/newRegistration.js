@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import NavBar from "../common/navbar";
+import NaviBar from "../common/navbar";
 import LoginModal from "../login/loginPopup"
 import Registration from "../login/register"
 
@@ -15,7 +15,7 @@ export default function NewRegistration(props){
 
     return(
         <div className={isShowLogin ? "hide-parent" : ""}>
-            <NavBar handleLoginClick={handleLoginClicked}></NavBar>
+            <NaviBar handleLoginClick={handleLoginClicked}></NaviBar>
             {isShowLogin && <LoginModal isShowLogin={isShowLogin} setIsShowLogin={setIsShowLogin} pathname={pathname}/>}
             <div>
                 <div>

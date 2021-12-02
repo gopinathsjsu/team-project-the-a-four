@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import AdminOptions from "./adminOptions";
-import NavBar from "../common/navbar";
+import NaviBar from "../common/navbar";
 import AdminSearch from './adminSearch';
 import UserDetails from '../user/userDetails';
 import { useGetUserData } from "../common/getUserData";
@@ -25,7 +25,7 @@ export default function AdminHome(){
     const getUserById = () =>{
         if(username){
             var authToken = "Bearer " + token;
-            fetch("http://localhost:8080/api/users/get-user-details?username=" + entityId, {
+            fetch("http://3.143.245.196:8080/api/users/get-user-details?username=" + entityId, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -85,7 +85,7 @@ export default function AdminHome(){
     }
     return(
         <div>
-            <NavBar props={username}></NavBar>
+            <NaviBar props={username}></NaviBar>
             {!isShowSearch && <AdminOptions setIsShowSearch={setIsShowSearch} setManageType={setManageType} setLableText={setLableText}/>}
             {isShowSearch && <AdminSearch handleSearch={handleSearch} lableText={lableText} manageType={manageType} setEntityId={setEntityId}/>}
         </div>
