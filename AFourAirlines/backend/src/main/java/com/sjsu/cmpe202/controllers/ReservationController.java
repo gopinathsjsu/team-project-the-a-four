@@ -25,7 +25,7 @@ public class ReservationController {
     ReservationService reservationService;
 
     @GetMapping("/get-reservation-by-id")
-    public ResponseEntity<?> getReservationById(@RequestParam String reservationId) throws Exception {
+    public ResponseEntity<?> getReservationById(@RequestParam Integer reservationId) throws Exception {
         log.info("Entering getReservationById Api");
         Optional<Reservation> reservation = null;
         try {

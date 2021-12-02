@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public interface ReservationRepository extends CrudRepository<Reservation, String> {
+public interface ReservationRepository extends CrudRepository<Reservation, Integer> {
 
     @Query(value = "SELECT * FROM reservation WHERE username = :userName", nativeQuery = true)
     ArrayList<Reservation> getReservationsForUser(@Param("userName") String userName);
