@@ -9,4 +9,4 @@
 
 
 # Scrum Meetings
-Sprint Sheet: https://docs.google.com/spreadsheets/d/145nm1DlgnWYFZhjSNyuR5kcQNm7ogVP8zwMHdognqBQ/edit?usp=sharing
+Sprint Sheet: https://docs.google.com/spreadsheets/d/1YrUaUBsKUFDT5ytJBxuxwVIvz794vBDi/edit?usp=sharing&ouid=103311653268373522349&rtpof=true&sd=true
