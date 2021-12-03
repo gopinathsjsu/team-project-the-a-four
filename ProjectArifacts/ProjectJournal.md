@@ -78,26 +78,26 @@
 
 ### Sprint 3: 
 - **What tasks did I work on / complete?** Created UI mock-up for Mileage program page.
-- **What am I planning to work on next?** Next, I am planing to work on finding ways to pass data from one page to another.
+- **What am I planning to work on next?** Next, I am planing to work on finding ways to pass data from one page to another and make UI for Help page and Admin home page
 - **What tasks are blocked waiting on another team member?** Data passing from one page to another.
 - **XP Core Value:** Courage
 
 ### Sprint 4: 
-- **What tasks did I work on / complete?** Data passing blocker removed. Help page completed
-- **What am I planning to work on next?** Next, I am planing to work on user profile page.
+- **What tasks did I work on / complete?** Data passing blocker removed. Help page completed. Created Admin dashboard mock up.
+- **What am I planning to work on next?** Next, I am planing to work on Book flights page.
 - **What tasks are blocked waiting on another team member?** None
 - **XP Core Value:** Communication
 
 ### Sprint 5: 
-- **What tasks did I work on / complete?** Created mock up for user Profile. Created Admin dashboard mock up
-- **What am I planning to work on next?** Next, I am planing to connect frontend with backend and perform API calls.
-- **What tasks are blocked waiting on another team member?** None
+- **What tasks did I work on / complete?** Created Flight Booking page- create reservation. 
+- **What am I planning to work on next?** Next, I am planing to create update reservation page.
+- **What tasks are blocked waiting on another team member?** Facing difficulty to connect to APIs due to security errors(looking in it)
 - **XP Core Value:** Communication
 
 ### Sprint 6: 
-- **What tasks did I work on / complete?** Attempted to make all pages dynamic.
-- **What am I planning to work on next?** Next, I am planing to work on Create booking page.
-- **What tasks are blocked waiting on another team member?** Facing difficulty to connect to APIs due to security errors(looking in it)
+- **What tasks did I work on / complete?** Completed Manage reservation page for both User and admin
+- **What am I planning to work on next?** 
+- **What tasks are blocked waiting on another team member?** None
 - **XP Core Value:** Communication
 
 ## Mohammed Tuba Ahmed
