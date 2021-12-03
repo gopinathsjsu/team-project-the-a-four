@@ -14,4 +14,6 @@
 # Scrum Artifacts and Diagrams
 1. Sprint Sheet: https://docs.google.com/spreadsheets/d/1YrUaUBsKUFDT5ytJBxuxwVIvz794vBDi/edit?usp=sharing&ouid=103311653268373522349&rtpof=true&sd=true
 2. [Project Journal](https://github.com/gopinathsjsu/team-project-the-a-four/blob/main/ProjectArifacts/ProjectJournal.md)
-3. [Design and Diagrams](https://github.com/gopinathsjsu/team-project-the-a-four/blob/main/ProjectArifacts/arch-and-design.md)
+3. [Project Board](https://github.com/gopinathsjsu/team-project-the-a-four/projects/1)
+4. [Design and Diagrams](https://github.com/gopinathsjsu/team-project-the-a-four/blob/main/ProjectArifacts/arch-and-design.md)
+5. [Wireframes](https://github.com/gopinathsjsu/team-project-the-a-four/tree/main/ProjectArifacts/UI%20wireframes)
