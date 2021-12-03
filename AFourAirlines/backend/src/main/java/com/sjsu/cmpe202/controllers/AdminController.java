@@ -1,7 +1,9 @@
 package com.sjsu.cmpe202.controllers;
 
 import com.sjsu.cmpe202.models.JwtResponse;
+import com.sjsu.cmpe202.models.Reservation;
 import com.sjsu.cmpe202.models.User;
+import com.sjsu.cmpe202.service.ReservationService;
 import com.sjsu.cmpe202.service.UserService;
 import com.sjsu.cmpe202.validators.JwtTokenUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +32,9 @@ public class AdminController {
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
+
+    @Autowired
+    private ReservationService reservationService;
 
     @PostMapping("/authenticate")
     public ResponseEntity<?> authenticate(@RequestBody User user) {
@@ -82,4 +87,18 @@ public class AdminController {
         return ResponseEntity.ok(userList);
     }
 
+    @GetMapping("/get-all-reservations")
+    public ResponseEntity<?> getAllReservations() throws Exception {
+        log.info("Entering getReservationsForUser Api");
+        Iterable<Reservation> reservations = null;
+        try {
+            reservations = reservationService.getAllReservations();
+        } catch (Exception e) {
+            log.error("Error occured in getReservationsForUser :{}", e);
+            return ResponseEntity.status(400).body(e.getMessage());
+        } finally {
+            log.info("Exiting getReservationsForUser Api");
+        }
+        return ResponseEntity.ok(reservations);
+    }
 }

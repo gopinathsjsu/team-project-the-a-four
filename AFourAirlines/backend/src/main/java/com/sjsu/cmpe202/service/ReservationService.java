@@ -93,4 +93,8 @@ public class ReservationService {
     public Optional<ArrayList<Reservation>> getReservationsByPnr(String pnr) {
         return reservationRepository.getReservationsByPnr(pnr);
     }
+
+    public Iterable<Reservation> getAllReservations() {
+        return reservationRepository.findAll();
+    }
 }
